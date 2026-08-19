@@ -27,7 +27,7 @@
 | DG-021 | 114 players told an Engine A prior was used when none exists | 3→6 | todo | — |
 | DG-022 | Players with no canonical id can never be graded | **2** | todo | — |
 | DG-023 | Health gate labels good participation data "empty" | **1** | todo | — |
-| DG-024 | **DAVID'S CALL** — regular-season or all-game PPG? | 3 | **waiting on David** | — |
+| DG-024 | PPG counts **ALL GAMES**, postseason included — David 2026-08-19 | 3 | **decided** | — |
 | DG-025 | Ablate usage features under a scaled, tuned fit — the deciding test | 3 | todo | — |
 | DG-026 | Train and test labels share the 2023 season | 3 | todo | — |
 | DG-027 | Penalty chosen by random CV on repeated-player data | 3 | todo | — |
