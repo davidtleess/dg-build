@@ -34,9 +34,11 @@
 | DG-028 | "We changed nothing" check cannot see the artifacts it guards | 3 | todo | — |
 | DG-029 | Is feature season 2024 absent by design or by gap? | **2** | todo | — |
 | DG-030 | Compare model families to each other, not just to naive | 3 | todo | — |
+| DG-031 | Salvage the outcome resolver and Coverage contract | 1 → 3 | **done — merged in PR #159** | CodexCrew20260819 |
 | DG-032 | Six ledger trees, three versions of the same day; reconcile the channel | process | todo | — |
 | DG-033 | A producer can abort and still be graded fresh | **1** | todo | — |
 | DG-034 | Backup health reports `ok` while the backup is failing | **1** | todo | — |
+| DG-035 | Capture chain silently does not run unless David is logged in | **1** | todo | — |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
