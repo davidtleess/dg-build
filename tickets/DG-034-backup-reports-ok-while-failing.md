@@ -1,6 +1,6 @@
 # DG-034 — Backup health reports `ok` while the backup is failing
 
-**Layer:** 1  ·  **State:** todo  ·  **Lane:** ClaudeOpus5-DG034-20260823  ·  **DG 3.0**
+**Layer:** 1  ·  **State:** **done — 52e7dfc9 on `feature/outcome-loop-week1`**  ·  **Lane:** ClaudeOpus5-DG034-20260823  ·  **DG 3.0**
 **Source:** Codex Consultant read-only sweep, 2026-08-19; independently re-derived at source by the
 crew Claude lane the same afternoon
 
@@ -26,7 +26,10 @@ is itself a degraded state rather than a free pass. A test asserts both.
 
 ---
 
-**STATUS 2026-08-23 — BUILT on `ticket/DG-034`, NOT LANDED (tooling blocks the gate).**
+**STATUS 2026-08-23 — DONE. `52e7dfc9`, hand-landed on `feature/outcome-loop-week1`.**
+Hand-landed because `dg-land.sh` cannot run at all (DG-037), not because its gate was skipped: the
+rebase was a no-op (remote tip == base) and the suite was run and accounted for below. Pushed as a
+fast-forward, `2c793603..52e7dfc9`, verified against `origin/feature/outcome-loop-week1`.
 
 **The defect lives on `feature/outcome-loop-week1`, not `main`.** `inspect_backup_marker` was added
 this morning by `2c793603` and does not exist on `main` (that file is 658 lines with zero occurrences
@@ -90,5 +93,13 @@ must surface, never pass silently."* The backup is the product's disaster floor 
 the PIT capture stores, model artifacts and operational databases.
 
 A third finding from the same sweep — backup failure disappearing from two aggregate health surfaces
-(`system_tier_readiness.py:75-101`, `system_health.py:110-141`) — is **not yet independently
-reproduced** and is deliberately not filed until someone measures it.
+(`system_tier_readiness.py:75-101`, `system_health.py:110-141`) — was **measured on 2026-08-23** and
+is CONFIRMED. Both re-derive capture health in-process from `inspect_capture_store` ONLY; neither
+calls `inspect_backup_marker`. So `/api/health`'s `capture_health` subsystem and tier-readiness's
+`capture_health_ok` precondition (5 surfaces via `app/config/tier_readiness.json`) cannot see backup
+state at all — a failed backup is invisible there both before and after this fix.
+
+That containment is why DG-034 was safe to ship, and it is also a real gap: it now needs its own
+ticket. Consequence worth naming — with this fix live, a degraded backup flips the Daily Tape to
+"Partial Market Sync" while the shell pill (fed by `/api/health`) still reads "Synced": a visible
+cross-surface contradiction.

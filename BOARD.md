@@ -37,7 +37,7 @@
 | DG-031 | Salvage the outcome resolver and Coverage contract | 1 → 3 | **done — merged in PR #159** | CodexCrew20260819 |
 | DG-032 | Six ledger trees, three versions of the same day; reconcile the channel | process | todo | — |
 | DG-033 | A producer can abort and still be graded fresh | **1** | todo | — |
-| DG-034 | Backup health reports `ok` while the backup is failing | **1** | **built, not landed** | ClaudeOpus5-DG034-20260823 |
+| DG-034 | Backup health reports `ok` while the backup is failing | **1** | **done — 52e7dfc9, hand-landed on `feature/outcome-loop-week1`** | ClaudeOpus5-DG034-20260823 |
 | DG-035 | Capture chain silently does not run unless David is logged in | **1** | todo | — |
 | DG-036 | A failed backup can leave the previous run's `completed` marker standing | **1** | todo | — |
 | DG-037 | No ticket can land through `dg-land.sh` — the worktree fails its own gate | process | todo | — |
