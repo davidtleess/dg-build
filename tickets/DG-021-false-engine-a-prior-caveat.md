@@ -1,6 +1,6 @@
 # DG-021 — 114 players are told an Engine A prior was used when none exists
 
-**Layer:** 3 → surfaces at 6  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**
+**Layer:** 3 → surfaces at 6  ·  **State:** todo  ·  **Lane:** CodexTeam20260819  ·  **DG 3.0**
 **Source:** crew lane, 2026-08-18; independently re-derived by the judge seat the same night
 
 **Problem:** 114 served rows carry `dvs_engine="A"` and the caveat *"Engine A prospect score used as

@@ -1,6 +1,6 @@
 # DG-029 — Establish whether feature season 2024 is absent by design or by gap
 
-**Layer:** 2  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**
+**Layer:** 2  ·  **State:** todo  ·  **Lane:** Davids-Air-38585  ·  **DG 3.0**
 **Source:** Tower, 2026-08-18, adversarial review
 
 **Problem:** The training table has no 2024 rows at all. One proposal assumes 2024 can be made

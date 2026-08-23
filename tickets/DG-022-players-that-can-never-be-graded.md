@@ -1,6 +1,6 @@
 # DG-022 — Players with no canonical id can never be graded, and nothing says so
 
-**Layer:** 2  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**
+**Layer:** 2  ·  **State:** todo  ·  **Lane:** CodexTeam20260819  ·  **DG 3.0**
 **Source:** crew lane, 2026-08-18; carried forward by the judge seat as real and separate
 
 **Problem:** A player can be present in the market data, present on a roster, and carry
