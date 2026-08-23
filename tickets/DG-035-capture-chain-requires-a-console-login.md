@@ -37,7 +37,32 @@ a slot must produce an alert, not silence. Option (b) is strictly cheaper and is
 
 **Depends on:** nothing. **Overlaps:** SR-09 (chain rewire) and SR-11 (the alert). SR-11 must be
 able to report a job that *never attempted* — a class invisible to logs, markers and exit codes,
-because a job that never spawned writes none of them.
+because a job that never spawned writes none of them. **This requirement was written into SR-11 on
+2026-08-23 — see STATUS below.**
+
+**STATUS 2026-08-23 — option (b) is SCOPED INTO SR-11. NOTHING IS BUILT.**
+`docs/strategies/2026-08-20-dg-SEASON-BUILD-SPEC.md` was amended today (MIG-1). SR-11 gains a
+**second detection channel that reads launchd directly and depends on no registry** —
+`launchctl print gui/501/<label>` parsed for `runs` and `last exit code`, with the label list derived
+from `ops/launchd/*.plist` rather than hand-kept. It covers the three classes no store, marker, log
+or exit code can see, all three of which occurred on 08-22:
+- **never attempted** — `runs = 0` / `last exit code = (never exited)` on a job whose slot has passed;
+- **the penalty box** — in-memory only, lost at reboot, and the alert must say `bootout` + `bootstrap`
+  rather than `kickstart`;
+- **the boot-to-login gap itself** — `sysctl -n kern.boottime` against the console login from `who`,
+  cross-referenced with the day's scheduled slots, stating plainly that launchd will not replay them.
+
+SR-11 also gained a heartbeat, because at 10:30 the alert is itself a `StartCalendarInterval` job —
+**on this exact failure the alert will not have fired either**, so it checks its own absence
+retroactively. Cost 1.0d → 1.5d; sprint buffer 1.00d → 0.50d.
+
+**Option (b) closes when SR-11 ships and names a `runs = 0` job in a dry run — not before.**
+
+**Option (a) remains open and is David's call.** Moving the season-critical producers to
+**LaunchDaemons** (`/Library/LaunchDaemons`, root-owned, run from boot with no session) is the only
+route that *removes* the login dependency instead of reporting on it. It is Tier 2, it overlaps
+SR-09's chain rewire, and David's 2026-08-22 instruction stands: *"Scope it as a new ticket, decide
+after SR-11."*
 
 ---
 
