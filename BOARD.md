@@ -41,7 +41,7 @@
 | DG-035 | Capture chain silently does not run unless David is logged in | **1** | todo | — |
 | DG-036 | A failed backup can leave the previous run's `completed` marker standing | **1** | **done — merge `de551d22` on `origin/feature/outcome-loop-week1`** | ClaudeOpus5-DG036-20260824 |
 | DG-037 | No ticket can land through `dg-land.sh` — five mechanisms | process | **done — 5 mechanisms fixed, dry-run green** | ClaudeOpus5-DG037-20260823 |
-| DG-038 | `dg-land.sh` cannot merge into any base that is checked out somewhere | process | todo | — |
+| DG-038 | `dg-land.sh` cannot merge into any base that is checked out somewhere | process | **done — detached merge + `HEAD:$BASE` push; dry-run now proves the merge; gated by `tests/test-dg-land.sh`** | ClaudeFable5-DG038-20260824 |
 | DG-039 | A blocked roster-capacity audit writes nothing; last week's audit stands as current | **1** | todo | — |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,

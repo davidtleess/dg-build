@@ -1,6 +1,6 @@
 # DG-038 — `dg-land.sh` cannot merge into any base that is checked out somewhere
 
-**Layer:** process  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**
+**Layer:** process  ·  **State:** done  ·  **Lane:** ClaudeFable5-DG038-20260824  ·  **DG 3.0**
 **Source:** hit while landing DG-036, 2026-08-24. The gate passed and the merge step died.
 
 **Problem:** `dg-land.sh:106-113` creates a detached temp worktree at `origin/$BASE` and then runs
@@ -54,3 +54,47 @@ this is a sixth, in the half of the script DG-037's dry-run could not reach — 
 The `--dry-run` gate is what made this survivable: it reported "rebase clean, tests pass" and was
 telling the truth about everything it tested. It simply never tests the merge. That is the cheap fix
 worth considering first — a dry run that also proves the merge can start.
+
+---
+
+**CLOSED 2026-08-24, lane ClaudeFable5-DG038-20260824.**
+
+What changed in `bin/dg-land.sh`:
+1. The merge is built on a **detached** head in the throwaway worktree and pushed as
+   `git push origin HEAD:$BASE` — the base branch is never checked out, so it may be checked out
+   anywhere else (the hand procedure that landed DG-036, now the script's own procedure).
+2. `--dry-run` now runs the **entire merge block** with `git push --dry-run`, so a green dry run
+   means "this ticket can actually land", not just "the suite passed".
+3. One EXIT trap owns the lock **and** the temp worktree: a failed merge/push no longer leaves
+   `.land-<TICKET>` behind for the next run to silently destroy, and the error says outright that
+   the ticket worktree, branch and claim are untouched.
+4. A leftover temp worktree from an interrupted (kill -9) land is announced before removal, not
+   silently erased.
+5. After a real land the script tries `git fetch origin $BASE:$BASE` (fast-forward-only); when git
+   refuses because the trunk holds the branch, it prints where the stale local branch lives instead
+   of touching a shared worktree — the "say so rather than do it" this ticket asked for.
+
+**Evidence — the bug, reproduced in a hermetic sandbox before the fix:**
+```
+$ DG_REPO=$SB/trunk DG_BUILD=$SB/build DG_WT_ROOT=$SB/wt dg-land.sh DG-999 --from base
+→ merging into base
+fatal: 'base' is already used by worktree at '…/trunk'
+EXIT=128            # and $SB/wt/.land-DG-999 left behind
+```
+
+**Evidence — the gate:** `tests/test-dg-land.sh` (new; run it from anywhere) builds the production
+layout in a temp dir — bare origin → clone → linked-worktree trunk with the base **checked out** →
+ticket worktree — and drives three scenarios: a real land, a dry run, and a push rejected by a
+pre-receive hook. 21 checks, all failing before the fix (10 FAIL) and all passing after:
+```
+$ ~/dg-build/tests/test-dg-land.sh
+scenario 1: land into a base that the trunk has checked out        8/8 ok
+scenario 2: --dry-run exercises the merge path without pushing     7/7 ok
+scenario 3: push rejected by the remote (pre-receive exit 1)       6/6 ok
+✔ all scenarios pass
+```
+
+Real-world verification is the next land through this script (DG-040 is queued for it).
+
+Still true and out of scope here: the nine pre-DG-037 worktrees cannot pass the dirty-tree gate
+until removed and recreated (safe — all nine branches are on origin, BOARD.md 2026-08-23).
