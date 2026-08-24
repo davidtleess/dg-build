@@ -39,8 +39,9 @@
 | DG-033 | A producer can abort and still be graded fresh | **1** | todo | — |
 | DG-034 | Backup health reports `ok` while the backup is failing | **1** | **done — 52e7dfc9, hand-landed on `feature/outcome-loop-week1`** | ClaudeOpus5-DG034-20260823 |
 | DG-035 | Capture chain silently does not run unless David is logged in | **1** | todo | — |
-| DG-036 | A failed backup can leave the previous run's `completed` marker standing | **1** | todo | — |
+| DG-036 | A failed backup can leave the previous run's `completed` marker standing | **1** | **done — merge `de551d22` on `origin/feature/outcome-loop-week1`** | ClaudeOpus5-DG036-20260824 |
 | DG-037 | No ticket can land through `dg-land.sh` — five mechanisms | process | **done — 5 mechanisms fixed, dry-run green** | ClaudeOpus5-DG037-20260823 |
+| DG-038 | `dg-land.sh` cannot merge into any base that is checked out somewhere | process | todo | — |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
@@ -73,3 +74,28 @@ neither cites which is current. Someone who knows the work should say.
 All nine `ticket/DG-*` branches are on `origin` as of today. Six worktrees (DG-014/020/021/022/023/029)
 still predate the DG-037 tooling fix and cannot pass `dg-land.sh`'s dirty-tree gate; everything in
 them is now pushed, so remove-and-recreate is safe.
+
+---
+
+**2026-08-24.** DG-036 landed. Two things a reader of this board should know:
+
+**`dg-land.sh` still cannot land a ticket unaided — DG-038.** DG-037 fixed the five mechanisms that
+stopped a worktree reaching the gate; the merge block behind the gate has a sixth, and `--dry-run`
+returns before it (`dg-land.sh:100`), so a green dry run does not mean a landable ticket. DG-036's
+merge was completed by hand in a detached worktree, verified byte-identical to the tested tree, and
+pushed. **A failed land also leaves the temp worktree, the claim, the branch and `State: todo` behind,
+and the next run silently cleans the evidence** — so an interrupted land looks like an unstarted
+ticket whose lane is taken.
+
+**The trunk's LOCAL `feature/outcome-loop-week1` is one commit behind `origin`.** A detached push
+cannot move a branch that is checked out. `~/dynasty-genius-product` needs `git pull --ff-only`; it
+was not run here because that trunk carries 47 dirty files from other lanes and AGENT-HOOK rule 1
+says leave it alone. None of those 47 touch DG-036's four files.
+
+**DG-034 and DG-036 both live only on `feature/outcome-loop-week1`**, which is now 38 ahead / 6 behind
+`origin/main` and unmerged, 11 days from the 09-04 freeze. Nobody has said whether that branch is
+meant to reach `main` before the season. It is worth someone's word.
+
+**Naming collision worth knowing:** `origin/main`'s PR #160 merged a branch called `ticket/DG-035`,
+but its content is the 2026-08-19 governance removal — nothing to do with the DG-035 capture-chain
+ticket, which is still genuinely open above.

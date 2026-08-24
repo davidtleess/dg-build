@@ -1,6 +1,6 @@
 # DG-036 — A failed backup can leave the previous run's `completed` marker standing
 
-**Layer:** 1  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**
+**Layer:** 1  ·  **State:** done  ·  **Lane:** ClaudeOpus5-DG036-20260824  ·  **DG 3.0**
 **Source:** adversarial verification during DG-034, 2026-08-23. Found by attacking a claim about the
 marker's failure taxonomy, not by looking for this.
 
@@ -39,6 +39,63 @@ following a successful one never leaves `status: completed` readable.
 
 **Depends on:** nothing. **Related:** DG-034 (the two blind spots in the reader), DG-033 (a producer's
 own terminal status not being read).
+
+---
+
+**STATUS 2026-08-24 — LANDED on David's word.** Merge `de551d22` is on
+`origin/feature/outcome-loop-week1` (pushed `e6995967..de551d22`); worktree and branch removed.
+Based there rather than `main` because DG-034's reader lives only on that branch.
+
+**`dg-land.sh` could not complete the merge — filed as DG-038.** Its gate passed (6301) and then it
+died at `fatal: 'feature/outcome-loop-week1' is already used by worktree at
+'/Users/davidleess/dynasty-genius-product'`. The merge was completed by hand in a DETACHED temp
+worktree and pushed with `git push origin HEAD:feature/outcome-loop-week1`; the merged tree was
+verified byte-identical to the tested tree (`git diff --stat ticket/DG-036 HEAD` empty) before the
+push. **Consequence: the trunk's LOCAL `feature/outcome-loop-week1` is now 1 behind `origin`** and
+needs `git pull --ff-only` in `~/dynasty-genius-product` — not done here, because that trunk carries
+47 dirty files belonging to other lanes (AGENT-HOOK rule 1). None of them overlap DG-036's four.
+
+**The ticket named the wrong dominant vector.** It frames the defect as the `OSError` branch at
+`:397-401`. The vector that has actually occurred is process death, which never reaches the marker
+write at all — measured twice: `docs/agent-ledger/2026-08-01.md:460-463` (manual run killed), and
+2026-08-12, which `app/data/logs/backup_irreplaceable.out.log` skips entirely between
+`20260811T141500Z` and `20260813T143035Z`. Both left staging directories that a `finally:` block
+removes. 2026-08-12 is the same day the season brief records as a gap in `model_forward_capture`
+and `market_divergence_history`.
+
+**Built:** the producer writes `app/data/ops/backup_run_active.json` (`run_id`, `started_at`, `pid`)
+at run start and never deletes it. The reader's invariant is that the marker must never describe an
+EARLIER run than the last one that started — `>=` on the run_id, because `%Y%m%dT%H%M%SZ` sorts
+chronologically, so a run whose sentinel write failed and published a *newer* marker stays healthy.
+New reasons `backup_run_incomplete` and `backup_sentinel_unparseable`. Plus the `run_prefix` reset
+this ticket's Notes called for.
+
+**The first cut of this was wrong and adversarial review caught it.** Comparing run_ids for equality
+made every healthy in-flight run read `degraded` — 0.11h to 12.64h daily, median 1.25h, measured
+across the 52 runs in the log carrying both timestamps. The reason now fires only when the started
+run can no longer be in flight: its pid is gone, or it has outlived `BACKUP_MAX_RUN_HOURS = 18`
+(above the longest real run, 20260804T143449Z at 12.64h; below the 20-24h inter-run interval).
+
+**Known limit, deliberately open:** the sentinel and the marker share a directory, so whatever makes
+one unwritable usually makes the other unwritable too. They then agree and only the 26-hour law
+catches it. Documented in `inspect_backup_marker`'s docstring.
+
+**How we know it works:**
+```
+.venv/bin/python3.14 -m pytest tests -q      -> 6301 passed, 40 skipped (6283 before)
+  .../test_dg036_stale_marker_red.py -q      -> 31 passed
+ruff 0.15.12 check (pinned pre-commit rev)   -> All checks passed
+dg-land.sh DG-036 --from feature/outcome-loop-week1 --dry-run
+  -> "dry run: rebase clean, tests pass. Nothing merged."
+10/10 deliberate mutations of the new production code caught by the new tests,
+   including deletion of the route's sentinel_path kwarg.
+
+replay of 2026-08-12 (stale 08-11 completed marker 25.6h old, dead run, inside the 26h law):
+  BEFORE  status='ok'        reasons=[]
+  AFTER   status='degraded'  reasons=['backup_run_incomplete']
+healthy run observed from inside run_backup mid-upload:
+  status='ok' reasons=[]     run returns completed / exit 0
+```
 
 ---
 
