@@ -1,6 +1,6 @@
 # DG-040 — the daily nflverse capture has never once succeeded: upstream renamed contracts `cols`
 
-**Layer:** 1  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**
+**Layer:** 1  ·  **State:** done  ·  **Lane:** ClaudeFable5-DG040-20260824  ·  **DG 3.0**
 **Source:** live ops sweep, 2026-08-24, while ranking the board. The 06:15 job was exit 1 in
 `launchctl list` and nobody had looked.
 
@@ -61,3 +61,36 @@ the season's primary capture job, 17 days before kickoff.
 **Depends on:** nothing. **Related:** DG-033 (status grading on this producer), the
 nflverse-"unchanged"-trap note (a stale mtime here means idempotent-healthy — this failure is
 the opposite case and the ledger says `failed` outright).
+
+---
+
+**CLOSED 2026-08-24, lane ClaudeFable5-DG040-20260824. All four "done" criteria met.**
+
+Landed as merge `6b5dceb9` on `origin/feature/outcome-loop-week1` — **the first ticket ever
+landed through `dg-land.sh` unaided** (base checked out in the trunk, the exact DG-038
+condition; its dry run proved the merge and `git ls-remote` confirmed nothing pushed until the
+real land). RED 60 failed → GREEN 108 passed on the contracts contract file; full suite
+**6323 passed / 40 skipped / zero collection errors** at the gate, twice (dry + real).
+
+Deployment, each step run and verified:
+```
+$ git -C ~/dynasty-genius-product pull --ff-only        # trunk → 6b5dceb9; no dirty overlap
+$ .venv/bin/python3.14 -c "...migrate_additive_columns(Path('app/data/nflverse_usage.db'),
+    build_streams())"                                    # → {'contracts': ['season_history',
+                                                         #    'contract_history']}
+$ .venv/bin/python3.14 scripts/run_nflverse_usage_capture.py   # launchd's exact invocation
+  → status "ok", EXIT=0, run nflverse-usage-20260824T1718351183490000
+```
+Store verified read-only afterwards: new vintage `…T1718…:contracts` = 48,690 rows beside the
+two 2026-08-08 vintages (145,712 total — accumulate-from-capture-one arithmetic exact);
+`season_history`/`contract_history` populated with `cols` NULL on new rows and vice versa on
+legacy rows; **exactly 62 rows null in both nested columns — matching the payload census to
+the row**; ledger `nflverse_usage_status_latest.json` reads `ok`.
+
+The scheduled 06:15 run on 2026-08-25 is the remaining production confirmation; nothing
+differs from today's hand-run but the launchd trigger, which the four failed runs already
+proved fires.
+
+Cosmetic finding for the tooling, not worth a ticket: `dg-land.sh` composes the merge subject
+as `TICKET: <branch subject>`, so a branch subject that already starts with the ticket id
+lands as "DG-040: DG-040: …". Strip a leading `TICKET:` from the subject if it grates.

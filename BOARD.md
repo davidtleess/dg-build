@@ -43,7 +43,7 @@
 | DG-037 | No ticket can land through `dg-land.sh` — five mechanisms | process | **done — 5 mechanisms fixed, dry-run green** | ClaudeOpus5-DG037-20260823 |
 | DG-038 | `dg-land.sh` cannot merge into any base that is checked out somewhere | process | **done — detached merge + `HEAD:$BASE` push; dry-run now proves the merge; gated by `tests/test-dg-land.sh`** | ClaudeFable5-DG038-20260824 |
 | DG-039 | A blocked roster-capacity audit writes nothing; last week's audit stands as current | **1** | todo | — |
-| DG-040 | The daily nflverse capture has never once succeeded — upstream renamed contracts `cols` | **1** | todo | — |
+| DG-040 | The daily nflverse capture has never once succeeded — upstream renamed contracts `cols` | **1** | **done — merge `6b5dceb9`, deployed to the trunk, capture run green same day** | ClaudeFable5-DG040-20260824 |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
@@ -116,3 +116,24 @@ meant to reach `main` before the season. It is worth someone's word.
 **Naming collision worth knowing:** `origin/main`'s PR #160 merged a branch called `ticket/DG-035`,
 but its content is the 2026-08-19 governance removal — nothing to do with the DG-035 capture-chain
 ticket, which is still genuinely open above.
+
+---
+
+**2026-08-24, later.** Three state changes a reader of the 09:00 notes above should know:
+
+**The landing pipeline works.** DG-038 is done and DG-040 landed through `dg-land.sh` unaided —
+the first ticket ever to do so — against a base checked out in the trunk. A green `--dry-run` now
+means "this ticket can actually land": it builds the real merge and runs `git push --dry-run`. The
+nine pre-DG-037 worktrees still need remove-and-recreate before they can pass the dirty-tree gate
+(safe; all nine branches are on origin).
+
+**The trunk moved.** `~/dynasty-genius-product` was fast-forwarded to `6b5dceb9` (dirty-overlap
+checked first — none of the 47 files touched the merge). Local `feature/outcome-loop-week1` is
+level with origin again.
+
+**The 06:15 capture is fixed and proven.** DG-040: upstream had renamed contracts `cols` →
+`season_history` and added `contract_history`; the scheduled job had been 4-for-4 exit 1 since
+install, and the last normalized contracts vintage was 2026-08-08 — a 16-day gap, not the 2-day
+gap the err.log suggested (the log is younger than the machine). Store migrated additively, a
+hand-run of launchd's exact invocation finished `status ok / exit 0`, and a 48,690-row contracts
+vintage dated today sits beside the 08-08 ones. Tomorrow's scheduled run is the last confirmation.
