@@ -13,7 +13,14 @@ BUILD="${DG_BUILD:-$HOME/dg-build}"
 WT_ROOT="${DG_WT_ROOT:-$HOME/dg-wt}"
 BASE="main"
 DRY=0
-LOCK="$REPO/.git/dg-land.lock"
+# NOT "$REPO/.git/..." — $REPO is itself a LINKED WORKTREE, so its .git is a
+# one-line FILE ("gitdir: .../worktrees/dynasty-genius-product"), not a
+# directory. Opening a lock under it fails with "Not a directory" and this
+# script dies at the exec below before it does anything at all. Ask git where
+# the real git dir is; --git-common-dir also keeps every worktree contending for
+# the SAME lock, which is the point of serialising landings.
+LOCK_ROOT="$(git -C "$REPO" rev-parse --git-common-dir)"
+LOCK="$LOCK_ROOT/dg-land.lock"
 
 [[ $# -ge 1 ]] || { echo "usage: dg-land.sh DG-NNN [--from main] [--dry-run]" >&2; exit 1; }
 TICKET="$1"; shift
@@ -33,7 +40,7 @@ DEST="$WT_ROOT/$TICKET"
 exec 9>"$LOCK"
 if ! flock -n 9 2>/dev/null; then
   # macOS has no flock(1) by default; fall back to an atomic mkdir lock
-  LOCKDIR="$REPO/.git/dg-land.lockdir"
+  LOCKDIR="$LOCK_ROOT/dg-land.lockdir"
   if ! mkdir "$LOCKDIR" 2>/dev/null; then
     echo "error: another land is in progress ($LOCKDIR exists)." >&2
     echo "       Wait for it, or remove that directory if it is stale." >&2

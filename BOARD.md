@@ -40,7 +40,7 @@
 | DG-034 | Backup health reports `ok` while the backup is failing | **1** | **done — 52e7dfc9, hand-landed on `feature/outcome-loop-week1`** | ClaudeOpus5-DG034-20260823 |
 | DG-035 | Capture chain silently does not run unless David is logged in | **1** | todo | — |
 | DG-036 | A failed backup can leave the previous run's `completed` marker standing | **1** | todo | — |
-| DG-037 | No ticket can land through `dg-land.sh` — the worktree fails its own gate | process | todo | — |
+| DG-037 | No ticket can land through `dg-land.sh` — five mechanisms | process | **done — 5 mechanisms fixed, dry-run green** | ClaudeOpus5-DG037-20260823 |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
