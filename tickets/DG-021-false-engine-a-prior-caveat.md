@@ -76,5 +76,7 @@ rows both times):**
 ```
 The 114 is conserved — the exact cohort the ticket counted now says the truth about itself.
 
-Remaining production confirmation: the **11:30 scheduled** pvo-refresh run repeating this from
-launchd's own trigger (the DG-040 proof pattern).
+**CONFIRMED 2026-08-25 11:38.** The 11:30 scheduled run fired from launchd's own trigger:
+`launchctl list` exit 0, report `status ok`, artifact vintage `2026-08-25T15:30:02Z`, and the
+acceptance held on the fresh artifact — `falseA_nullDVS=0`, `old_caveat=0`, `honest=114`.
+Nothing about this ticket remains open.

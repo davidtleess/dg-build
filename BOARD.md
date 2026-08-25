@@ -209,3 +209,14 @@ paths, and **`pvo_refresh` does not declare `input_provenance_field`** — only 
 of eight artifacts — so this change cannot move what that session was about to verify. `dg-land.sh`
 again refused to touch the trunk and printed the note instead: **the trunk's local `main` is now 1
 behind `origin/main`** and wants `git pull --ff-only` when its tree is quiet.
+
+---
+
+**2026-08-25 11:38 — DG-021 production-CONFIRMED, and the trunk is current.** The 11:30 scheduled
+pvo-refresh fired from launchd's own trigger: exit 0, report `status ok`, artifact vintage
+`15:30:02Z`, and the acceptance held — **0** rows with `dvs_engine="A"` beside a null score, **0**
+old caveats, **114** honest no-score rows. Nothing about DG-021 remains open. The trunk was then
+fast-forwarded `b291107f → b4662707` (overlap 0 of 25 dirty paths), so DG-023's reader fix is live
+for tomorrow's 06:15+ producers and every job now runs from current `main`. Board state: DG-021,
+DG-023, DG-029, DG-004 all closed today; next unclaimed picks are DG-022 (WIP on origin), DG-041
+(new, layer 1), DG-020, and SR-11's slot tomorrow 08-26 — sequencing is David's call.
