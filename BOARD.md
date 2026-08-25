@@ -131,6 +131,17 @@ nine pre-DG-037 worktrees still need remove-and-recreate before they can pass th
 checked first — none of the 47 files touched the merge). Local `feature/outcome-loop-week1` is
 level with origin again.
 
+**2026-08-25.** The open question above — whether `feature/outcome-loop-week1` reaches `main`
+before the season — is answered: **David ruled merge, and it merged as `d33c9896` on
+`origin/main`.** Ten conflicts resolved (scorecard trio → PR #159's later refinement; the four
+frontend seams REGENERATED via `npm run openapi-gen`, never hand-merged; AGENTS.md → charter +
+parallel-work protocol union; AGENT_SYNC.md and the 08-18 ledger → main's landed deletion wins).
+Gate on the merged tree before push: pytest **6029 passed / 0 failed / zero collection errors**
+(the −294 vs the branch is main's landed deletion of 29 governance-test files, verified by
+`git diff --name-status`) and frontend vitest **298/298**. Local `main` fast-forwarded to match.
+The trunk still runs `feature/outcome-loop-week1` (content-identical to `main` at merge time);
+whether the trunk switches to `main` and where future tickets land is an open operational choice.
+
 **The 06:15 capture is fixed and proven.** DG-040: upstream had renamed contracts `cols` →
 `season_history` and added `contract_history`; the scheduled job had been 4-for-4 exit 1 since
 install, and the last normalized contracts vintage was 2026-08-08 — a 16-day gap, not the 2-day
