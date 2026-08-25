@@ -1,6 +1,6 @@
 # DG-041 — The inputs gate is permanently red, because participation can never serve the season it is asked for
 
-**Layer:** 1  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**
+**Layer:** 1  ·  **State:** done  ·  **Lane:** ClaudeFable5-DG041-20260825  ·  **DG 3.0**
 **Source:** found 2026-08-25 while fixing DG-023's two false words. David ruled the words-only scope
 and asked for the rest to be filed rather than folded in.
 
@@ -57,3 +57,42 @@ sentence underneath them), DG-039 (also a producer fix that could not be made in
 Deliberately NOT bundled into DG-023. That ticket's own instruction is "fix the words, keep the gate",
 and DG-023 shipped 10 days before the 09-04 freeze; this one touches the producer's season window and
 the source hash, which is a different risk class and deserves its own decision.
+
+---
+
+**CLOSED (code) 2026-08-25, lane ClaudeFable5-DG041-20260825. Landed as merge `b797ee1f` on
+`origin/main` through `dg-land.sh` unaided (gate: full suite 6,070 passed / 0 failed / zero
+collection errors — 6,067 at DG-023's land + 3 new).**
+
+**Fix — the ticket's own cheapest shape, taken exactly:** `_STREAM_LOADERS` entries gain a
+source-CEILING callable beside the existing floor; `_load_source` filters each stream's window
+through both. Participation's ceiling is the client's own formula —
+`lambda nfl: nfl.get_current_season(roster=True) - 1` — verified against the installed
+`load_participation`, whose first line is literally `max_season = get_current_season(roster=True)
+- 1`. The mirror is exact, not a guess, and cannot rot as seasons roll (pinned by a 2031-geometry
+test). The frames are byte-identical (the fallback already served the capped window); only the
+provenance stops recording a refusal that never needed to happen.
+
+**TDD, RED watched (3 failures, each for the expected reason):**
+`tests/contract/test_dg041_stream_source_ceiling.py` pins (1) one capped request, uncapped
+streams still get the full window; (2) `summarize_input_provenance` reads the result as
+`inputs_live` — the whole ticket in one assertion; (3) the ceiling tracks the roster-year bound,
+not a hardcoded 2025. DISCLOSED TEST CHANGE (DG-031 precedent) in
+`test_feature_refresh_source_isolation_red.py`: the CH1 fixture gains `get_current_season`,
+participation's expectations change from "refused then stepped back" to "capped up front".
+No reader change: DG-023's gate grades on `status` + `fallback_used` alone, so honesty at the
+producer turns it green through the existing path.
+
+**Blast radius on `source_hash`, disclosed up front as the ticket demanded:**
+`stream_provenance.participation` changes (`fallback_used true→false`, `error_type
+"ValueError"→null`), so the FIRST run on this code moves the C4 hash and regenerates the
+candidate once, then settles. Frames unchanged — the regen is a provenance echo, not a content
+change.
+
+**Deployment sequencing (deliberate, in force):** landed on `origin/main` 2026-08-25 ~17:10 EDT;
+the trunk is intentionally NOT pulled — tomorrow ~09:00 is DG-023's first scheduled production
+run and stays single-variable on `main@a61f0fbe`. Trunk pulls post-window 08-26; DG-041 live
+from 08-27 with seven scheduled runs before the 09-04 freeze. **Production acceptance, still
+open until then:** the 08-27 `feature_refresh_latest_report.json` shows participation
+`fallback_used=false` / `error_type=null`, and `/api/health`'s inputs line reads `inputs_live`
+on a healthy day.

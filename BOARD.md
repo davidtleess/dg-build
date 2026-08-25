@@ -44,7 +44,7 @@
 | DG-038 | `dg-land.sh` cannot merge into any base that is checked out somewhere | process | **done — detached merge + `HEAD:$BASE` push; dry-run now proves the merge; gated by `tests/test-dg-land.sh`** | ClaudeFable5-DG038-20260824 |
 | DG-039 | A blocked roster-capacity audit writes nothing; last week's audit stands as current | **1** | todo | — |
 | DG-040 | The daily nflverse capture has never once succeeded — upstream renamed contracts `cols` | **1** | **done — merge `6b5dceb9`, deployed to the trunk, capture run green same day** | ClaudeFable5-DG040-20260824 |
-| DG-041 | The inputs gate is permanently red — participation can never serve the season it is asked for | **1** | todo | — |
+| DG-041 | The inputs gate is permanently red — participation can never serve the season it is asked for | **1** | done | ClaudeFable5-DG041-20260825 |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
@@ -220,3 +220,19 @@ fast-forwarded `b291107f → b4662707` (overlap 0 of 25 dirty paths), so DG-023'
 for tomorrow's 06:15+ producers and every job now runs from current `main`. Board state: DG-021,
 DG-023, DG-029, DG-004 all closed today; next unclaimed picks are DG-022 (WIP on origin), DG-041
 (new, layer 1), DG-020, and SR-11's slot tomorrow 08-26 — sequencing is David's call.
+
+---
+
+**2026-08-25 17:1x — DG-041 CLOSED (code), landed `b797ee1f`, trunk pull deliberately held.**
+David's word: "go" on the DG-041-first sequencing. The fix is the ticket's cheapest shape taken
+exactly: a per-stream source CEILING beside the floor in `_STREAM_LOADERS`, participation's being
+the client's own formula (`get_current_season(roster=True) - 1` — verified as literally the first
+line of the installed `load_participation`). TDD, RED watched (3 expected failures); one DISCLOSED
+test change in the CH1 isolation fixture; gate 6,070/0, zero collection errors. Known and
+disclosed: `source_hash` moves once on first run (provenance echo — frames byte-identical), then
+settles. **Sequencing in force: the trunk stays on `main@a61f0fbe` through tomorrow's ~09:00 cycle
+so DG-023's first scheduled production run is single-variable; trunk pulls post-window 08-26;
+DG-041 live from 08-27 with seven runs before the 09-04 freeze. Production acceptance still open:
+08-27 report shows participation `fallback_used=false` and `/api/health` reads `inputs_live`.**
+Next unclaimed picks unchanged: DG-022 (WIP on origin, rebase care — its WIP touched a test file
+DG-021 also changed), DG-020, SR-11's slot tomorrow 08-26.
