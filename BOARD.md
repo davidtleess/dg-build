@@ -7,7 +7,7 @@
 | DG-001 | What actually drives the Engine B projection | 3 | answered — **qualified by DG-017** | crew forensics |
 | DG-002 | Walk-forward validation for RB, WR, TE | 3 | todo | — |
 | DG-003 | Give the projection a distribution, not a number | 3 | todo | — |
-| DG-004 | Stale leakage FAILURE report in repo root | 3 | todo | — |
+| DG-004 | Stale leakage FAILURE report in repo root | 3 | **done — stale one-off artifact deleted; systemic guards live** | ClaudeFable5-DG004-20260825 |
 | DG-005 | Separate player talent from team environment | 3 | todo | — |
 | DG-006 | Model the career arc as a sequence | 3 | todo | — |
 | DG-007 | Learn when to act, not just what things are worth | 3 | todo | — |
@@ -32,7 +32,7 @@
 | DG-026 | Train and test labels share the 2023 season | 3 | todo | — |
 | DG-027 | Penalty chosen by random CV on repeated-player data | 3 | todo | — |
 | DG-028 | "We changed nothing" check cannot see the artifacts it guards | 3 | todo | — |
-| DG-029 | Is feature season 2024 absent by design or by gap? | **2** | todo | Davids-Air-38585 |
+| DG-029 | Is feature season 2024 absent by design or by gap? | **2** | **done — BY DESIGN, same mechanism; merge `849f3eaf` on `main`** | ClaudeFable5-DG029-20260825 |
 | DG-030 | Compare model families to each other, not just to naive | 3 | todo | — |
 | DG-031 | Salvage the outcome resolver and Coverage contract | 1 → 3 | **done — merged in PR #159** | CodexCrew20260819 |
 | DG-032 | Six ledger trees, three versions of the same day; reconcile the channel | process | todo | — |
@@ -141,6 +141,22 @@ Gate on the merged tree before push: pytest **6029 passed / 0 failed / zero coll
 `git diff --name-status`) and frontend vitest **298/298**. Local `main` fast-forwarded to match.
 The trunk still runs `feature/outcome-loop-week1` (content-identical to `main` at merge time);
 whether the trunk switches to `main` and where future tickets land is an open operational choice.
+
+**2026-08-25, morning. David ruled: all future tickets land on `main`.** `feature/outcome-loop-week1`
+is retired as a landing base; the trunk switches to `main` after today's producer window. Under that
+ruling: **DG-029 landed on `main`** as merge `849f3eaf` (gate 6037 passed / 0 failed) — the answer is
+**BY DESIGN, same mechanism** (`apply_inference_partition`; 2024 is the in-between season of a 2-year
+outcome horizon; making it eligible is a model-definition decision, not a backfill). The close also
+resolved a contradiction sitting in the 2026-08-19 trunk ledger: the Consultant lane's "gap, not a
+design choice" claim (based on 2024 existing upstream) is wrong — upstream presence is consistent
+with a downstream partition. **DG-004 closed**: the repo-root leakage report was an untracked one-off
+probe artifact (its writer has zero production callers; `adp_sleeper` not in the current matrix);
+deleted, with the pre-commit training-CSV guard and feature-gate temporal check named as the live
+protection. **Recreate procedure for pre-DG-037 worktrees is proven**: remove worktree → delete local
+branch (origin keeps the copy) → clear Lane → fresh `dg-work.sh` (base `main`) → cherry-pick the one
+pushed commit. DG-029's cherry-pick hit one add/add conflict on the 08-19 ledger — resolved by
+keeping the trunk's canonical version, NOT re-planting the worktree-local duplicate (DG-032).
+**In flight:** DG-021 (this lane), DG-023 (handed to David's parallel session, worktree prepped).
 
 **The 06:15 capture is fixed and proven.** DG-040: upstream had renamed contracts `cols` →
 `season_history` and added `contract_history`; the scheduled job had been 4-for-4 exit 1 since
