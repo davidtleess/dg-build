@@ -1,6 +1,6 @@
 # DG-023 — The health gate labels good participation data "empty"
 
-**Layer:** 1  ·  **State:** todo  ·  **Lane:** ClaudeCrew20260819  ·  **DG 3.0**
+**Layer:** 1  ·  **State:** todo  ·  **Lane:** Parallel-DG023-20260825  ·  **DG 3.0**
 **Source:** crew lane flagged it; Tower and the judge seat each confirmed it independently, 2026-08-18
 
 **Problem:** `/api/health` reports `feature_refresh` as `inputs_degraded` with basis
