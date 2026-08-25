@@ -25,7 +25,7 @@
 | DG-019 | Market appears to over-disperse by ~2× | 3 | todo | — |
 | DG-020 | Get more than four market snapshots | **1** | todo | Davids-Air-63412 |
 | DG-021 | 114 players told an Engine A prior was used when none exists | 3→6 | **done — merge `b291107f` on `main`, DEPLOYED 10:21: live artifact 114→0 false rows, same 114 now honest** | ClaudeFable5-DG021-20260825 |
-| DG-022 | Players with no canonical id can never be graded | **2** | todo | CodexTeam20260819 |
+| DG-022 | Players with no canonical id can never be graded | **2** | **done — merge `20807368` on `main`: frozen-prediction membership lane, real-surface-QA proven** | ClaudeFable5-DG022-20260825 |
 | DG-023 | Health gate labels good participation data "empty" | **1** | **done — merge `b4662707` on `main`** | Parallel-DG023-20260825 |
 | DG-024 | PPG counts **ALL GAMES**, postseason included — David 2026-08-19 | 3 | **decided** | — |
 | DG-025 | Ablate usage features under a scaled, tuned fit — the deciding test | 3 | todo | — |
@@ -46,6 +46,7 @@
 | DG-040 | The daily nflverse capture has never once succeeded — upstream renamed contracts `cols` | **1** | **done — merge `6b5dceb9`, deployed to the trunk, capture run green same day** | ClaudeFable5-DG040-20260824 |
 | DG-041 | The inputs gate is permanently red — participation can never serve the season it is asked for | **1** | done | ClaudeFable5-DG041-20260825 |
 | DG-042 | David's "all games" PPG ruling is honoured by accident, not enforced (SR-21) | 3 | **done — merge `c2b11f0a` on `main`** | ClaudeOpus5-DG042-20260825 |
+| DG-043 | Player card two-lane furniture fails contrast, markup, and mobile width (pre-existing; found by DG-022 QA) | **6** | todo | — |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
@@ -237,3 +238,22 @@ DG-041 live from 08-27 with seven runs before the 09-04 freeze. Production accep
 08-27 report shows participation `fallback_used=false` and `/api/health` reads `inputs_live`.**
 Next unclaimed picks unchanged: DG-022 (WIP on origin, rebase care — its WIP touched a test file
 DG-021 also changed), DG-020, SR-11's slot tomorrow 08-26.
+
+---
+
+**2026-08-25 19:3x — DG-022 CLOSED, landed `20807368`; DG-043 filed; an ID collision resolved.**
+The 08-19 WIP was resumed by its own handoff, rebased (generated seams REGENERATED — the regen
+caught `index.ts` about to drop main's newer types), hardened with four measured fixes (duplicate
+region landmark on the real surface; TWO test files silently reading the production capture DB —
+hermetic seams added, disclosed; unclosed sqlite handle; unpinned classifier arm), and **the
+real-surface QA gate the WIP was blocked on now PASSED** — Tank Dell's card tells the truth on
+desktop and mobile, evidence in `dg-build/preserved/2026-08-25-dg022-qa/`. Gate after rebase onto
+the parallel session's DG-042: green; local suite 6,087/0, frontend 73 files/302, zero collection
+errors. Whole-page QA found three PRE-EXISTING base-card defects, proven independent of DG-022 →
+**DG-043** (layer 6; Tier-3-shaped, so post-freeze unless David says otherwise). **ID note:** the
+a11y filing briefly carried the number DG-042 (the 08-25 product ledger says "Filed as DG-042")
+before discovering the parallel session's same-evening DG-042 (PPG guard, `c2b11f0a`) — theirs
+was committed first and keeps the number; the a11y ticket is DG-043 and was never committed under
+042. **Trunk is now 3 merges behind origin/main** (DG-041 `b797ee1f`, DG-042 `c2b11f0a`, DG-022
+`20807368`) — all still land tomorrow's post-window pull; none of the three touches a producer
+except DG-041 (the planned one). Remaining unclaimed: DG-020, DG-043, SR-11's slot tomorrow.
