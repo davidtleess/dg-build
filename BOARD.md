@@ -26,7 +26,7 @@
 | DG-020 | Get more than four market snapshots | **1** | todo | Davids-Air-63412 |
 | DG-021 | 114 players told an Engine A prior was used when none exists | 3→6 | **done — merge `b291107f` on `main`, DEPLOYED 10:21: live artifact 114→0 false rows, same 114 now honest** | ClaudeFable5-DG021-20260825 |
 | DG-022 | Players with no canonical id can never be graded | **2** | todo | CodexTeam20260819 |
-| DG-023 | Health gate labels good participation data "empty" | **1** | todo | ClaudeCrew20260819 |
+| DG-023 | Health gate labels good participation data "empty" | **1** | **done — merge `b4662707` on `main`** | Parallel-DG023-20260825 |
 | DG-024 | PPG counts **ALL GAMES**, postseason included — David 2026-08-19 | 3 | **decided** | — |
 | DG-025 | Ablate usage features under a scaled, tuned fit — the deciding test | 3 | todo | — |
 | DG-026 | Train and test labels share the 2023 season | 3 | todo | — |
@@ -44,6 +44,7 @@
 | DG-038 | `dg-land.sh` cannot merge into any base that is checked out somewhere | process | **done — detached merge + `HEAD:$BASE` push; dry-run now proves the merge; gated by `tests/test-dg-land.sh`** | ClaudeFable5-DG038-20260824 |
 | DG-039 | A blocked roster-capacity audit writes nothing; last week's audit stands as current | **1** | todo | — |
 | DG-040 | The daily nflverse capture has never once succeeded — upstream renamed contracts `cols` | **1** | **done — merge `6b5dceb9`, deployed to the trunk, capture run green same day** | ClaudeFable5-DG040-20260824 |
+| DG-041 | The inputs gate is permanently red — participation can never serve the season it is asked for | **1** | todo | — |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
@@ -180,3 +181,31 @@ install, and the last normalized contracts vintage was 2026-08-08 — a 16-day g
 gap the err.log suggested (the log is younger than the machine). Store migrated additively, a
 hand-run of launchd's exact invocation finished `status ok / exit 0`, and a 48,690-row contracts
 vintage dated today sits beside the 08-08 ones. Tomorrow's scheduled run is the last confirmation.
+
+---
+
+**2026-08-25, mid-morning. DG-023 landed** as merge `b4662707` on `main` (gate 6067 passed / 0 failed,
+ruff clean). The finding worth carrying: **the producer half already cherry-picked onto that branch
+(`f2e09ab`) was inert.** It set `status: "loaded"` for participation, but the READER bucketed a stream
+as empty on `status != "loaded"` **OR a null season** — and participation's frame has no `season`
+column at all, so it stayed in `EMPTY:` regardless. Before/after output was byte-identical. A green
+producer-side fix is not the same as a fixed surface; run the reader.
+
+Both of this ticket's false words are gone and both were re-measured, not inherited:
+`load_participation(seasons=[2025])` returns **45,184 rows across 26 columns, none named `season`**,
+and `fallback_used` means a REFUSED SEASON, not a cache — `nflreadpy`'s `cache_mode` is `MEMORY`, so a
+scheduled run starts cold and never serves anything from cache. The gate itself is untouched: empty,
+unavailable and step-back all still degrade.
+
+**DG-041 filed, not fixed.** Participation's upstream ceiling is `current_season - 1` *by
+construction*, so it steps back on every run forever and holds `feature_refresh` degraded
+permanently — even after Week 1 when the other four streams go live. A gate that is always red
+carries as little information as one that is always green. Fixing it means a per-stream ceiling in
+the producer's season window, which moves `source_hash`; David scoped it out of DG-023 deliberately.
+
+**Landed alongside a live second session** (deploy/verify lane, waiting on the 11:30 pvo-refresh).
+Checked first: no `dg-land.lockdir`, nothing in `doing`, zero file overlap with the trunk's 25 dirty
+paths, and **`pvo_refresh` does not declare `input_provenance_field`** — only `feature_refresh` does,
+of eight artifacts — so this change cannot move what that session was about to verify. `dg-land.sh`
+again refused to touch the trunk and printed the note instead: **the trunk's local `main` is now 1
+behind `origin/main`** and wants `git pull --ff-only` when its tree is quiet.
