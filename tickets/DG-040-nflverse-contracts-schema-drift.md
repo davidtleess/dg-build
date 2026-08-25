@@ -91,6 +91,12 @@ The scheduled 06:15 run on 2026-08-25 is the remaining production confirmation; 
 differs from today's hand-run but the launchd trigger, which the four failed runs already
 proved fires.
 
+**CONFIRMED 2026-08-25 06:34.** The scheduled run fired at 06:15:00 EDT and succeeded on its
+own — the job's first clean scheduled exit: `launchctl list` exit 0;
+`nflverse_usage_status_latest.json` status `ok`, run `nflverse-usage-20260825T1015008880030000`,
+finished in 99s; contracts vintage `…20260825T1015…` = 48,690 rows stored beside yesterday's.
+Nothing about this ticket remains open.
+
 Cosmetic finding for the tooling, not worth a ticket: `dg-land.sh` composes the merge subject
 as `TICKET: <branch subject>`, so a branch subject that already starts with the ticket id
 lands as "DG-040: DG-040: …". Strip a leading `TICKET:` from the subject if it grates.
