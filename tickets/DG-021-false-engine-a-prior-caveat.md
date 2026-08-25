@@ -60,8 +60,21 @@ $ .venv/bin/python3.14 -m pytest -q          # full suite, worktree, pre-land
 6042 passed, 38 skipped                       # zero failures, zero collection errors
 ```
 
-**⚠ Production truth pending one deployment step:** the live serving artifact still carries the
-114 false rows until the universe producer regenerates from the fixed code — trunk switch to
-`main` + artifact regen after today's 09:00–10:15 producer window. Acceptance check at regen:
-rows with `dvs_engine="A"` and null DVS must count **0**, and the no-prior cohort must carry the
-honest caveat.
+**DEPLOYED 2026-08-25 10:21 EDT, on David's "go ahead".** Trunk switched to `main@b291107f`
+(post-window; the three dirty files on main-deleted paths were archived to
+`dg-build/preserved/2026-08-25-trunk-switch/` AND stashed — `stash@{0}` — before the switch;
+dirty count 47→25, remainder carried over untouched). Producer hand-run with launchd's exact
+invocation: `run_pvo_refresh.py` → report `status: ok`, `EXIT=0`, artifact vintage
+`2026-08-25T14:21:18Z`.
+
+**Acceptance measured, before vs after, same artifact path (`universe_pvo_runtime.json`, 12,225
+rows both times):**
+```
+09:30 artifact (old code):  falseA_nullDVS=114  old_caveat_rows=114
+10:21 artifact (fixed):     falseA_nullDVS=0    old_caveat_rows=0
+                            honest_caveat_rows=114, all dvs_engine=None
+```
+The 114 is conserved — the exact cohort the ticket counted now says the truth about itself.
+
+Remaining production confirmation: the **11:30 scheduled** pvo-refresh run repeating this from
+launchd's own trigger (the DG-040 proof pattern).

@@ -24,7 +24,7 @@
 | DG-018 | Standing measurement: does the model beat the market? | 3 | todo | — |
 | DG-019 | Market appears to over-disperse by ~2× | 3 | todo | — |
 | DG-020 | Get more than four market snapshots | **1** | todo | Davids-Air-63412 |
-| DG-021 | 114 players told an Engine A prior was used when none exists | 3→6 | **done (code) — merge `b291107f` on `main`; artifact regen post-window is the last step** | ClaudeFable5-DG021-20260825 |
+| DG-021 | 114 players told an Engine A prior was used when none exists | 3→6 | **done — merge `b291107f` on `main`, DEPLOYED 10:21: live artifact 114→0 false rows, same 114 now honest** | ClaudeFable5-DG021-20260825 |
 | DG-022 | Players with no canonical id can never be graded | **2** | todo | CodexTeam20260819 |
 | DG-023 | Health gate labels good participation data "empty" | **1** | todo | ClaudeCrew20260819 |
 | DG-024 | PPG counts **ALL GAMES**, postseason included — David 2026-08-19 | 3 | **decided** | — |
@@ -163,10 +163,16 @@ keeping the trunk's canonical version, NOT re-planting the worktree-local duplic
 rebase; local full suite 6042 passed / 0 failed). The dead-window no-A-no-B arm no longer claims
 an Engine A prior: `dvs_engine` stays None, the caveat says outright that no score is available,
 and the player API serves a degradation notice on any modeled row with a null score. Two spec pins
-of the false behavior (phase15 5.10, phase14 5.5) amended with disclosure comments. **The 114 live
-cards stay false until the universe producer regenerates from the fixed trunk — trunk switch to
-`main` + regen scheduled after the 10:15 window close; acceptance = zero rows with `dvs_engine="A"`
-and null DVS.**
+of the false behavior (phase15 5.10, phase14 5.5) amended with disclosure comments.
+
+**2026-08-25 10:21 — THE TRUNK IS ON `main` AND THE LIVE CARDS ARE HONEST.** Post-window, on
+David's "go ahead": three dirty files on main-deleted paths archived
+(`preserved/2026-08-25-trunk-switch/`) and stashed, `git switch main` → `b291107f` (dirty 47→25),
+pvo-refresh hand-run with launchd's exact invocation → `status ok`, exit 0. Acceptance on
+`universe_pvo_runtime.json` (12,225 rows): false rows **114 → 0**, old caveat **114 → 0**, honest
+no-score caveat on **exactly 114** rows, all `dvs_engine=None` — the cohort is conserved. The
+11:30 scheduled run is the remaining launchd-triggered confirmation. **All future producer runs
+now execute from `main`.**
 
 **The 06:15 capture is fixed and proven.** DG-040: upstream had renamed contracts `cols` →
 `season_history` and added `contract_history`; the scheduled job had been 4-for-4 exit 1 since
