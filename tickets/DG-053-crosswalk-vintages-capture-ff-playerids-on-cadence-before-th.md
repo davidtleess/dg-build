@@ -1,6 +1,6 @@
 # DG-053 — Crosswalk vintages: capture ff_playerids on cadence before the season burns identity truth
 
-**Layer:** 2  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**
+**Layer:** 2  ·  **State:** todo  ·  **Lane:** ClaudeFable5-DG053-20260826  ·  **DG 3.0**
 **Edge distance:** foundation  ·  **Size:** 1.5d
 **Source:** 2026-08-26 six-layer completion audit → mapping fleet; roadmap RATIFIED by David
 same day ("3. yes"). Full sequence context: `~/dg-build/ROADMAP-LAYERS.md`.

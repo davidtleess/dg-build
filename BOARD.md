@@ -49,14 +49,14 @@
 | DG-043 | Player card two-lane furniture fails contrast, markup, and mobile width (pre-existing; found by DG-022 QA) | **6** | todo | — |
 | DG-044 | SR-11: the daily capture gap alert — the only detection channel that will exist (absorbs DG-035 option b) | **1** | **done — merge `b1b888be`; INSTALLED + LIVE-FIRE ACCEPTED 08-26 12:00 (banner seen)** | ClaudeFable5-DG044-20260826 |
 | DG-045 | SR-09: the dependency-ordered fail-soft daily chain (steps 1-5 built D4 on David's go; 6-8 = D5/D6) | **1** | doing — `bf5ba8a1` on `ticket/DG-045`, pushed; suite 6203/0 | ClaudeFable5-DG045-20260826 |
-| DG-046 | The common-cohort divergence fix is built, tested, and NOT WIRED IN (archive stores raws — recomputable) | **5** | todo | — |
+| DG-046 | The common-cohort divergence fix is built, tested, and NOT WIRED IN (archive stores raws — recomputable) | **5** | **done — merge `e976b1e2` on `main`, trunk live 08-26** | ClaudeFable5-DG046-20260826 |
 | DG-047 | Morning report's staleness caveat cries wolf (24.0h threshold on a 24h cadence) — trains David to skip caveats | **6** | todo | — |
 | DG-048 | Layer 1 Daily Control exists, works, and nothing schedules it — marker stale since Aug 8 | **1** | todo | — |
 | DG-049 | Extend the capture-gap alert to the two unmonitored event streams (SR-10b's deferred scope) | **1** | todo (foundation, 2d) | — |
 | DG-050 | Replay-reproducibility harness: prove snapshot + parser version reproduces normalized content | **1** | todo (enabler, 3d) | — |
 | DG-051 | Catalog as single source of truth: generate or mechanically reconcile scheduler, freshness, and backup co | **1** | todo (foundation, 3d) | — |
 | DG-052 | End-to-end restore rehearsal with dated evidence; backup class joins per-store health | **1** | todo (foundation, 2d) | — |
-| DG-053 | Crosswalk vintages: capture ff_playerids on cadence before the season burns identity truth | **2** | todo (foundation, 1.5d) | — |
+| DG-053 | Crosswalk vintages: capture ff_playerids on cadence before the season burns identity truth | **2** | doing — `45738736` on `ticket/DG-053`, pushed; land after 14:20 | ClaudeFable5-DG053-20260826 |
 | DG-054 | One versioned name normalizer producing staging keys | **2** | todo (enabler, 2d) | — |
 | DG-055 | Typed facts and the storage pilot: retire the 501-TEXT-column store through the seven proofs | **2** | todo (enabler, 6d) | — |
 | DG-056 | Owned bitemporal identity: mint canonical IDs and run the six-step migration | **2** | todo (enabler, 10d) | — |

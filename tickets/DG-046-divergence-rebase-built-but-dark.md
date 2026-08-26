@@ -1,6 +1,6 @@
 # DG-046 — The common-cohort divergence fix is built, tested, and NOT WIRED IN
 
-**Layer:** 5  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**
+**Layer:** 5  ·  **State:** done  ·  **Lane:** ClaudeFable5-DG046-20260826  ·  **DG 3.0**
 **Source:** 2026-08-26 six-layer completion audit (L5 auditor), facts re-verified same day.
 
 **Problem:** the product's flagship market signal — model-vs-market divergence — is served daily
@@ -26,3 +26,19 @@ new number with unchanged honesty markup.
 **Tier:** product code on a daily producer — pre-freeze candidate; after 09-04 it is not Tier 0
 and waits for the season's end unless David rules otherwise. **Edge distance: DIRECT** — this is
 the nearest lever that makes a served number more real.
+
+---
+
+**✅ BUILT AND LANDED 2026-08-26 ~13:50 — merge `e976b1e2` on `main`, trunk pulled same minute.**
+David's "1 yes" (~13:45). Implementation went one better than the ticket's ask: rather than
+bolting the rebase module onto the runner, `build_universe_market_divergence` itself now ranks
+BOTH lanes against the common cohort (two-pass: eligibility collected with the row loop's own
+skip conditions, then ranked against that population only) — so every caller is fixed, not just
+the daily job. Rows + batch header disclose `inclusion_rule` + population; the small-cohort gate
+judges the real common population; the cross-proof test pins the served delta to
+`market_divergence_rebase.rebased_delta` forever. 7 new tests RED-first; 397 existing
+divergence/market tests green untouched (nothing had pinned the wrong populations); full gate
+green in dg-land. The rebase module stays as the historical-baseline/proof harness, docstring
+updated. **Acceptance:** trunk pulled pre-14:00 so the SR-00 14:00 market retry may produce the
+first production rebased artifact same-day (monitor armed); otherwise tomorrow's 09:40 chain run
+is the first. Verify `divergence_cohort_method` in the served artifact.
