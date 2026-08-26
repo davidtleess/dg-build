@@ -83,6 +83,7 @@
 | DG-077 | Complete the resource layer: dedup, stale state, contract_mismatch, receipt invalidation | **6** | todo (enabler, 1.5d) | — |
 | DG-078 | Belief archive read model — what we believed about a player, dated | **6** | todo (enabler, 2d) | — |
 | DG-079 | Turn release evidence into a gate — goldens, state matrix, CI wiring | **6** | todo (enabler, 1.5d) | — |
+| DG-080 | SR-15: Trade Lab search renders results for the WRONG query (stale-response race) | **6** | doing | ClaudeFable5-DG080-20260826 |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
