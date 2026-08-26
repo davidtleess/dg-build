@@ -89,3 +89,16 @@ rollback: snapshot `launchctl list` + plutil schedules into `ops/launchd/retired
 D8 — not before. Land gate: Thu EOD only if Thu 10:30 alert fired scheduled+silent+heartbeat
 AND DG-041 Thu acceptance clean; else Fri EOD. David runs all launchctl install/bootout
 commands himself.
+
+**2026-08-26 ~14:05 — STEPS 6-7 PREPARED on the branch (`ab522db7`, pushed), on David's "why
+don't we start on tomorrow's work."** Chain plist written + contract-tested (dry-run=false
+pinned; strict-XML-parse test — plutil tolerates what expat rejects); PRE-SR09 snapshots
+committed (13 agents, all exit 0, taken from the live pre-change world); four plists retired
+byte-identical with README/rollback; b-EXCEPTION applied (market + model-pvo → retry-only
+11:30/14:00, scheduler tests updated); retirement contract test guards the layout. 67 contract
+tests green. **⚠ LAND IS COUPLED TO THE SWAP:** three retired plists are live SYMLINKS — landing
+before David's launchctl session + a reboot = silent loss of league/market/pvo producers.
+**Thursday remaining:** morning checks (10:30 silent+heartbeat; DG-041 clean) → apply any
+confirmed findings from today's adversarial review → land → ONE launchctl sitting: bootout six,
+bootstrap chain + ff-playerids (DG-053), verify `launchctl list | grep -c dynasty` = 10
+(13 − 6 retired + 1 chain + 1 ff-playerids + ... recount live) → step 8/SR-19 stays D8.
