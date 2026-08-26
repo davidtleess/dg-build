@@ -1,6 +1,6 @@
 # DG-014 — The deployed models were fit on 2018–2021 only
 
-**Layer:** 3  ·  **State:** todo  ·  **Lane:** Davids-Air-15594  ·  **DG 3.0**
+**Layer:** 3  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**
 **Source:** crew lane forensics, 2026-08-18; verified independently by Tower same night
 
 **Problem:** 2022 and 2023 are held out for evaluation and never folded back in for the final fit.

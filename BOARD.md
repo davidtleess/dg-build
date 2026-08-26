@@ -48,6 +48,7 @@
 | DG-042 | David's "all games" PPG ruling is honoured by accident, not enforced (SR-21) | 3 | **done — merge `c2b11f0a` on `main`** | ClaudeOpus5-DG042-20260825 |
 | DG-043 | Player card two-lane furniture fails contrast, markup, and mobile width (pre-existing; found by DG-022 QA) | **6** | todo | — |
 | DG-044 | SR-11: the daily capture gap alert — the only detection channel that will exist (absorbs DG-035 option b) | **1** | **done — merge `b1b888be`; INSTALLED + LIVE-FIRE ACCEPTED 08-26 12:00 (banner seen)** | ClaudeFable5-DG044-20260826 |
+| DG-045 | SR-09: the dependency-ordered fail-soft daily chain (steps 1-5 built D4 on David's go; 6-8 = D5/D6) | **1** | doing — `bf5ba8a1` on `ticket/DG-045`, pushed; suite 6203/0 | ClaudeFable5-DG045-20260826 |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
@@ -297,3 +298,16 @@ file carries the model 08-12 GAP line + the market 4-date GAP line + heartbeat, 
 persisted, stderr empty. **David saw the banner** — visible-notification acceptance met and the
 08-25 probe question closed. Remaining proof is passive: **tomorrow's scheduled 10:30 run must be
 silent + heartbeat** (calendar scheduling). 08-27: DG-041 production acceptance unchanged.
+
+**2026-08-26 afternoon — the post-noon game plan EXECUTED (adversarially reviewed first, per
+David's ask; his "go" ~12:40 covered the three-ask batch).** Rulings recorded: (h) amendment
+RATIFIED; DG-035 option (a) DEFERRED post-season (ticket updated); SR-09 steps 1-5 pulled to D4.
+Executed: Tuesday-1 baseline preserved (`preserved/2026-08-26-tuesday1-baseline/`, commit
+`75a8f67`) BEFORE the chain rewire makes it unrecapturable; **DG-045 filed and built — SR-09
+steps 1-5 complete, TDD, 26 tests, worktree suite 6203/0, commit `bf5ba8a1` pushed on
+`ticket/DG-045`, NOT landed (install + retirement are D5/D6, David's launchctl)**; hygiene sweep:
+`agent/modeling-backend` pushed (last unbacked branch), 63 untracked trunk files protectively
+copied (`preserved/2026-08-26-trunk-untracked-copy/`), stale Air lane claims cleared on
+DG-014/015/020, clean worktrees DG-015/031/035 removed (tips verified on origin; DG-014/020
+worktrees left in place — dirty, another day's classification). DG-045 ticket carries the full
+resume brief + the D5 stale-report observation.

@@ -67,11 +67,17 @@ goes beyond this ticket's ask: an 08-22-shaped gap that swallows the alert's own
 delivered by the first run after the gap, not lost. **This ticket stays open for option (a) only**
 (LaunchDaemons migration — David's call, now that SR-11 has landed, per his 08-22 word).
 
-**Option (a) remains open and is David's call.** Moving the season-critical producers to
-**LaunchDaemons** (`/Library/LaunchDaemons`, root-owned, run from boot with no session) is the only
-route that *removes* the login dependency instead of reporting on it. It is Tier 2, it overlaps
-SR-09's chain rewire, and David's 2026-08-22 instruction stands: *"Scope it as a new ticket, decide
-after SR-11."*
+**✅ OPTION (a) DECIDED 2026-08-26 ~12:40 — DEFERRED POST-SEASON, David's "go" on the batched
+recommendation.** Moving the season-critical producers to **LaunchDaemons** stays the only route
+that *removes* the login dependency instead of reporting on it, and it is deliberately NOT being
+taken during the season: Tier 2 scope six working days before the 09-04 freeze, and SR-11's live
+alert made the gap loud, which was the accepted minimum bar (option b). Costs accepted with eyes
+open: a boot-to-login gap still swallows slots permanently (08-22 swallowed 13); the alert reports,
+it cannot replay. **Standing caveat for whoever picks this up post-season:** the "producers need a
+GUI session (keychain/user env)" premise argued in the deferral brief is UNVERIFIED — measure it
+against the actual producer code before executing any migration. Also: any option-(a) branch must
+use a FRESH name — `ticket/DG-035` is poisoned by the PR #160 collision. Ticket may CLOSE when
+the post-season backlog records the migration as its own ticket.
 
 ---
 

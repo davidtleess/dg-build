@@ -1,6 +1,6 @@
 # DG-015 — The model card and the training code disagree about what the model saw
 
-**Layer:** 3  ·  **State:** todo  ·  **Lane:** Davids-Air-37360  ·  **DG 3.0**
+**Layer:** 3  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**
 **Source:** Tower, 2026-08-18, while checking DG-014
 
 **Problem:** The card the app serves describes a training procedure the training script does not
