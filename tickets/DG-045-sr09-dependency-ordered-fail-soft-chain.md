@@ -102,3 +102,19 @@ before David's launchctl session + a reboot = silent loss of league/market/pvo p
 confirmed findings from today's adversarial review → land → ONE launchctl sitting: bootout six,
 bootstrap chain + ff-playerids (DG-053), verify `launchctl list | grep -c dynasty` = 10
 (13 − 6 retired + 1 chain + 1 ff-playerids + ... recount live) → step 8/SR-19 stays D8.
+
+**2026-08-26 ~14:45 — ADVERSARIAL REVIEW COMPLETE, ALL CONFIRMED FINDINGS FIXED (`6038d2d6`,
+pushed).** 29-agent review (4 lenses, per-finding adversarial verification): 16 upheld findings
+deduplicating to 2 distinct majors + 3 minors + 4 missing test pins, all fixed TDD same hour.
+The majors: (A) a scratch --steps-from table could silently overwrite the LIVE alert-read report
+— the spec's own printed proof commands (spec:881/:886) do exactly this; the CLI now refuses
+without an explicit scratch destination. **Amend the spec's proof commands when SR-09 closes.**
+(B) SR-19's documented rehearsal command could not produce the real feature_refresh refusal
+(nothing forwarded --season-end 2026); new repeatable `--step-extra STEP=ARG` fixes it.
+**THE D8 REHEARSAL COMMAND IS NOW:**
+`run_daily_chain.py --dry-run=false --runtime-override "$SCRATCH/rollover_rehearsal"
+--step-extra run_feature_refresh=--season-end --step-extra run_feature_refresh=2026`
+Also fixed: hard-upstream table validation (typo'd/forward edge dies at launch, not perma-skip
+with exit 0); past-midnight drift computes against yesterday's target. 44 DG-045 tests green.
+Branch state: bf5ba8a1 (steps 1-5) → ab522db7 (6-7 prep) → 6038d2d6 (review fixes) — READY TO
+LAND Thursday after the two morning checks, coupled to David's launchctl sitting.
