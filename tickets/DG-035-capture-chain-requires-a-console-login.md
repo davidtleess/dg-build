@@ -58,6 +58,15 @@ retroactively. Cost 1.0d → 1.5d; sprint buffer 1.00d → 0.50d.
 
 **Option (b) closes when SR-11 ships and names a `runs = 0` job in a dry run — not before.**
 
+**✅ OPTION (b) CLOSED 2026-08-26.** SR-11 shipped as DG-044 (merge `b1b888be` on `main`), and the
+close condition is met twice over: the review's live reproduction (a `--dry-run` against a scratch
+repo-root naming the really-loaded, really-runs=0 label `com.davidleess.dynasty-what-changed-report`
+as never attempted) and, permanently, in-suite —
+`tests/contract/test_dg044_capture_gap_alert_red.py::TestDryRunNamesNeverAttempted`. The alert also
+goes beyond this ticket's ask: an 08-22-shaped gap that swallows the alert's own 10:30 slot is
+delivered by the first run after the gap, not lost. **This ticket stays open for option (a) only**
+(LaunchDaemons migration — David's call, now that SR-11 has landed, per his 08-22 word).
+
 **Option (a) remains open and is David's call.** Moving the season-critical producers to
 **LaunchDaemons** (`/Library/LaunchDaemons`, root-owned, run from boot with no session) is the only
 route that *removes* the login dependency instead of reporting on it. It is Tier 2, it overlaps

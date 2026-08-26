@@ -47,7 +47,7 @@
 | DG-041 | The inputs gate is permanently red — participation can never serve the season it is asked for | **1** | done | ClaudeFable5-DG041-20260825 |
 | DG-042 | David's "all games" PPG ruling is honoured by accident, not enforced (SR-21) | 3 | **done — merge `c2b11f0a` on `main`** | ClaudeOpus5-DG042-20260825 |
 | DG-043 | Player card two-lane furniture fails contrast, markup, and mobile width (pre-existing; found by DG-022 QA) | **6** | todo | — |
-| DG-044 | SR-11: the daily capture gap alert — the only detection channel that will exist (absorbs DG-035 option b) | **1** | todo | ClaudeFable5-DG044-20260826 |
+| DG-044 | SR-11: the daily capture gap alert — the only detection channel that will exist (absorbs DG-035 option b) | **1** | **done — merge `b1b888be` on `main`; install pending post-pull** | ClaudeFable5-DG044-20260826 |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
@@ -269,3 +269,27 @@ lane `ClaudeFable5-DG044-20260826`; a fresh number was used deliberately — `ti
 poisoned by the PR #160 collision. The trunk stays pinned at `a61f0fbe` until the post-window pull
 (~10:15+); 09:00–10:15 remains hands-off for DG-023's first scheduled single-variable run. Setup
 re-verified before filing: both origin tips unmoved overnight, dg-build clean at `748becf`.
+
+---
+
+**2026-08-26 06:57 — DG-044 LANDED, merge `b1b888be` on `main` (SR-11 + SR-10a step 1 shipped D4,
+on schedule).** TDD build (76 ticket tests, every unit watched RED), then a 23-agent adversarial
+review: 17 confirmed findings all fixed in `f47d3a6f` — headline: the crash guard (an uncaught
+exception now DELIVERS a crash alert instead of silently killing the only detection channel), and
+per-bootstrap reboot semantics (a mid-morning reboot no longer floods false "never attempted"
+lines; unverifiable slots become one consolidated line that still names every job). Live-verified:
+production dry-run names exactly the model_forward_capture 08-12 hole and nothing else. Suite
+6,177/0. **DG-035 option (b) is CLOSED by this land** (in-suite proof; option (a) stays open as
+David's call). DG-040's final confirmation also landed this morning: second consecutive scheduled
+06:15 success, status ok. **Also proven this morning: the DG-040 marker briefly reads
+`status: running` mid-capture — a transient state readers must tolerate.**
+
+**Remaining today, in order:** hands off 09:00–10:15 (DG-023 single-variable + DG-040-fixed
+producers) → trunk `git pull --ff-only` post-window (now takes FOUR merges: DG-041 `b797ee1f`,
+DG-042 `c2b11f0a`, DG-022 `20807368`, DG-044 `b1b888be`; overlap-check the 25 dirty paths) →
+restart the API server (DG-022 surface + capture-health config v2; then run spec:1011's curl —
+expect `('market_divergence_history', 4)`) → David's `launchctl bootstrap` of the gap alert (his
+symlink into ~/Library/LaunchAgents was created at ~06:55 and is DANGLING until the pull lands the
+plist in the trunk — expected, harmless, do NOT bootstrap before the pull) → first live 10:30-class
+run watched by David (it will name the 08-12 hole; that banner doubles as the visible-notification
+acceptance the spec demands). 08-27: DG-041 production acceptance unchanged.

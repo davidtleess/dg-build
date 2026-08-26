@@ -1,6 +1,6 @@
 # DG-044 — SR-11: the daily capture gap alert — the only detection channel that will exist
 
-**Layer:** 1  ·  **State:** todo  ·  **Lane:** ClaudeFable5-DG044-20260826  ·  **DG 3.0**
+**Layer:** 1  ·  **State:** done  ·  **Lane:** ClaudeFable5-DG044-20260826  ·  **DG 3.0**
 **Source:** season sprint ticket SR-11, `docs/strategies/2026-08-20-dg-SEASON-BUILD-SPEC.md:595-749`
 (AMENDED 2026-08-23 — MIG-1), scheduled D4 = 2026-08-26. Filed as a DG ticket because the worktree
 tooling requires one (`dg-work.sh:24,36`); **the spec section remains the authoritative build text —
