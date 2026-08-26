@@ -42,3 +42,11 @@ green in dg-land. The rebase module stays as the historical-baseline/proof harne
 updated. **Acceptance:** trunk pulled pre-14:00 so the SR-00 14:00 market retry may produce the
 first production rebased artifact same-day (monitor armed); otherwise tomorrow's 09:40 chain run
 is the first. Verify `divergence_cohort_method` in the served artifact.
+
+**✅ PRODUCTION ACCEPTANCE SAME DAY, 14:00 — a day early.** The trunk was pulled before the SR-00
+14:00 retry slot, and the retry rebuilt the served artifact on the new code. Verified live:
+`universe_market_divergence_latest.json` declares `divergence_cohort_method`
+(inclusion_rule model_backed_and_market_priced; populations QB 45 / RB 90 / TE 62 / WR 144),
+341 delta rows each carrying their cohort disclosure, honesty markup unchanged
+(decision_supported false). The number the product serves every morning is interpretable as of
+today. Ticket CLOSED in full.
