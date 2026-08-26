@@ -52,6 +52,37 @@
 | DG-046 | The common-cohort divergence fix is built, tested, and NOT WIRED IN (archive stores raws — recomputable) | **5** | todo | — |
 | DG-047 | Morning report's staleness caveat cries wolf (24.0h threshold on a 24h cadence) — trains David to skip caveats | **6** | todo | — |
 | DG-048 | Layer 1 Daily Control exists, works, and nothing schedules it — marker stale since Aug 8 | **1** | todo | — |
+| DG-049 | Extend the capture-gap alert to the two unmonitored event streams (SR-10b's deferred scope) | **1** | todo (foundation, 2d) | — |
+| DG-050 | Replay-reproducibility harness: prove snapshot + parser version reproduces normalized content | **1** | todo (enabler, 3d) | — |
+| DG-051 | Catalog as single source of truth: generate or mechanically reconcile scheduler, freshness, and backup co | **1** | todo (foundation, 3d) | — |
+| DG-052 | End-to-end restore rehearsal with dated evidence; backup class joins per-store health | **1** | todo (foundation, 2d) | — |
+| DG-053 | Crosswalk vintages: capture ff_playerids on cadence before the season burns identity truth | **2** | todo (foundation, 1.5d) | — |
+| DG-054 | One versioned name normalizer producing staging keys | **2** | todo (enabler, 2d) | — |
+| DG-055 | Typed facts and the storage pilot: retire the 501-TEXT-column store through the seven proofs | **2** | todo (enabler, 6d) | — |
+| DG-056 | Owned bitemporal identity: mint canonical IDs and run the six-step migration | **2** | todo (enabler, 10d) | — |
+| DG-057 | Hashed TrainingSpec with load-time verification — serving that can refuse the wrong artifact | **3** | todo (enabler, 3d) | — |
+| DG-058 | The §8.3 promotion chain: safe JSON artifacts, equivalence tests, and a PromotionReceipt | **3** | todo (enabler, 5d) | — |
+| DG-059 | ScoringEnvelope — separate raw inference from PVO assembly | **3** | todo (enabler, 2d) | — |
+| DG-060 | Versioned universe snapshot contract for coverage claims (§8.6) | **3** | todo (enabler, 2d) | — |
+| DG-061 | Version the scoring constants and declare their calibration-evidence state | **3** | todo (enabler, 1.5d) | — |
+| DG-062 | Manager identity reconciliation across the four-season transaction chain | **4** | todo (enabler, 1.5d) | — |
+| DG-063 | Manager behavior profiles (§9.1) — the layer's flagship deliverable | **4** | todo (direct, 3d) | — |
+| DG-064 | Pick appreciation as a versioned analytical policy, not a static slot curve | **4** | todo (direct, 2d) | — |
+| DG-065 | Posture label contradiction on the morning surface (REBUILDING vs UNCLASSIFIED) | **4** | todo (enabler, 0.5d) | — |
+| DG-066 | Declared competitive horizon and risk preferences (§9 lane 8) | **4** | todo (enabler, 1d) | — |
+| DG-067 | League format and analytic coefficients out of code constants, into versioned policy | **4** | todo (enabler, 2d) | — |
+| DG-068 | Per-lane version streams for the league graph (derive from the archived snapshots) | **4** | todo (foundation, 1d) | — |
+| DG-069 | The divergence band is an unversioned constant — make every band versioned, evidence-backed, disclosed | **5** | todo (enabler, 1d) | — |
+| DG-070 | Build the §10.1 change-event stream over the rebased divergence — and backfill the season from the PIT st | **5** | todo (direct, 2.5d) | — |
+| DG-071 | The Evidence Registry: a typed claim store, generalized from the QB-1 program | **5** | todo (enabler, 5d) | — |
+| DG-072 | DecisionOpportunity Object and an executable ordered ClaimLevel with fail-closed composition | **5** | todo (enabler, 5d) | — |
+| DG-073 | Scenario 2: hold-versus-move for a David-selected player — the first DOO client | **5** | todo (direct, 3d) | — |
+| DG-074 | Scenario 4: trade-partner EVIDENCE panels — receipts, not context cards | **5** | todo (direct, 2.5d) | — |
+| DG-075 | Read-model store: precompute, publish atomically, serve with receipts | **6** | todo (enabler, 3d) | — |
+| DG-076 | Frontend build manifest — source SHA, OpenAPI hash, build timestamp | **6** | todo (enabler, 0.5d) | — |
+| DG-077 | Complete the resource layer: dedup, stale state, contract_mismatch, receipt invalidation | **6** | todo (enabler, 1.5d) | — |
+| DG-078 | Belief archive read model — what we believed about a player, dated | **6** | todo (enabler, 2d) | — |
+| DG-079 | Turn release evidence into a gate — goldens, state matrix, CI wiring | **6** | todo (enabler, 1.5d) | — |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
