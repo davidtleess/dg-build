@@ -17,13 +17,13 @@
 | DG-011 | Stress-test outside the training distribution | 3 | todo | — |
 | DG-012 | News, injury reports and pressers as features | **1** | todo | — |
 | DG-013 | A feature store you can query as-of a date | **2** | todo | — |
-| DG-014 | Deployed models were fit on 2018–2021 only | 3 | todo | Davids-Air-15594 |
-| DG-015 | Model card contradicts the training code | 3 | todo | Davids-Air-37360 |
+| DG-014 | Deployed models were fit on 2018–2021 only | 3 | todo | — |
+| DG-015 | Model card contradicts the training code | 3 | todo | — |
 | DG-016 | TE "validation report" doesn't say what it validated against | 3 | todo | — |
 | DG-017 | We validate a scaled model and deploy an unscaled one | 3 | **confirmed** | — |
 | DG-018 | Standing measurement: does the model beat the market? | 3 | todo | — |
 | DG-019 | Market appears to over-disperse by ~2× | 3 | todo | — |
-| DG-020 | Get more than four market snapshots | **1** | todo | Davids-Air-63412 |
+| DG-020 | Get more than four market snapshots | **1** | todo | — |
 | DG-021 | 114 players told an Engine A prior was used when none exists | 3→6 | **done — merge `b291107f` on `main`, DEPLOYED 10:21: live artifact 114→0 false rows, same 114 now honest** | ClaudeFable5-DG021-20260825 |
 | DG-022 | Players with no canonical id can never be graded | **2** | **done — merge `20807368` on `main`: frozen-prediction membership lane, real-surface-QA proven** | ClaudeFable5-DG022-20260825 |
 | DG-023 | Health gate labels good participation data "empty" | **1** | **done — merge `b4662707` on `main`** | Parallel-DG023-20260825 |
@@ -38,7 +38,7 @@
 | DG-032 | Six ledger trees, three versions of the same day; reconcile the channel | process | todo | — |
 | DG-033 | A producer can abort and still be graded fresh | **1** | **done — merge `30a91c33` on `origin/feature/outcome-loop-week1`** | ClaudeOpus5-DG033-20260824 |
 | DG-034 | Backup health reports `ok` while the backup is failing | **1** | **done — 52e7dfc9, hand-landed on `feature/outcome-loop-week1`** | ClaudeOpus5-DG034-20260823 |
-| DG-035 | Capture chain silently does not run unless David is logged in | **1** | todo | — |
+| DG-035 | Capture chain silently does not run unless David is logged in | **1** | option (b) CLOSED by DG-044; option (a) DEFERRED post-season (David 08-26) | — |
 | DG-036 | A failed backup can leave the previous run's `completed` marker standing | **1** | **done — merge `de551d22` on `origin/feature/outcome-loop-week1`** | ClaudeOpus5-DG036-20260824 |
 | DG-037 | No ticket can land through `dg-land.sh` — five mechanisms | process | **done — 5 mechanisms fixed, dry-run green** | ClaudeOpus5-DG037-20260823 |
 | DG-038 | `dg-land.sh` cannot merge into any base that is checked out somewhere | process | **done — detached merge + `HEAD:$BASE` push; dry-run now proves the merge; gated by `tests/test-dg-land.sh`** | ClaudeFable5-DG038-20260824 |
