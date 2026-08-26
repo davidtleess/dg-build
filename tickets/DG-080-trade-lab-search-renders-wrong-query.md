@@ -1,6 +1,6 @@
 # DG-080 — Trade Lab asset search renders results for the WRONG query (SR-15)
 
-**Layer:** 6  ·  **State:** doing  ·  **Lane:** ClaudeFable5-DG080-20260826  ·  **DG 3.0**
+**Layer:** 6  ·  **State:** done  ·  **Lane:** ClaudeFable5-DG080-20260826  ·  **DG 3.0**
 **Source:** season spec SR-15 (docs/strategies/2026-08-20-dg-SEASON-BUILD-SPEC.md:1301, draft
 PERF-4, absorbs MR-8). Sprint-committed Tier 0, calendar slot D9 (Wed 09-02) — **pulled forward
 to the evening of D4 (08-26) on David's "go ahead with SR-15"**, chosen because it is the one
@@ -37,3 +37,21 @@ four AssetSearch tests stay green (real-timer `waitFor` tolerates the 200 ms deb
 
 **Tier:** 0 (wrong data on a decision surface). **Edge distance: DIRECT-adjacent trust repair** —
 the surface the trade numbers travel through stops lying about which player it is showing.
+
+---
+
+**✅ BUILT AND LANDED 2026-08-26 ~19:03 ET — merge `ab32a605` on `main`, trunk pulled same minute.**
+David's "go ahead with SR-15" (~18:55). TDD per spec: both new tests watched RED against the old
+component — stale test failed with Brock Purdy rendered for "brown", debounce test failed at 3
+fetches — then GREEN at 6/6; the revert-proof was RE-RUN after the tests' final staging (stash
+apply/drop by SHA, never pop). Implementation is spec steps 1–5 exactly: 200ms debounce state
+pair, AbortController per request with the aborted-guard in the catch, min-length-3 and
+safeParse-or-clear byte-identical, no caching, no retry. One existing pin amended to carry the
+new `{ signal }` fetch argument (that argument IS the fix's contract). Full frontend gate green
+(typecheck · biome · vitest · banned-language · build); dg-land full pytest gate 6221 passed.
+Harness lesson recorded in the test comments: with fake timers, each `act` boundary is the React
+flush point that actually issues the fetch effect's request — advance timers in stages, and give
+the slow response a delay wide enough that the race survives the staging (bro=400ms vs
+brown=10ms).
+
+**SR-15 is closed. D9 (Wed 09-02) now carries SR-13 only.**
