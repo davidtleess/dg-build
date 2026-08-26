@@ -49,3 +49,10 @@ read-only modes and document the deviation (now in the test file's docstring); (
 share map's "share what is read" is violated by any writer reaching shared dirs — the retired
 runner was one such writer (vector now closed); the structural note joins the share-map
 housekeeping item from DG-049.
+
+**Incident closure 2026-08-26 ~16:15 ET — David: "fix the marker."** The production nflverse
+status marker now carries a truthful failed-run record (killed run's id, integrity verification,
+pointer to the prior good run and this ticket) in place of the permanent `running` lie. Verified
+end-to-end: the DG-049 attestation channel reads it as `attested status failed` — the correct
+alarm for exactly this state. Self-heals to ok at tomorrow's 06:15 capture. Incident CLOSED; the
+two lessons stand in the record above.
