@@ -42,7 +42,7 @@
 | DG-036 | A failed backup can leave the previous run's `completed` marker standing | **1** | **done — merge `de551d22` on `origin/feature/outcome-loop-week1`** | ClaudeOpus5-DG036-20260824 |
 | DG-037 | No ticket can land through `dg-land.sh` — five mechanisms | process | **done — 5 mechanisms fixed, dry-run green** | ClaudeOpus5-DG037-20260823 |
 | DG-038 | `dg-land.sh` cannot merge into any base that is checked out somewhere | process | **done — detached merge + `HEAD:$BASE` push; dry-run now proves the merge; gated by `tests/test-dg-land.sh`** | ClaudeFable5-DG038-20260824 |
-| DG-039 | A blocked roster-capacity audit writes nothing; last week's audit stands as current | **1** | todo | — |
+| DG-039 | A blocked roster-capacity audit writes nothing; last week's audit stands as current | **1** | **done — landed 08-26: always-written status marker, artifact keeps preserve-last-good** | ClaudeFable5-DG039-20260826 |
 | DG-040 | The daily nflverse capture has never once succeeded — upstream renamed contracts `cols` | **1** | **done — merge `6b5dceb9`, deployed to the trunk, capture run green same day** | ClaudeFable5-DG040-20260824 |
 | DG-041 | The inputs gate is permanently red — participation can never serve the season it is asked for | **1** | done | ClaudeFable5-DG041-20260825 |
 | DG-042 | David's "all games" PPG ruling is honoured by accident, not enforced (SR-21) | 3 | **done — merge `c2b11f0a` on `main`** | ClaudeOpus5-DG042-20260825 |
@@ -51,7 +51,7 @@
 | DG-045 | SR-09: the dependency-ordered fail-soft daily chain (steps 1-7 BUILT + REVIEWED D4; land coupled to Thu launchctl swap; step 8 = D8) | **1** | doing — `6038d2d6` on `ticket/DG-045`, pushed; 44 tests green | ClaudeFable5-DG045-20260826 |
 | DG-046 | The common-cohort divergence fix is built, tested, and NOT WIRED IN (archive stores raws — recomputable) | **5** | **done — merge `e976b1e2`; PRODUCTION-ACCEPTED 08-26 14:00 (rebased artifact live)** | ClaudeFable5-DG046-20260826 |
 | DG-047 | Morning report staleness caveat cries wolf — was SR-20 substance; weekly section now cadence-aware | **6** | **done — landed 08-26, SR-20 D10 slot FREED** | ClaudeFable5-DG047-20260826 |
-| DG-048 | Layer 1 Daily Control exists, works, and nothing schedules it — marker stale since Aug 8 | **1** | todo | — |
+| DG-048 | Layer 1 Daily Control — RETIRED on David's ruling 08-26; runner refuses every mode, module lives on as library | **1** | **done — landed 08-26 (incident during build: see ticket)** | ClaudeFable5-DG048-20260826 |
 | DG-049 | Extend the capture-gap alert to the two unmonitored event streams (SR-10b) | **1** | **done — landed 08-26; every capture store now has a detection channel** | ClaudeFable5-DG049-20260826 |
 | DG-050 | Replay-reproducibility harness: prove snapshot + parser version reproduces normalized content | **1** | todo (enabler, 3d) | — |
 | DG-051 | Catalog as single source of truth: generate or mechanically reconcile scheduler, freshness, and backup co | **1** | todo (foundation, 3d) | — |

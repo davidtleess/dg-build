@@ -1,6 +1,6 @@
 # DG-039 — A blocked roster-capacity audit writes nothing, so last week's audit stands as current
 
-**Layer:** 1  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**
+**Layer:** 1  ·  **State:** done  ·  **Lane:** ClaudeFable5-DG039-20260826  ·  **DG 3.0**
 **Source:** investigated 2026-08-24 on David's instruction ("do roster_capacity too") while landing
 DG-033. The answer turned out to be that DG-033's fix does not apply here, and a different one does.
 
@@ -64,3 +64,17 @@ Two other artifacts were checked in the same pass and need nothing: `what_change
 `league_opportunity` write no top-level `status` at all, so their silence in the config is correct
 rather than an oversight. `league_opportunity` and `roster_capacity` both carry `Weekday 2` in their
 plists and are genuinely weekly — their 08-18 reports were current, not stale, when this was measured.
+
+---
+
+**✅ BUILT AND LANDED 2026-08-26 (David: "do DG-039"), on `main` via dg-land full gate.** Exactly
+the ticket's DG-036 shape: `run_audit` writes an atomic status marker on EVERY exit path
+(input-blocked, content-blocked, ok) at `app/data/ops/roster_capacity_audit_status_latest.json`;
+the artifact keeps preserve-last-good (blocked runs verified byte-identical prior artifact);
+registered in report_freshness as `roster_capacity_status` with `status_field: producer_status` /
+`success_status: ok` — honest ONLY because the marker cannot miss an exit (DG-033's rule), while
+the artifact itself deliberately keeps NO status_field. Preflight stays write-free (its printed
+contract says "performs no load, score, or write" — the ticket's "preflight_ready legible" half
+was NOT taken; deviation noted). 6 tests RED-first; two intentional pin amendments (artifact set
++ count). First real marker: next Tuesday 10:00 (09-01) — the first exercise the 09-01/09-08
+Tuesday runs were bought for.
