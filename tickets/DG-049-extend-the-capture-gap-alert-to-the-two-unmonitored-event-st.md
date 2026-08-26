@@ -1,6 +1,6 @@
 # DG-049 — Extend the capture-gap alert to the two unmonitored event streams (SR-10b's deferred scope)
 
-**Layer:** 1  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**
+**Layer:** 1  ·  **State:** done  ·  **Lane:** ClaudeFable5-DG049-20260826  ·  **DG 3.0**
 **Edge distance:** foundation  ·  **Size:** 2d
 **Source:** 2026-08-26 six-layer completion audit → mapping fleet; roadmap RATIFIED by David
 same day ("3. yes"). Full sequence context: `~/dg-build/ROADMAP-LAYERS.md`.

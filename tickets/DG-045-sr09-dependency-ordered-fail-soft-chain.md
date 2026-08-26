@@ -118,3 +118,10 @@ Also fixed: hard-upstream table validation (typo'd/forward edge dies at launch, 
 with exit 0); past-midnight drift computes against yesterday's target. 44 DG-045 tests green.
 Branch state: bf5ba8a1 (steps 1-5) → ab522db7 (6-7 prep) → 6038d2d6 (review fixes) — READY TO
 LAND Thursday after the two morning checks, coupled to David's launchctl sitting.
+
+**⚠ THURSDAY CHECK AMENDED (2026-08-26 ~15:30, after DG-049's live dry-run):** the 10:30
+scheduled run will NOT be perfectly silent — DG-044's not_loaded class correctly flags DG-053's
+committed-not-installed ff-playerids plist. Expected output Thursday 10:30: exactly ONE line
+("GAP com.davidleess.dynasty-ff-playerids-snapshot: present in ops/launchd but not loaded...")
+plus the heartbeat. That exact line = HEALTHY (cleared by the bootstrap in the sitting). Any
+OTHER line = investigate before landing.

@@ -52,7 +52,7 @@
 | DG-046 | The common-cohort divergence fix is built, tested, and NOT WIRED IN (archive stores raws — recomputable) | **5** | **done — merge `e976b1e2`; PRODUCTION-ACCEPTED 08-26 14:00 (rebased artifact live)** | ClaudeFable5-DG046-20260826 |
 | DG-047 | Morning report staleness caveat cries wolf — was SR-20 substance; weekly section now cadence-aware | **6** | **done — landed 08-26, SR-20 D10 slot FREED** | ClaudeFable5-DG047-20260826 |
 | DG-048 | Layer 1 Daily Control exists, works, and nothing schedules it — marker stale since Aug 8 | **1** | todo | — |
-| DG-049 | Extend the capture-gap alert to the two unmonitored event streams (SR-10b's deferred scope) | **1** | todo (foundation, 2d) | — |
+| DG-049 | Extend the capture-gap alert to the two unmonitored event streams (SR-10b) | **1** | **done — landed 08-26; every capture store now has a detection channel** | ClaudeFable5-DG049-20260826 |
 | DG-050 | Replay-reproducibility harness: prove snapshot + parser version reproduces normalized content | **1** | todo (enabler, 3d) | — |
 | DG-051 | Catalog as single source of truth: generate or mechanically reconcile scheduler, freshness, and backup co | **1** | todo (foundation, 3d) | — |
 | DG-052 | End-to-end restore rehearsal with dated evidence; backup class joins per-store health | **1** | todo (foundation, 2d) | — |
