@@ -50,7 +50,7 @@
 | DG-044 | SR-11: the daily capture gap alert — the only detection channel that will exist (absorbs DG-035 option b) | **1** | **done — merge `b1b888be`; INSTALLED + LIVE-FIRE ACCEPTED 08-26 12:00 (banner seen)** | ClaudeFable5-DG044-20260826 |
 | DG-045 | SR-09: the dependency-ordered fail-soft daily chain (steps 1-7 BUILT + REVIEWED D4; land coupled to Thu launchctl swap; step 8 = D8) | **1** | doing — `6038d2d6` on `ticket/DG-045`, pushed; 44 tests green | ClaudeFable5-DG045-20260826 |
 | DG-046 | The common-cohort divergence fix is built, tested, and NOT WIRED IN (archive stores raws — recomputable) | **5** | **done — merge `e976b1e2`; PRODUCTION-ACCEPTED 08-26 14:00 (rebased artifact live)** | ClaudeFable5-DG046-20260826 |
-| DG-047 | Morning report's staleness caveat cries wolf (24.0h threshold on a 24h cadence) — trains David to skip caveats | **6** | todo | — |
+| DG-047 | Morning report staleness caveat cries wolf — was SR-20 substance; weekly section now cadence-aware | **6** | **done — landed 08-26, SR-20 D10 slot FREED** | ClaudeFable5-DG047-20260826 |
 | DG-048 | Layer 1 Daily Control exists, works, and nothing schedules it — marker stale since Aug 8 | **1** | todo | — |
 | DG-049 | Extend the capture-gap alert to the two unmonitored event streams (SR-10b's deferred scope) | **1** | todo (foundation, 2d) | — |
 | DG-050 | Replay-reproducibility harness: prove snapshot + parser version reproduces normalized content | **1** | todo (enabler, 3d) | — |
