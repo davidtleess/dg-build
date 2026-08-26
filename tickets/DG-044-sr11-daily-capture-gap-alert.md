@@ -72,3 +72,41 @@ same day beside this (spec:35-38) — an unregistered store is an unalertable st
 - **Delivery channel unproven:** the 08-25 osascript probe exited 0 but David has not yet confirmed
   the banner rendered; the plain-text file (fixed path — builder chooses and documents it, spec
   leaves it open, as with the pin file's path) is the second channel either way.
+
+---
+
+**BUILD RECORD 2026-08-26 morning.** TDD throughout (every unit watched RED first). Branch
+`ticket/DG-044`: `907495c5` (the build — script, plist, empty-armed pin file, SR-10a config v2 +
+optional `SeasonWindows.comment`, 61 tests) + `f47d3a6f` (adversarial-review hardening). Chosen
+paths, documented per spec: alert/heartbeat file `~/DG-CAPTURE-ALERTS.txt` (outside the repo so a
+branch switch never moves it; outside TCC-protected dirs so a launchd writer cannot be silently
+denied); known-holes/exit-evidence state `app/data/ops/capture_gap_alert_state.json`; pin file
+`app/config/capture_gap_accepted_exits.json`. **Design decision:** the spec's dry-run demand (name
+the historical 08-12 hole) and its silence rule (permanent holes must not nag daily) are only
+reconcilable with memory — a known-holes state; a hole alerts on first sight, never again while it
+persists, and class (a) still catches every new hole at birth.
+
+**Adversarial review (23 agents, 3 lenses + per-finding verification): 17 confirmed → all fixed in
+`f47d3a6f`; 3 rejected.** Highlights: crash guard (the crash itself becomes the alert — the CRITICAL
+false-silence class); per-bootstrap reboot semantics (unverifiable ≠ never-attempted, one
+consolidated line, no false flood); day-2 delivery of a swallowed 08-22-style gap enumeration
+(fires on the first run whose prior heartbeat predates the login); launchctl format-drift and
+chain-shape fail-opens closed; exit-evidence dedup; pin marker freshness (26h).
+
+**Verified live:** production dry-run names exactly `model_forward_capture: missing 2026-08-12`,
+nothing else, exit 0; worktree-config dry-run names market's four holes verbatim. Suite 6,177/0/38,
+ruff clean, `dg-land.sh --dry-run` green twice.
+
+**FOR THE SR-09 LANE (D5-D6):** (1) build the chain report writer against
+`TestChainReportLines`' fixture shape — keys `steps[].name/exit_code/status`, statuses
+`failed`/`skipped_upstream_failed`; a step carrying neither key is reported as unreadable. (2) The
+chain runner's own label will get a class (b) line whenever any step failed (its exit code is
+derived from step failures already reported one line each) — consider excluding the chain label
+from class (b) when the report was readable.
+
+**STILL OPEN AT LAND TIME:** install (David's `!` one-liners, AFTER the post-window trunk pull —
+the plist points at the trunk's script); first LIVE run watched by David (banner visibility is not
+programmatically provable); post-restart `curl /api/system/capture-health` showing
+`('market_divergence_history', 4)` (spec:1011); David to ratify the beyond-spec (h) amendment
+(first-run-after-gap delivery). DG-035 option (b) close condition is met in-suite
+(`TestDryRunNamesNeverAttempted`) — close DG-035's (b) half when this lands.
