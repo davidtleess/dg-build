@@ -47,7 +47,7 @@
 | DG-041 | The inputs gate is permanently red — participation can never serve the season it is asked for | **1** | done | ClaudeFable5-DG041-20260825 |
 | DG-042 | David's "all games" PPG ruling is honoured by accident, not enforced (SR-21) | 3 | **done — merge `c2b11f0a` on `main`** | ClaudeOpus5-DG042-20260825 |
 | DG-043 | Player card two-lane furniture fails contrast, markup, and mobile width (pre-existing; found by DG-022 QA) | **6** | todo | — |
-| DG-044 | SR-11: the daily capture gap alert — the only detection channel that will exist (absorbs DG-035 option b) | **1** | **done — merge `b1b888be` on `main`; install pending post-pull** | ClaudeFable5-DG044-20260826 |
+| DG-044 | SR-11: the daily capture gap alert — the only detection channel that will exist (absorbs DG-035 option b) | **1** | **done — merge `b1b888be`; INSTALLED + LIVE-FIRE ACCEPTED 08-26 12:00 (banner seen)** | ClaudeFable5-DG044-20260826 |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
@@ -284,12 +284,16 @@ David's call). DG-040's final confirmation also landed this morning: second cons
 06:15 success, status ok. **Also proven this morning: the DG-040 marker briefly reads
 `status: running` mid-capture — a transient state readers must tolerate.**
 
-**Remaining today, in order:** hands off 09:00–10:15 (DG-023 single-variable + DG-040-fixed
-producers) → trunk `git pull --ff-only` post-window (now takes FOUR merges: DG-041 `b797ee1f`,
-DG-042 `c2b11f0a`, DG-022 `20807368`, DG-044 `b1b888be`; overlap-check the 25 dirty paths) →
-restart the API server (DG-022 surface + capture-health config v2; then run spec:1011's curl —
-expect `('market_divergence_history', 4)`) → David's `launchctl bootstrap` of the gap alert (his
-symlink into ~/Library/LaunchAgents was created at ~06:55 and is DANGLING until the pull lands the
-plist in the trunk — expected, harmless, do NOT bootstrap before the pull) → first live 10:30-class
-run watched by David (it will name the 08-12 hole; that banner doubles as the visible-notification
-acceptance the spec demands). 08-27: DG-041 production acceptance unchanged.
+**2026-08-26 midday — the day's sequence EXECUTED, SR-11 fully accepted.** DG-023's
+single-variable confirmation cycle ran green on the pinned trunk (fc 09:00 · features 09:15 ·
+league 09:20 · model/pvo 09:30:08 · market 09:40:04 · what-changed 09:45; participation upstream
+timeout again = expected pre-pull, DG-041's fix now in). Trunk pulled `--ff-only`
+`a61f0fbe → b1b888be` ~10:16, zero dirty-path overlap. Capture-health verified in-process
+(TestClient; no server was on :8000, so no restart — next API start serves DG-022's surface):
+config_version 2, `market_divergence_history` registered with its 4 missing dates — spec:1011
+substance confirmed, SR-10a step 1 accepted. David missed the 10:30 bootstrap window; recovery
+was bootstrap + `launchctl kickstart` at 12:00 — a real launchd-path run: runs=1, exit 0, alert
+file carries the model 08-12 GAP line + the market 4-date GAP line + heartbeat, state schema 2
+persisted, stderr empty. **David saw the banner** — visible-notification acceptance met and the
+08-25 probe question closed. Remaining proof is passive: **tomorrow's scheduled 10:30 run must be
+silent + heartbeat** (calendar scheduling). 08-27: DG-041 production acceptance unchanged.

@@ -110,3 +110,18 @@ programmatically provable); post-restart `curl /api/system/capture-health` showi
 `('market_divergence_history', 4)` (spec:1011); David to ratify the beyond-spec (h) amendment
 (first-run-after-gap delivery). DG-035 option (b) close condition is met in-suite
 (`TestDryRunNamesNeverAttempted`) — close DG-035's (b) half when this lands.
+
+**✅ ACCEPTANCE RECORD 2026-08-26 12:00 — every open item above is CLOSED except the (h)
+ratification.** Trunk pulled `a61f0fbe → b1b888be` ~10:16 (four merges, zero dirty-path overlap).
+Capture-health verified IN-PROCESS via TestClient (no server on :8000; equivalent surface, same
+route): config_version 2, `market_divergence_history` registered with its 4 missing dates
+(07-10/07-12/07-17/08-12) — spec:1011 substance met. Install: David's bootstrap ~11:59
+(the 10:30 window was missed — nothing lost, launchd doesn't replay an unregistered job's slot)
++ `launchctl kickstart` 12:00, a REAL launchd-path run: `runs = 1`, `last exit code = 0`,
+program resolved to the absolute venv python through the symlinked plist. Output exactly as
+designed: `~/DG-CAPTURE-ALERTS.txt` = model 08-12 GAP line + market 4-date GAP line + HEARTBEAT;
+state schema 2 persisted (known holes recorded → next run silent on them); stderr empty; no
+delivery-failure line. **David: "yes i saw the banner"** — the visible-notification acceptance
+and the 08-25 banner-rendering question, both closed. REMAINING (passive): the 08-27 scheduled
+10:30 run must be SILENT + heartbeat — proves StartCalendarInterval; check logs/heartbeat 08-27.
+STILL OPEN: David to ratify the beyond-spec (h) amendment (first-run-after-gap delivery).
