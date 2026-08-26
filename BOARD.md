@@ -47,6 +47,7 @@
 | DG-041 | The inputs gate is permanently red — participation can never serve the season it is asked for | **1** | done | ClaudeFable5-DG041-20260825 |
 | DG-042 | David's "all games" PPG ruling is honoured by accident, not enforced (SR-21) | 3 | **done — merge `c2b11f0a` on `main`** | ClaudeOpus5-DG042-20260825 |
 | DG-043 | Player card two-lane furniture fails contrast, markup, and mobile width (pre-existing; found by DG-022 QA) | **6** | todo | — |
+| DG-044 | SR-11: the daily capture gap alert — the only detection channel that will exist (absorbs DG-035 option b) | **1** | todo | ClaudeFable5-DG044-20260826 |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
@@ -257,3 +258,14 @@ was committed first and keeps the number; the a11y ticket is DG-043 and was neve
 042. **Trunk is now 3 merges behind origin/main** (DG-041 `b797ee1f`, DG-042 `c2b11f0a`, DG-022
 `20807368`) — all still land tomorrow's post-window pull; none of the three touches a producer
 except DG-041 (the planned one). Remaining unclaimed: DG-020, DG-043, SR-11's slot tomorrow.
+
+---
+
+**2026-08-26 05:5x — DG-044 filed and claimed for SR-11's D4 slot, on David's word.** SR-11 had no
+ticket file and `dg-work.sh` requires one; DG-044 carries the claim and the build-morning brief —
+the spec section (`SEASON-BUILD-SPEC.md:595-749`, MIG-1) stays the authoritative build text.
+Worktree `~/dg-wt/DG-044` cut from `origin/main` `2bf91d8d` (NOT the pinned trunk), landable-clean,
+lane `ClaudeFable5-DG044-20260826`; a fresh number was used deliberately — `ticket/DG-035` is
+poisoned by the PR #160 collision. The trunk stays pinned at `a61f0fbe` until the post-window pull
+(~10:15+); 09:00–10:15 remains hands-off for DG-023's first scheduled single-variable run. Setup
+re-verified before filing: both origin tips unmoved overnight, dg-build clean at `748becf`.

@@ -1,0 +1,74 @@
+# DG-044 — SR-11: the daily capture gap alert — the only detection channel that will exist
+
+**Layer:** 1  ·  **State:** todo  ·  **Lane:** ClaudeFable5-DG044-20260826  ·  **DG 3.0**
+**Source:** season sprint ticket SR-11, `docs/strategies/2026-08-20-dg-SEASON-BUILD-SPEC.md:595-749`
+(AMENDED 2026-08-23 — MIG-1), scheduled D4 = 2026-08-26. Filed as a DG ticket because the worktree
+tooling requires one (`dg-work.sh:24,36`); **the spec section remains the authoritative build text —
+this file is the claim ticket and the build-morning brief, not a restatement.** Tier 2 · NEVER-DROP
+(spec:1542). Absorbs [[DG-035]] option (b).
+
+**Problem:** nothing in this repo can notify David. Every observed failure has been silent — the
+08-12 archive gap, prior-date aborts, refusing-to-publish exits, failed backups, and the 08-22
+boot-to-login incident in which THIRTEEN scheduled slots (including the 10:15 offsite backup) never
+attempted and no log, marker, exit code or health surface recorded it.
+
+**How we know:** `grep -rE 'osascript|display notification|terminal-notifier|smtplib|sendmail'
+scripts/ src/` → zero matches (spec:631). The 08-22 incident measurements are in DG-035 (boottime
+09:04:39 vs console login 10:48:52; `runs = 0` / `last exit code = (never exited)` on the missed
+jobs). Readiness re-audited 2026-08-25 evening from origin/main `2bf91d8d` — see Notes.
+
+**Done looks like:** (spec:743-749) On a bad morning David gets a macOS notification naming the
+store and the date before he opens anything; on a clean morning he gets nothing. On a morning when
+a job never ran at all he is told which jobs, and that launchd will not replay them. NOT done while
+`--dry-run` says anything at all about nflverse/contracts, and NOT done while a `runs = 0` job can
+pass unnamed. It exists before SR-09 does. DG-035 option (b) closes when this ships and names a
+`runs = 0` job in a dry run.
+
+**Depends on:** nothing hard. SR-10a step 1 (the `app/config/capture_cadence.json` registration
+block for `market_divergence_history`, verbatim at spec:973-989) is spec-directed to land on the
+same day beside this (spec:35-38) — an unregistered store is an unalertable store.
+
+---
+
+**Notes** — build-morning brief, re-verified 2026-08-25 ~22:00 ET against origin/main `2bf91d8d`:
+
+- **Base:** build from `origin/main` (`2bf91d8d`), never the pinned trunk (`a61f0fbe` until the
+  post-window pull 08-26). `dg-land.sh` resolves its own base (`dg-land.sh:14`), so a worktree cut
+  `--from origin/main` lands normally.
+- **Deliverables are clean creates:** `scripts/run_capture_gap_alert.py` and
+  `ops/launchd/com.davidleess.dynasty-capture-gap-alert.plist` exist nowhere in any branch history.
+  No launchd label collision (checked `launchctl print gui/501` + `~/Library/LaunchAgents/`).
+- **Import surface LANDED** — the spec's step-1 "+124 uncommitted" warning is OBSOLETE
+  (`2c793603`/`52e7dfc9`/`cef5b6a3`). Bind by symbol, not the spec's drifted line numbers:
+  `load_capture_cadence` (:243), `inspect_capture_store` (:646), and the newer
+  `inspect_backup_marker` (:814, takes the `backup_run_active.json` sentinel) in
+  `app/api/routes/system_capture_health_models.py`.
+- **Step 9 premise DRIFTED:** nflverse/contracts is NOT failing anymore (marker 08-25 06:16 reads
+  `status=ok, failed_stream=None` — DG-040 fixed it). Re-measure the morning of the build; the pin
+  file may ship EMPTY. Pins match on `failed_stream`, never exit code alone; every pin carries a
+  review date. Step 5(b) stays UNARMED until the pin file exists.
+- **Class (c) input** `app/data/ops/daily_chain_latest_report.json` does not exist until SR-09
+  lands (D6) — its absence before then is expected, not a failure.
+- **`launchctl print` semantics:** `runs`/`last exit code` are per-bootstrap — `runs = 0` after a
+  reboot means "not since login", not "broken" (12 of 14 jobs read 0 on 08-25). Parse the
+  non-numeric `(never exited)`. No last-run timestamp exists in the output — cross-check against
+  marker mtimes. Regex on field names, not positions.
+- **Label list derived from `ops/launchd/*.plist`** (spec's own rule) — which naturally excludes
+  the cockpit's `dg-cockpit-backup` (known exit 127) and `dg-mail-carrier` (known exit 2), and a
+  non-recursive glob excludes `ops/launchd/retired/` after SR-09. Never hard-code the count —
+  spec:910's "8" contradicts the b-EXCEPTION (four plists retire, not six).
+- **Plist:** absolute venv interpreter `/Users/davidleess/dynasty-genius-product/.venv/bin/python3.14`
+  (launchd's bare PATH resolves `python3` to Apple 3.9.6); 10:30 StartCalendarInterval; installed
+  by SYMLINK from `~/Library/LaunchAgents/` per the 08-23 convention; `launchctl bootstrap` is
+  David's own `!` command, post-window — a committed plist is not an installed plist.
+- **Fresh figures, cite these not the spec's:** backup failures 10/54 lifetime (18.5%) but 3/30
+  last-30-days (10%), last failure migration-day 08-22, three clean runs since. fc_forward_capture
+  "58/58" verification count is stale — recount at build time (store runs through 08-25).
+- **Dry-run hygiene (SR-07 incident):** redirect ALL output paths away from production before
+  executing anything the spec prescribes — `--db-path` alone once overwrote a live marker.
+- **Tests:** follow `test_<job>_ops_scheduler.py` for the plist + a ticket-numbered red test.
+  The untracked `tests/contract/test_governed_cadence_inputs_red.py` in the trunk belongs to
+  another lane — do not sweep it into this ticket's commits.
+- **Delivery channel unproven:** the 08-25 osascript probe exited 0 but David has not yet confirmed
+  the banner rendered; the plain-text file (fixed path — builder chooses and documents it, spec
+  leaves it open, as with the pin file's path) is the second channel either way.
