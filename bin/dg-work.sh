@@ -70,6 +70,9 @@ SHARE_PATHS=(
   "app/data/fc_forward_capture.db"
   "app/data/fc_snapshots.db"
   "app/data/league_transactions.db"
+  # Written daily by the trunk's 06:30 capture job; shared like nflverse_usage so
+  # DG-049's attestation checks read trunk truth (worktrees never run producers).
+  "app/data/league_transactions"
   "app/data/pff_exports"
   "app/data/footballguys"
   "app/data/sources"
