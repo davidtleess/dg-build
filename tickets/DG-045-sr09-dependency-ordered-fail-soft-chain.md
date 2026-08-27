@@ -339,3 +339,19 @@ Observed result to be appended below.
 **Class (c) chain-report freshness check:** session recommendation DEFER (the guard now
 watches the chain's receipt; a third channel is redundancy, and D7's alert observation is
 the designated review point). Awaiting David's word.
+
+**GUARD BACKFILL OBSERVED ~17:18 (appended as promised):** the guard's own StartInterval
+spawn sat `pended nondemand spawn = interval` in launchd for 66 min while the machine idled
+— NOT the migration-era penalty box (that follows FAILED spawns and resists kickstart);
+`launchctl kickstart` cleared this one instantly. Recorded in the guard memory; candidate
+hardening = `ProcessType=Interactive` in the guard plist, David's call post-trip. On the
+kicked tick (17:18:44, new config live, 11 jobs checked) the guard kicked ff-playerids and
+daily-chain — oldest unserved occurrences (08-26; one fresh run serves all it covers).
+Results: **ff-playerids FIRST-EVER RUN ok** (receipt 2026-08-27T21:18:44Z). **Chain first
+live fire: fail-soft PROVEN in production** — fc_forward_capture failed exit 1, BENIGN:
+"immutable snapshot conflict for player_key 'sleeper:4984' on 2026-08-27" — today's fc
+snapshot was already written by the old world's 09:00 run and the store refused an intraday
+overwrite, exactly as it should; market_divergence correctly `skipped_upstream_failed` on
+its hard edge (today's divergence already captured by the 14:00 retry — NO hole); the other
+four steps ok; report at the fixed path; 48s wall. Friday remains: 06:45 ff-playerids,
+09:00 chain (first-of-day, fc writes clean), 10:30 alert silent + heartbeat.
