@@ -341,7 +341,9 @@ RATIFIED; DG-035 option (a) DEFERRED post-season (ticket updated); SR-09 steps 1
 Executed: Tuesday-1 baseline preserved (`preserved/2026-08-26-tuesday1-baseline/`, commit
 `75a8f67`) BEFORE the chain rewire makes it unrecapturable; **DG-045 filed and built — SR-09
 steps 1-5 complete, TDD, 26 tests, worktree suite 6203/0, commit `bf5ba8a1` pushed on
-`ticket/DG-045`, NOT landed (install + retirement are D5/D6, David's launchctl)**; hygiene sweep:
+`ticket/DG-045`, NOT landed (install + retirement are D5/D6, David's launchctl)** *[superseded
+same day: steps 6-7 prepped `ab522db7`, 29-agent review fixes `6038d2d6`, 44 DG-045 tests green —
+the DG-045 row above and the ticket file are current]*; hygiene sweep:
 `agent/modeling-backend` pushed (last unbacked branch), 63 untracked trunk files protectively
 copied (`preserved/2026-08-26-trunk-untracked-copy/`), stale Air lane claims cleared on
 DG-014/015/020, clean worktrees DG-015/031/035 removed (tips verified on origin; DG-014/020

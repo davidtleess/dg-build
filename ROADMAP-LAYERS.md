@@ -1,4 +1,4 @@
-# LAYER ROADMAP — filling the percentages (drafted 2026-08-26, awaiting David's ratification)
+# LAYER ROADMAP — filling the percentages (drafted 2026-08-26; RATIFIED by David same day, "3. yes"; filed as board tickets DG-049..DG-079)
 
 Built from the six-layer completion audit (same day) by six mapper agents, each cross-referencing
 its layer's missing scope against all existing tickets. **Sequencing criterion, David's words:**
@@ -23,6 +23,7 @@ Completion at drafting: L1 35% · L2 15% · L3 20% · L4 45% · L5 25% · L6 45%
 
 **New tickets proposed:**
 ### [FOUNDATION · 2d] Extend the capture-gap alert to the two unmonitored event streams (SR-10b's deferred scope)
+**→ Filed as DG-049 — BUILT AND LANDED 2026-08-26 (capture-critical exemption; see the ticket).**
 SR-11's gap alert — the only detection channel — registers only the 3 store entries in capture_cadence.json; league_transactions and nflverse_usage stay unmonitored all season because the cadence analyzer has no event-stream store kind (bursty streams with legitimately quiet days do not fit daily-cadence semantics — the spec's own stated reason for deferring SR-10b). Gaps in these stores are permanently unbackfillable, and the risk window is widest right now: SR-09 replaces 13 proven plists with a brand-new chain whose bug would burn silent holes in exactly these stores — the L1 audit's named biggest risk. This is capture-critical, so it is the one L1 backlog item eligible to land during the season under the freeze rule; SR-10b is listed under the spec's 'WHAT HE DOES NOT GET', so no ticket or sprint slot covers it.
 *Evidence:* docs/strategies/2026-08-20-dg-SEASON-BUILD-SPEC.md:101 ('the cadence analyzer cannot hold them without a new store kind. Those two stores stay unmonitored this season'); app/config/capture_cadence.json (config_version 2, 3 store_id entries incl. fc_forward_capture); scripts/run_capture_gap_alert.py (store registration reads that config); audit L1 biggest_risk
 
@@ -48,6 +49,7 @@ Section 6.4 line 298 requires per-producer health to include 'its backup class a
 
 **New tickets proposed:**
 ### [FOUNDATION · 1.5d] Crosswalk vintages: capture ff_playerids on cadence before the season burns identity truth
+**→ Filed as DG-053 — BUILT AND LANDED 2026-08-26 (merge `34a9a970`, pre-freeze per David's "2. pre freeze"); plist installs at Thursday's sitting (see the ticket).**
 The product's only sanctioned identity join is a single crosswalk file frozen 2026-05-16, hard-pinned by three ingest modules, and no scheduled job captures fresh crosswalk snapshots — the eval lane loads it live but nothing archives it on cadence. Unlike stats, there is no upstream archive of the crosswalk as-it-stood-on-a-date, so every in-season identity change (rookie activations, renames, new Sleeper ids) that is not snapshotted now is point-in-time fuel the 2027 rebuild can never recover. Deliverable: a dated, content-hashed ff_playerids snapshot stream in the daily capture (an SR-09 chain step, or standalone per the current per-producer pattern), plus a documented governed-refresh procedure that promotes a chosen snapshot to the GOVERNED_CROSSWALK pointer under a receipt — resolution stays pinned and reproducible, capture goes live. Capture-shaped and small: worth putting before David as a capture-critical candidate under the post-freeze rule, without displacing sprint tickets.
 *Evidence:* src/dynasty_genius/nflverse_usage.py:78-80 (GOVERNED_CROSSWALK pinned to ff_playerids_20260516.json); src/dynasty_genius/playerprofiler.py:73 (same frozen pin); app/data/identity/_runs/ holds exactly one crosswalk vintage, dated 2026-05-16; src/dynasty_genius/adapters/nflreadpy_qb_adapter.py:483-497 (live load exists only in the validation lane, no scheduled capture); audit L2 biggest_risk (crosswalk 'frozen in May' rotting weekly)
 
