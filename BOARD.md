@@ -20,10 +20,10 @@
 | DG-014 | Deployed models were fit on 2018–2021 only | 3 | todo | — |
 | DG-015 | Model card contradicts the training code | 3 | todo | — |
 | DG-016 | TE "validation report" doesn't say what it validated against | 3 | todo | — |
-| DG-017 | We validate a scaled model and deploy an unscaled one | 3 | **confirmed** | — |
+| DG-017 | We validate a scaled model and deploy an unscaled one | 3 | finding CONFIRMED, fix unbuilt — David's word 2026-08-28 | — |
 | DG-018 | Standing measurement: does the model beat the market? | 3 | todo | — |
 | DG-019 | Market appears to over-disperse by ~2× | 3 | todo | — |
-| DG-020 | Get more than four market snapshots | **1** | todo | — |
+| DG-020 | Get more than four market snapshots | **1** | RULED INTO SPRINT by David 2026-08-28 — build today | — |
 | DG-021 | 114 players told an Engine A prior was used when none exists | 3→6 | **done — merge `b291107f` on `main`, DEPLOYED 10:21: live artifact 114→0 false rows, same 114 now honest** | ClaudeFable5-DG021-20260825 |
 | DG-022 | Players with no canonical id can never be graded | **2** | **done — merge `20807368` on `main`: frozen-prediction membership lane, real-surface-QA proven** | ClaudeFable5-DG022-20260825 |
 | DG-023 | Health gate labels good participation data "empty" | **1** | **done — merge `b4662707` on `main`** | Parallel-DG023-20260825 |
@@ -110,9 +110,9 @@ are the side the tooling reads (`dg-work.sh:39`) and therefore the correct side.
 here while the ticket files named live lanes — a reader picking work off this board could have
 collided with a claimed worktree.
 
-**One conflict NOT resolved, because it is not an agent's to resolve:** DG-017 reads `confirmed` here
-and `todo` in `tickets/DG-017-validation-tests-a-different-model.md`. Both were written by hand and
-neither cites which is current. Someone who knows the work should say.
+**~~One conflict NOT resolved~~ RESOLVED by David's word 2026-08-28:** DG-017's marker now reads
+"finding CONFIRMED, fix unbuilt" in both places — the problem is real (verified 08-18), the fix
+(one pipeline object for eval+deploy) is unbuilt and stays in the post-freeze L3 chain.
 
 All nine `ticket/DG-*` branches are on `origin` as of today. Six worktrees (DG-014/020/021/022/023/029)
 still predate the DG-037 tooling fix and cannot pass `dg-land.sh`'s dirty-tree gate; everything in

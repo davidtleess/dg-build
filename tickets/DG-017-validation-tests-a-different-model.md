@@ -1,6 +1,6 @@
 # DG-017 — We validate a scaled model and deploy an unscaled one
 
-**Layer:** 3  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**
+**Layer:** 3  ·  **State:** finding CONFIRMED, fix unbuilt (David's word 2026-08-28 — settles the board-vs-ticket marker conflict; the fix stays in the post-freeze L3 chain)  ·  **Lane:** —  ·  **DG 3.0**
 **Source:** crew lane (parallel author), 2026-08-18; verified independently by Tower same night
 
 **Problem:** The evaluation harness standardizes features before fitting Ridge. The training script
