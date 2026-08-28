@@ -62,3 +62,9 @@ dates, 231,837 rows** — dp_archive 57 dates 2021-02-05→2025-06-06 · fc_hist
 
 *For land:* install `~/dg-wt/DG-020/app/data/fc_snapshots.db` (43 MB) over the trunk store.
 The four original annual cohort dates are byte-preserved (append-only path; skip-if-present).
+
+**INSTALLED 2026-08-28 10:31 ET:** backfilled DB copied to trunk `app/data/fc_snapshots.db`
+(sha256 ad17d82d… byte-identical to the reviewed copy; integrity_check ok; 480 distinct dates —
+dp_archive 57 / fc_history_api 413 / fc_native 10; original annual + fc_native rows verified
+byte-identical pre-install). Same day's 14:15Z GCS backup carries it off-machine. The 10:30
+alert fired pure-heartbeat before the install; no producer window was crossed.
