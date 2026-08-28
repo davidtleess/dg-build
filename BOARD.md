@@ -23,7 +23,7 @@
 | DG-017 | We validate a scaled model and deploy an unscaled one | 3 | finding CONFIRMED, fix unbuilt — David's word 2026-08-28 | — |
 | DG-018 | Standing measurement: does the model beat the market? | 3 | todo | — |
 | DG-019 | Market appears to over-disperse by ~2× | 3 | todo | — |
-| DG-020 | Get more than four market snapshots | **1** | RULED INTO SPRINT by David 2026-08-28 — build today | — |
+| DG-020 | Get more than four market snapshots | **1** | landed — merge `ac8ac4a4` 08-28: 4 → 480 dates (dp_archive monthly 2021-02→2025-06 commit-anchored + fc_history_api daily 2025-07→08-27); DB install pending ~10:15; adversarially reviewed pre-land (provenance labels fixed) | — |
 | DG-021 | 114 players told an Engine A prior was used when none exists | 3→6 | **done — merge `b291107f` on `main`, DEPLOYED 10:21: live artifact 114→0 false rows, same 114 now honest** | ClaudeFable5-DG021-20260825 |
 | DG-022 | Players with no canonical id can never be graded | **2** | **done — merge `20807368` on `main`: frozen-prediction membership lane, real-surface-QA proven** | ClaudeFable5-DG022-20260825 |
 | DG-023 | Health gate labels good participation data "empty" | **1** | **done — merge `b4662707` on `main`** | Parallel-DG023-20260825 |
@@ -85,7 +85,9 @@
 | DG-079 | Turn release evidence into a gate — goldens, state matrix, CI wiring | **6** | todo (enabler, 1.5d) | — |
 | DG-080 | SR-15: Trade Lab search renders results for the WRONG query (stale-response race) | **6** | done | — |
 | DG-081 | SR-16: Morning Room hero counts a number David does not act on (his roster's movers instead) | **6** | done | — |
-| DG-082 | The catch-up guard's timer dozes off: launchd pends StartInterval during idle | **1** | landed — merge `27ab6af2` 08-28, hybrid schedule (96-slot lattice + interval) + per-label class-(h) lines; guard label swapped same morning | Davids-MacBook-Pro-20944 |
+| DG-082 | The catch-up guard's timer dozes off: launchd pends StartInterval during idle | **1** | landed — merge `27ab6af2` 08-28, hybrid schedule (96-slot lattice + interval) + per-label class-(h) lines; guard label swapped same morning; first lattice tick PROVEN 09:02:00 | Davids-MacBook-Pro-20944 |
+| DG-083 | SR-10a (pulled to D6): register market_divergence_history — the schedule-drift block | **1** | landed 08-28 — the only unbuilt SR-10a piece (steps 1/2/4/5 had landed via DG-044); capture-health gains StoreScheduleDrift, config v3 chain_step wirings, OpenAPI additive; adversarially reviewed | ClaudeFable5-DG083-20260828 |
+| DG-084 | SR-14 (pulled to D6): forward-capture NULL xVAR — record honestly, fabricate nothing | **1** | landed 08-28 — driver reads valuation xvar; daily_diff guards ALL THREE delta sites (third found by pre-land review); 468 historical rows stay honest NULLs; proof = tomorrow's 09:00 capture (same-day re-run would hit immutability, correctly); FABRICATION CHECK Wed 09-02 morning | ClaudeFable5-DG084-20260828 |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
