@@ -85,6 +85,7 @@
 | DG-079 | Turn release evidence into a gate — goldens, state matrix, CI wiring | **6** | todo (enabler, 1.5d) | — |
 | DG-080 | SR-15: Trade Lab search renders results for the WRONG query (stale-response race) | **6** | done | — |
 | DG-081 | SR-16: Morning Room hero counts a number David does not act on (his roster's movers instead) | **6** | done | — |
+| DG-082 | The catch-up guard's timer dozes off: launchd pends StartInterval during idle | **1** | landed — merge `27ab6af2` 08-28, hybrid schedule (96-slot lattice + interval) + per-label class-(h) lines; guard label swapped same morning | Davids-MacBook-Pro-20944 |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
