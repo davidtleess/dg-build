@@ -32,5 +32,13 @@ opening.
    soak week; docs only, freeze-safe either way). BUILD stays post-freeze, candidate window =
    season weeks 1-2 alongside League Activity (≤09-17).
 
+**✅ BRIEF DRAFTED 2026-08-29 night: `~/dg-build/DG091-DESIGN-BRIEF.md`** — four mandated
+sections grounded in four read-only audits (token/visual identity, full vocabulary sweep of
+~7,100 frontend lines, hierarchy+navigation map, ticket-evidence catalog) plus a coverage
+critique. Carries a week-one quick-win list (10 items), the design pass proper for Studio, and
+four decisions only David can make (incl. `?player=` URL addressability, which reverses the
+recorded I3 deferral, and rewording the two byte-locked mitigation contracts). Awaiting
+David's review; hands to Studio through Tower after his word.
+
 **Done looks like:** David opens the product on a season morning and does not say "not great."
 Measured by his word, nothing else.
