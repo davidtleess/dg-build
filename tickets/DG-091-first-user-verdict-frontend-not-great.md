@@ -24,10 +24,13 @@ opening.
    anywhere; fewer clicks to the card).
 2. Constraints that stand: no-verdict law (no buy/sell smuggled in via design), decision_supported
    stays visible, the tape's honesty function survives any restyle, zod boundaries untouched.
-3. Venue open — crew design pass in the product repo, and/or the Studio fresh-eyes lane (Tower
-   carries Studio; that routing is DAVID's call, standing wall respected).
-4. Timing: proposal can be drafted during D10 buffer / soak week (docs only, freeze-safe);
-   BUILD is post-freeze, candidate window = season weeks 1-2 alongside League Activity (≤09-17).
+3. ~~Venue open~~ **RULED 2026-08-29 evening: David chose the Studio fresh-eyes lane.** Tower
+   carries Studio (standing wall TW29-WALL-35 — crew lanes stay out of ~/frontend-studio), so the
+   finished brief hands to Studio THROUGH Tower, never directly. The brief itself is drafted
+   venue-neutral in dg-build.
+4. Timing: **brief drafting PULLED FORWARD to Sat 08-29 night on David's pick** (was D10 buffer /
+   soak week; docs only, freeze-safe either way). BUILD stays post-freeze, candidate window =
+   season weeks 1-2 alongside League Activity (≤09-17).
 
 **Done looks like:** David opens the product on a season morning and does not say "not great."
 Measured by his word, nothing else.
