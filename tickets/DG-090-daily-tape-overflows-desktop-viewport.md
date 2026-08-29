@@ -2,7 +2,7 @@
 
 **Layer:** 6  ·  **State:** todo — **SPLIT by David's ruling 2026-08-29 night: Problem A (the
 5px overflow) pulled forward to tonight; Problem B (46-node contrast) folds into DG-091's
-visual-identity pass** (avoids retuning the same color tokens twice)  ·  **Lane:** —  ·
+visual-identity pass** (avoids retuning the same color tokens twice)  ·  **Lane:** Davids-MacBook-Pro-23766  ·
 **DG 3.0**  ·  **frontend-only**
 **Source:** exposed 2026-08-29 when DG-089 repaired the visual-smoke harness (strict-mode
 selector fixed; Playwright chromium installed — the harness had NEVER actually run).
