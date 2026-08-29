@@ -93,6 +93,7 @@
 | DG-087 | SR-12: product not openable without a terminal (no launchd agent serves the API) | **6** | landed 08-29 (merge `39c61ece`, trunk pull HELD for the sitting) — dynasty-api plist (KeepAlive, ThrottleInterval 60, WD=trunk) + DG-050's weekly replay-verify plist (Mon 12:00) ride-along; guard registration (replay→receipts, api→unguarded w/ penalty-box remedy); README rebuilt; 14 lane tests + panel fixes; BOTH PLISTS UNLOADED until David's sitting | ClaudeFable5-DG087-20260829 |
 | DG-089 | Front-page movers not clickable (David's first-user finding) | **6** | landed 08-29 (merge `e68aac07`, dist rebuilt) — every feed row incl. quiet-day roster rows opens the inspector; panel BLOCKING (width:100% row-shatter) caught in-browser + fixed pre-land; visual-smoke harness repaired, first-ever run | ClaudeFable5-DG089-20260829 |
 | DG-090 | Daily tape 5px desktop overflow + 46-node contrast debt (pre-existing, exposed by the repaired harness) | **6** | todo — post-freeze unless pulled | — |
+| DG-091 | First-user verdict: frontend "not great" — all four dimensions (looks, density, language, navigation) | **6** | todo — DESIGN proposal first (freeze-safe docs), build post-freeze / season wk 1-2 | — |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
