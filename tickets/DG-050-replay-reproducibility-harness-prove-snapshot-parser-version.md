@@ -1,6 +1,6 @@
 # DG-050 — Replay-reproducibility harness: prove snapshot + parser version reproduces normalized content
 
-**Layer:** 1  ·  **State:** doing  ·  **Lane:** lane-dg050-replay  ·  **DG 3.0**
+**Layer:** 1  ·  **State:** done  ·  **Lane:** lane-dg050-replay  ·  **DG 3.0**
 **Edge distance:** enabler  ·  **Size:** 3d
 **Source:** 2026-08-26 six-layer completion audit → mapping fleet; roadmap RATIFIED by David
 same day ("3. yes"). Full sequence context: `~/dg-build/ROADMAP-LAYERS.md`.

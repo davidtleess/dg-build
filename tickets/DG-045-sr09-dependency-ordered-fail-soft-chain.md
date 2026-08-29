@@ -356,3 +356,36 @@ overwrite, exactly as it should; market_divergence correctly `skipped_upstream_f
 its hard edge (today's divergence already captured by the 14:00 retry — NO hole); the other
 four steps ok; report at the fixed path; 48s wall. Friday remains: 06:45 ff-playerids,
 09:00 chain (first-of-day, fc writes clean), 10:30 alert silent + heartbeat.
+
+---
+
+## SAT 08-29 BASELINE RECORD (D7-eve — appended by the day-planning session so D8 starts from a written two-morning baseline)
+
+**Two clean post-swap mornings on the record:**
+- **Fri 08-28:** 06:15 nflverse / 06:30 league / 06:45 ff-playerids (first scheduled fire) all on
+  the dot; 09:00 chain FIRST SCHEDULED FIRE — all six steps ok; 10:30 alert SILENT + heartbeat
+  (`HEARTBEAT 2026-08-28T10:30:00` is the alert file's only 08-28 line) — exactly the healthy
+  expectation the sitting record named for Friday.
+- **Sat 08-29:** chain started 09:00:01, drift_minutes 0, exit 0, all six steps ok, 53s wall
+  (daily_chain_latest_report.json); nflverse/league/ff-playerids markers all ok on their slots;
+  guard lattice tick 09:02 status ok, jobs_checked 11, kicked [].
+
+**B1 — "a live retry observed firing AFTER the chain landed" (spec:903-913) — SATISFIED; recorded
+here because the spec's proof block was never formally answered:**
+- 08-27: market-divergence **14:00 retry fired and captured** — the sitting record above states
+  today's divergence was already captured by the 14:00 retry, NO hole.
+- 08-28: model-pvo **11:30 AND 14:00 both fired via launchd** (pvo_refresh.out.log ~358013-358082)
+  — both refused with "immutable snapshot conflict for sleeper:10210" at capture. BENIGN per the
+  08-27 sleeper:4984 precedent: the 09:00 chain had already captured; first-capture-wins refused an
+  intraday overwrite. A fired-and-refused retry is a fired retry — launchd scheduling is what B1 tests.
+- Slot configs verified at the 08-27 sitting: retry-only plists [(11,30),(14,0)], calendarinterval
+  counts 1/1/2/2. The spec block's "launchctl count 8" is STALE — verified live count is 12 dynasty
+  labels (catchup-guard, chain, ff-playerids, and later installs post-date the spec's count).
+- Remaining for SR-09 CLOSE on D8: SR-19 rehearsal outcome recorded + the finding-A spec amendment
+  (add the scratch --report-path note to spec:~883's proof command; ALSO amend SR-19's own
+  verification command at spec:~1169-1173 to this ticket's --step-extra form, which supersedes it).
+
+**False-alarm shield for D8:** the recorded rehearsal command is SAFE verbatim —
+run_daily_chain.py:420-425 re-roots the chain's own report under --runtime-override (verified by
+code read 08-29). Known caveat, not a defect: what_changed_report runs --preflight only under
+override (it exposes no redirect flag; run_daily_chain.py:285-288).
