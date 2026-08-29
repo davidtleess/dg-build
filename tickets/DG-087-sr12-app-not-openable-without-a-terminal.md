@@ -44,3 +44,9 @@ wrong WD OR unbuilt frontend/dist, frontend rebuild step after every pull (trunk
 stale — built Aug 22, five frontend lands unserved), retrain⇒kickstart line. jobs_checked goes
 11→12. SITTING SEQUENCE: pull → npm ci && npm run build → symlink+bootstrap both plists → verify
 (count 14, curl / 200, /api/league/what-changed 200, first replay receipt within ~15 min).
+
+**VISIBLE ACCEPTANCE 2026-08-29 ~11:05 — David's word: "ok now i see it."** Session opened
+http://127.0.0.1:8000 in his browser (root 200, fresh bundle index-DdZC4aw9.js); Daily
+What-Changed rendered on his screen. Bookmark save (Cmd+D) handed to him. The spec's cold-morning
+proof (bookmark after the 6:13 wake, no terminal) completes itself tomorrow morning passively —
+the agent is KeepAlive+RunAtLoad, so it survives the night by construction.
