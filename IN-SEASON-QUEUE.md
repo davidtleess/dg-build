@@ -17,6 +17,23 @@ read as: make those flagged calls and record them durably. Anything beyond that 
 David-gated as before — in particular the Databricks retire/wire ruling (DG-101) and the DG-103
 ratifications are explicitly NOT covered and remain his.
 
+## AMENDMENT — 2026-08-29 late night: DAVID'S FRONTEND RULING (supersedes parts of this queue)
+Verbatim (gap-audit session; the frontend session holds the same green light from him directly):
+*"I'm having another parallel session work on the front end, and I've given it signal and approval
+to make the front end world class for a dynasty football front end. I don't care to persist the
+governance of language and caveats and lack of overall recommendation from the back end into the
+front end. I'd rather use layman's terms and call a spade a spade, and I've given it the green
+light to do so."*
+Effects: **DG-094 and DG-095 are DROPPED** (they enforced the pre-ruling presentation law; revival
+needs his word). **DG-104 filed** — the CI banned-language linter would mechanically block the
+green-lit language; re-scope it (presentation checks go; backend evidence-typing — fail-closed
+decision_supported, claim levels, validate_no_prohibited_features — stays armed: the ruling changed
+what the product SAYS, not what it MEASURES). **DG-102's frontend gate sequences AFTER DG-104.**
+DG-091's old constraint list ("honesty markup stays") is amended by this ruling; the night lane
+recorded the same ruling as the design brief's controlling principle. Buffer order becomes:
+DG-100 → DG-101 banners → DG-102 (after DG-104). DG-103 now gates only the backend flag.
+Also: DG-090A and DG-092 LANDED tonight (night lane) — Wed 09-02 confirmed freed.
+
 ## Pre-freeze (now → Fri 09-04 EOD)
 Fixed points: **Tue 09-01** — 15-min Tuesday check + SR-09/SR-19 close paperwork (the amendment text
 was drafted tonight by the night lane; the DONE-MARK stays Tuesday per DG-045's own law). SR-13

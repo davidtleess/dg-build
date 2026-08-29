@@ -1,6 +1,6 @@
 # DG-094 — POST /api/trade/analyze still returns a trade winner (Ruling 07 violation, live)
 
-**Layer:** 6  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**  ·  **PRE-FREEZE buffer target (hours)**
+**Layer:** 6  ·  **State:** dropped  ·  **Lane:** —  ·  **DG 3.0**  ·  **DROPPED 2026-08-29 late — David's frontend ruling**
 **Source:** filed 2026-08-29 night on David's delegation ("u decide", gap-audit session); site re-verified on trunk that evening.
 
 **Problem:** `compute_delta_status` returns `"Likely_Favors_You"` / `"Likely_Favors_Opponent"` and the analyzer surfaces it as `delta_status` over POST /api/trade/analyze — a trade winner verdict. Ruling 07: trade math is an input, never an output; no side total, fairness score, or winner ever surfaces. The master plan names this exact site: "The failure mode is in the product now."
@@ -18,3 +18,7 @@
 - What breaks, by design: the 4 delta_status assertions among the 6 tests in `tests/contract/test_trade_delta_status.py` (:14-15, :36, :71, :90) — rewrite them to assert absence; that IS the compliant contract test. The other two tests there (:38, :47) and `test_surface2_trade_typing.py` pass unchanged.
 - `frontend/openapi.json`: REGENERATE, never hand-commit the working copy (regen trap — a dirty copy can silently revert landed commits).
 - A beneficiary-free `within_model_error` boolean was considered and NOT chosen — it names no winner but churns the contract just as much. David can ask for it later as a separate disclosure decision.
+
+---
+
+**DROPPED 2026-08-29 late night — DAVID'S RULING, verbatim (gap-audit session):** *"I don't care to persist the governance of language and caveats and lack of overall recommendation from the back end into the front end. I'd rather use layman's terms and call a spade a spade, and I've given it the green light to do so."* The frontend is now authorized to present overall recommendations; deleting `delta_status` would strip the exact signal that presentation consumes. Backend evidence-typing is unchanged by the ruling. Revive only on David's word.
