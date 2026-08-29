@@ -389,3 +389,45 @@ here because the spec's proof block was never formally answered:**
 run_daily_chain.py:420-425 re-roots the chain's own report under --runtime-override (verified by
 code read 08-29). Known caveat, not a defect: what_changed_report runs --preflight only under
 override (it exposes no redirect flag; run_daily_chain.py:285-288).
+
+---
+
+## SR-19 REHEARSAL EXECUTED SAT 08-29 ~10:17 (pulled forward from D8 on David's panel selection
+## "Rehearse the season flip (SR-19)"; the formal SR-09 CLOSE stays D8 per this ticket's own law)
+
+**Step 1 — direct rollover force (command as spec):**
+`./.venv/bin/python3.14 scripts/run_feature_refresh.py --season-end 2026 --runtime-dir "$SCRATCH/rollover_rehearsal"`
+**OUTCOME (b) — the expected clean refusal.** Exit 1, status `blocked`; validation failures name
+it precisely: `inference: no rows for inference season 2026` + all four position coverage floors
+(QB/RB/WR/TE 0 rows < floor 1). Candidate CSV built (2,616 rows) and examined, publish REFUSED,
+nothing promoted. **NO lock file left** (find *lock* → 0). Live runtime untouched; git tree
+unchanged (26 known dirty entries before and after). Stream provenance healthy-shaped: rosters
+loaded real 2026 (27,792 rows); pbp/player_stats/snap_counts fallback to 2025 (the known state).
+
+**Step 3 — the refusal exercised THROUGH the runner (ticket's recorded command, verbatim):**
+`run_daily_chain.py --dry-run=false --runtime-override "$SCRATCH/rollover_rehearsal" --step-extra run_feature_refresh=--season-end --step-extra run_feature_refresh=2026`
+CHAIN_EXIT=1 (loud fail-soft report, correct). Steps: fc_forward_capture ok (473 rows to the
+SCRATCH store) · **feature_refresh FAILED exit 1 — the genuine refusal, 43.6s** · league ok ·
+**pvo ok** · market_divergence failed exit 1 (`tracked_pair_unreadable:FileNotFoundError` at
+publish — an HONEST abort: the scratch runtime has no divergence baseline; on the real rollover
+morning the live tracked pair exists, so this edge is scratch-only) · what_changed ok
+(--preflight only under override — the known no-redirect-flag caveat, reads live paths only).
+Report re-rooted into scratch exactly as run_daily_chain.py:420-425 promises; live report
+untouched (mtime 09:00:54, 1,461 bytes). No stranded locks anywhere.
+
+**BONUS — DG-086 proven through the runner on the real population:** the rehearsal's pvo step
+ran the just-landed wiring: scratch runtime artifact 12,226 rows, **xvar_percentile_position
+non-null for exactly 388**, coverage populated/reference = **388/388**, dg086 exit criterion
+TRUE.
+
+**Step 4 — what the first REAL rollover morning looks like (for the soak-week checklist):**
+feature_refresh may exit 1 once (`blocked`, "no rows for inference season 2026" until the 2026
+parquet publishes) — the chain CARRIES ON; pvo serves from the last published runtime/committed
+seed (degraded-but-captured, not an outage); market divergence continues from its LIVE baseline
+(the scratch-only tracked-pair abort does not apply); what_changed runs fully. Expect the chain
+report to show one failed step and CHAIN_EXIT=1 that morning — loud, honest, self-healing when
+the 2026 data lands. NOT an incident unless a second step fails or a lock strands.
+
+**Remaining for the D8 close (Tue 09-01, paperwork only):** apply the finding-A spec amendment
+(scratch --report-path note at spec:~883 AND the SR-19 verification block's outdated command at
+spec:~1169-1173 → this ticket's --step-extra form), then mark SR-09/DG-045 closed.
