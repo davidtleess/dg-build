@@ -16,3 +16,5 @@
 **Notes**
 - Keep the failure message as loud as the pytest one (":94 error: tests failed after rebase. Not merging." has the right shape).
 - Node/npm availability inside the land environment is the likely gotcha — the backup.sh verify abort of 08-27 was an nvm PATH problem of exactly this class; test for it explicitly.
+- **⚠ AMENDED 08-29 late (from the DG-090A land, night lane):** the daily-open axe assertion (`visual-smoke.spec.ts:453`) is NONDETERMINISTIC on main — 3 pass / 4 fail over 7 same-tree runs (failures report the real ~39-node contrast debt). **Gate on `vitest` ONLY (311/311 stable) until DG-091's visual pass retires the debt or the run is made deterministic** — wiring `npx playwright test` in now would coin-flip every land. Full record in DG-090's ticket.
+- **Sequencing per David's 08-29 frontend ruling:** this gate lands AFTER DG-104 re-scopes the banned-language checks, so it never blocks the green-lit language.

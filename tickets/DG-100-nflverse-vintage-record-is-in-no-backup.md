@@ -1,6 +1,6 @@
 # DG-100 — The nflverse vintage record is in NO backup, and the 30GB raw tree is invisible to the anti-rot test
 
-**Layer:** 1  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**  ·  **DECISION RECORDED 08-29 — build pre-freeze if Wed/Thu lands, else first in-season infra slot**
+**Layer:** 1  ·  **State:** todo  ·  **Lane:** ClaudeFable5-DG100-20260829  ·  **DG 3.0**  ·  **DECISION RECORDED 08-29 — build pre-freeze if Wed/Thu lands, else first in-season infra slot**
 **Source:** filed 2026-08-29 night on David's delegation ("u decide", gap-audit session); mechanics measured that evening.
 
 **Problem:** `app/data/nflverse_usage.db` (11.1GB, written daily ~06:16) is excluded from offsite backup as "Rebuildable from nflverse public usage statistics … not irreplaceable" — a rationale written before the store's role changed to daily point-in-time vintage capture. Public nflverse reproduces CURRENT content, not the dated vintages: 2027 training fuel a disk loss burns permanently. Worse, the sibling `app/data/nflverse_usage/` raw tree (30GB, ~1,548 entries — the snapshots themselves) is in NO manifest section with NO recorded rationale, because the anti-rot test scans only `*.db` files. The bigger half of the record is structurally invisible.
