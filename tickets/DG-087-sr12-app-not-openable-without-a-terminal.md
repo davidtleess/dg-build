@@ -1,6 +1,6 @@
 # DG-087 — SR-12: the product is not openable without a terminal (no launchd agent serves the API)
 
-**Layer:** 6  ·  **State:** todo  ·  **Lane:** ClaudeFable5-DG087-20260829  ·  **DG 3.0**  ·  **Tier 2**
+**Layer:** 6  ·  **State:** done  ·  **Lane:** ClaudeFable5-DG087-20260829  ·  **DG 3.0**  ·  **Tier 2**
 **Source:** SEASON-BUILD-SPEC SR-12 (SPEC:926-952), pulled forward from D7 (Mon 08-31) to Sat
 08-29 on David's panel selection "Today — I'm at the machine"; filed 2026-08-29.
 
@@ -32,3 +32,15 @@ the DG-050 ticket). Both plists bootstrap at TODAY's sitting.
 
 **Rollback:** bootout + remove two symlinks; the plists commit unloaded, so the land alone
 changes nothing live.
+
+---
+**LANDED 2026-08-29 (merge `39c61ece`; trunk pull deliberately HELD until the sitting).** Built
+RED-first (13→14 lane tests), 3-lens adversarial panel, 5 findings applied (`9f2fe1a7` pre-rebase):
+ThrottleInterval 60; penalty-box remedy corrected in guard config + plist header (kickstart -k for
+a hang; spawn failure needs bootout+bootstrap); replay-verify first-run brief in plist header (the
+guard back-fills the phantom prior-Monday slot — first receipt lands minutes after bootstrap, and
+between trunk-pull and bootstrap the guard reports degraded each tick, expected); README: 404 =
+wrong WD OR unbuilt frontend/dist, frontend rebuild step after every pull (trunk dist was a WEEK
+stale — built Aug 22, five frontend lands unserved), retrain⇒kickstart line. jobs_checked goes
+11→12. SITTING SEQUENCE: pull → npm ci && npm run build → symlink+bootstrap both plists → verify
+(count 14, curl / 200, /api/league/what-changed 200, first replay receipt within ~15 min).
