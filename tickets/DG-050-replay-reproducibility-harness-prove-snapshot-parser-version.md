@@ -52,3 +52,10 @@ Branch `ticket/DG-050`, commit `4c614be7`, pushed to origin. Worktree `~/dg-wt/D
   pre-commit: Passed.
 - NOT done here (deliberate): no launchd plist, no scheduling — the script is
   launchd-shaped for a later ops decision. dg-land not run (coordinator lands).
+
+---
+**SCHEDULING DECIDED 2026-08-29 (David's panel selection: "Weekly scheduled run"):** the harness
+joins launchd at WEEKLY cadence. Plist `com.davidleess.dynasty-replay-verify.plist` rides the
+DG-087 lane (same-day sitting); proposed slot Monday 12:00 — clear of the 06:15–10:30 capture
+cluster and 15+ min past the 11:30 retry slot; the harness only reads live stores and writes its
+own report. Slot choice open to the pre-land review panel's attack.
