@@ -1,6 +1,6 @@
 # DG-092 — SR-13: block the retracted TE lambda edit and guard the coupled constants
 
-**Layer:** 3  ·  **State:** todo  ·  **Lane:** Davids-MacBook-Pro-23900  ·  **DG 3.0**  ·  **Tier 0 · code+test only**
+**Layer:** 3  ·  **State:** done  ·  **Lane:** Davids-MacBook-Pro-23900  ·  **DG 3.0**  ·  **Tier 0 · code+test only**
 **Source:** SEASON-BUILD-SPEC SR-13 (spec ~1186-1226), scheduled Wed 09-02 D9; **pulled forward
 to Sat 08-29 night on David's pick** (spec line ~880 explicitly authorizes the pull: "SR-13
 (0.5d, no dependencies)"). Filed per board convention — SR-13 had no DG ticket.
@@ -43,3 +43,12 @@ unmodified constants, and the read-only sqlite clamp query returns ('QB',37,0) (
 ---
 
 **Notes**
+
+**⭐ LANDED 08-29 night, merge `1d2a5c89` on main (SR-13 done three days early — Wed D9 freed).**
+TDD with perturbation-proof RED (guard watched firing against a monkeypatched constant, then
+green against UNMODIFIED constants); all three spec verification commands passed verbatim —
+identity print all four pairs matching, pytest green, clamp query ('QB',37,0) ('RB',99,5)
+('TE',89,11) ('WR',163,6). 3-refuter panel: 2 minors fixed pre-land (docstring now says the
+lambda identity holds "at 3-decimal rounding" — 20.1/14.5 = 1.3862069 vs shipped 1.386 — and
+the replacement-PPG comment names the other in-repo statements of those numerators, noting the
+Engine A side is unguarded/out of SR-13 scope). Gate 6493/0. Constants untouched, verified.

@@ -43,21 +43,47 @@ design day.** The evidence is unusually concrete because the honesty machinery p
   (`roster-capacity/RosterCapacitySandbox.css:9`), and the player card's divergence label at
   a measured 3.23:1 (`dg022-axe-main.json`).
 
-What this brief is NOT: a bug list. DG-089 (fixed), DG-090-A (pulled to tonight), and DG-043
-own mechanics. This is the design direction those fixes land inside.
+What this brief is NOT: a bug list. DG-089 (fixed), DG-090-A (landed same night, merge
+`232fc0c1`), and DG-043 own mechanics. This is the design direction those fixes land inside.
 
 ---
 
-## Design direction — name it and keep it
+## ⭐ DAVID'S RULING, 2026-08-29 evening — the controlling principle of this brief
 
-The product's character is already real and worth keeping: **a calm, dark, honest terminal.**
-Self-hosted Archivo + IBM Plex, OKLCH tokens, a constitutional two-lane color law (blue =
-model signal, amber = market context, no verdict hues ever — enforced by test,
-`styles/tokens.test.js:83-110`), a disciplined motion system with one sanctioned expressive
-moment at daily open (`styles/motion.css:57-60`). The problem is not the character; it is
-that the character is enforced at the token layer and then abandoned at the surface layer.
-The direction: **finish the system it already wants to be** — no rebrand, no framework, no
-light theme (theme toggle stays deferred I5 scope, `styles/tokensI1.test.js:222-229`).
+Verbatim: **"I really don't care for the caveats and the hard wording governance. I prefer to
+use prose and layman's language with respect to making this a world-class fantasy football
+dynasty front end. Not a data science, data engineering visualization."**
+
+What this rules, applied throughout below:
+1. **The governance register is retired from the screen.** Caveat blocks, disclosure stamps,
+   status lines, "not decision-grade" legalese — the furniture goes. Where a qualifier
+   genuinely matters, it becomes one natural sentence in the flow, written the way a smart
+   friend would say it ("The model hasn't scored this rookie yet" — not "dynasty_value_score
+   unavailable: Engine B not yet validated; model_grade is PRE_MODEL").
+2. **The truth itself is not retired.** The product still never fabricates, still never shows
+   a stale number as fresh, still never recommends a move (the no-verdict law is a data law,
+   not a wording style, and David has not revoked it). But a world-class product doesn't
+   *announce* that it isn't lying six times per page — it simply tells the truth in prose and
+   keeps the receipts one press away for whoever wants the source.
+3. **The reference class changes.** Judge every screen against the best consumer fantasy
+   products a dynasty manager actually uses — not against a data-engineering dashboard. If a
+   screen would look at home in Grafana, it fails.
+4. The locked-copy machinery (`DISCLOSURE_LINE` exact-string lock, the two byte-locked
+   mitigation paragraphs) was built to protect wording David has now ruled against. The design
+   pass replaces them with human prose; David reviews the replacement copy in this proposal's
+   round-trip, which satisfies the sign-off those locks exist for.
+
+## Design direction
+
+**A world-class dynasty product with an honest spine — not an instrument panel.** What
+carries over from today's build is the substrate, not the register: the self-hosted type
+(Archivo + IBM Plex), the OKLCH token discipline, the two-lane color law (blue = model,
+amber = market — enforced by test, `styles/tokens.test.js:83-110`), the motion system with
+its one expressive daily-open moment (`styles/motion.css:57-60`), and the receipts machinery.
+What changes is everything the manager reads and feels: editorial prose instead of pipeline
+labels, one clear answer per screen instead of seventeen labeled blocks, polish that says
+premium sports product. No framework change; the dark canvas stays (dark is native to this
+category); theme toggle stays deferred (I5 scope, `styles/tokensI1.test.js:222-229`).
 
 ---
 
@@ -141,14 +167,15 @@ magnitude, not a prioritized transaction order" (`league-pulse/OpportunityCards.
 Apply that pattern to the morning read: one "largest movements first" ordering across model
 and market regions, carrying that caveat class. Salience without verdict.
 
-**Density: one page, one disclosure per region.** Collapse the five baseline subsections
-(Team Posture / Team Value / League Opportunity / Drop Pressure / Sleeper Snapshot — each with
-its own Status line, DisclosureLine, and caveat block, :828-908) into one "Where you stand"
-block with a single status line and ONE DisclosureLine. Today `DisclosureLine` renders six
-times and "Status:" six times on one page; repetition is read as clutter, not honesty. The
-honesty survives consolidation — every disclosure keeps existing exactly once per region.
-Move "Feed diagnostics" and raw receipts behind their disclosure triggers (the receipt
-primitive already supports this — `ui/ReceiptTrigger.tsx`).
+**Density: retire the caveat furniture entirely (David's ruling).** Today `DisclosureLine`
+renders six times and "Status:" six times on one page, and caveat blocks stack at region,
+subsection, and row level simultaneously — governance worn as chrome. Under the ruling:
+collapse the five baseline subsections (Team Posture / Team Value / League Opportunity / Drop
+Pressure / Sleeper Snapshot, :828-908) into one "Where you stand" block written in prose; zero
+stamped disclosure lines on a healthy morning; when something genuinely needs saying (stale
+pull, missing score), it is said once, in a human sentence, where it applies. "Feed
+diagnostics" and raw receipts move fully behind their triggers (the receipt primitive already
+supports this — `ui/ReceiptTrigger.tsx`): invisible until asked for, complete when asked.
 
 Type floor: the dominant body size is 13px (`--dg-text-sm`) with pockets at 11.2–12.8px
 (`TrustConsole.css`, `RealizedOutcomeScorecard.css:14`, `RosterCapacitySandbox.css:56`).
@@ -157,13 +184,15 @@ of the section-1 type scale.
 
 ---
 
-## Section 3 — Plain language: manager words, honesty intact
+## Section 3 — Plain language: fantasy-football prose everywhere
 
-The inventory found ~25 pipeline-jargon families on screen, ~44 honesty-markup groups that
-must SURVIVE reworded, and 17 bare-number sites. The rewording law is already written in the
-codebase and should be quoted verbatim as the contract for this pass:
-**"mathematically descriptive, never permissive — a caveat must never soften into
-permission"** (`lib/copy.ts:4-6`).
+The inventory found ~25 pipeline-jargon families on screen, ~44 truth-bearing message groups,
+and 17 bare-number sites. Under David's ruling the frame is: the ~44 groups are a checklist of
+**facts that must stay true on screen**, not blocks that must stay rendered. Each one either
+disappears into honest product behavior (the product simply doesn't recommend — it doesn't
+keep saying so) or becomes one plain sentence a league-mate would understand. The one line
+kept from the old register, as an internal writing rule rather than screen text: a qualifier
+must never soften into permission (`lib/copy.ts:4-6`).
 
 **The mechanism: ONE shared display dictionary.** Four partial translation layers already
 exist and are drifting apart — `describeStatusToken` (`lib/copy.ts:24-44`), the SystemHealthCard
@@ -201,15 +230,16 @@ scale on screen or in its receipt; note the live xVAR-percentile scale ambiguity
 the player card vs a 0–1 fraction labeled "pct" in League Pulse `OpportunityCards.tsx:114-115`)
 must be confirmed against the backend per field before relabeling.
 
-**What survives untouched or sign-off-gated:** all ~44 honesty groups reword-only; and THREE
-items are locked harder — `DISCLOSURE_LINE` is marked exact-string LOCKED (`lib/copy.ts:73`),
-and the two byte-locked mitigation contracts (`trade/TradeLab.tsx:119-133`,
-`league-pulse/LeaguePulse.tsx:73-98`) require **David's explicit sign-off before even
-rewording**. Backend caveat sentences pass through verbatim in at least 8 components
+**The locked copy:** `DISCLOSURE_LINE` (exact-string lock, `lib/copy.ts:73`) and the two
+byte-locked mitigation paragraphs (`trade/TradeLab.tsx:119-133`,
+`league-pulse/LeaguePulse.tsx:73-98`) protect exactly the register David ruled against
+tonight. The design pass writes their replacements as short human prose; David reviews the
+replacement copy in this brief's round-trip — that review IS the sign-off the locks were
+built to force. Backend caveat sentences pass through verbatim in at least 8 components
 (carrying `dynasty_value_score`, `Engine B`, `PRE_MODEL`), so this pass is NOT frontend-only:
-scope a token→prose map for backend caveat strings or a backend copy change. The build phase
-starts with a fresh live-surface label census (the static sweep and the preserved screenshots
-show different vocabulary sets).
+scope a token→prose map for backend strings or a backend copy change. The build phase starts
+with a fresh live-surface label census (the static sweep and the preserved screenshots show
+different vocabulary sets).
 
 ---
 
@@ -246,12 +276,17 @@ decision — "I3-owned", `shell/useUrlSurfaceState.ts:2-4`).
 
 ---
 
-## Constraints that stand (verbatim, from the ticket)
+## Constraints that stand — as amended by tonight's ruling
 
-No-verdict law (no buy/sell smuggled in via design) · `decision_supported` stays visible ·
-the tape's honesty function survives any restyle · zod boundaries untouched. Plus the
-enforcement layer in section 1e, the banned-vocabulary file as the copy validator, and the
-frontend-only safety category (nothing here can touch capture).
+- **No-verdict law stands untouched:** the product never tells David what to do. Its
+  *expression* changes — a world-class product simply doesn't recommend, rather than
+  repeatedly announcing that it doesn't.
+- **`decision_supported` stays true and discoverable** (status surface + receipts), no longer
+  stamped as a label across screens — the ratified precedent at `lib/copy.ts:70-73` already
+  points this way.
+- **The tape's honesty function survives any restyle** — restated in prose, per the ruling.
+- **Zod boundaries untouched.** Plus the enforcement layer in section 1e (code-level, invisible
+  to David) and the frontend-only safety category (nothing here can touch capture).
 
 ---
 
@@ -271,12 +306,31 @@ frontend-only safety category (nothing here can touch capture).
 10. DG-043's three player-card furniture defects (labeled pairs fix also kills the run-on line).
 
 **The design pass proper (Studio, via Tower):** sections 1–4 as a coherent restyle — token
-structure additions, the morning-read layout, the display dictionary, nav regrouping — built
-against this brief, reviewed by David before code.
+structure additions, the morning-read layout, the prose dictionary, nav regrouping — built
+against this brief and David's ruling, reviewed by David before code.
+
+**Program order (per IN-SEASON-QUEUE, filed 08-29 night):** DG-076 build manifest → DG-043
+a11y debts + DG-090-B contrast fold-in → arm the visual gate (DG-079 slice) → THEN the rebuild
+churns screens. Never restyle every surface with no build stamp, failing a11y, and no
+regression gate — staleness bit twice already, including on David's first user day. And
+design **DG-098 Ledger B's pre-reveal touchpoint INTO the rebuild** — bolting it on later
+costs a season of sample.
+
+**⚠ Inherited from tonight's DG-090-A land:** the daily-open axe gate
+(`visual-smoke.spec.ts:453`) is **nondeterministic** — same tree, 3 pass / 4 fail over 7 runs;
+when it fails it reports the real Problem-B debt (~39 serious nodes, measured fg `#767a7e` on
+bg `#161c21` = **3.97:1** at 13px). The overflow fix unblocked the spec past the overflow
+assertion for the first time, exposing this. Playwright is not in the land gate (pytest only),
+but any lane running `npx playwright test` on main hits coin-flip failures until this program
+retires the contrast debt. Do NOT "fix" it by excluding the color-contrast rule — that blinds
+the gate; make the run deterministic (post-settle / reduced-motion) and retire the debt.
+Note the rendered fg `#767a7e` also differs from the declared `--dg-text-muted` value — the
+build phase should find what dims it before retuning tokens blind.
 
 **Decisions only David can make (surface with the brief, don't bury):**
 - `?player=` URL addressability (reverses the recorded I3 deferral) — recommended yes.
-- Rewording the two byte-locked mitigation contracts + the LOCKED DisclosureLine string.
+- ~~Rewording the byte-locked contracts~~ — **answered by tonight's ruling**; replacement prose
+  ships in this brief's round-trip for his review.
 - Whether the backend caveat-copy change rides this program or files separately.
 - MarketLanePanel renders sent-side assets only (`trade/MarketLanePanel.tsx:76-88`) —
   intentional or defect; confirm before the design pass treats the lanes as symmetric.

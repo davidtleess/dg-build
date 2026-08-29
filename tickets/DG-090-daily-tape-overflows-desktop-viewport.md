@@ -1,9 +1,22 @@
 # DG-090 — The daily tape overflows the desktop viewport by 5px, and the surface's a11y evidence gate has never passed
 
-**Layer:** 6  ·  **State:** todo — **SPLIT by David's ruling 2026-08-29 night: Problem A (the
-5px overflow) pulled forward to tonight; Problem B (46-node contrast) folds into DG-091's
-visual-identity pass** (avoids retuning the same color tokens twice)  ·  **Lane:** Davids-MacBook-Pro-23766  ·
-**DG 3.0**  ·  **frontend-only**
+**Layer:** 6  ·  **State:** done — **Problem A LANDED 08-29 night (merge `232fc0c1`, served
+live same evening); Problem B TRANSFERRED to DG-091's visual pass per David's split ruling**  ·
+**Lane:** Davids-MacBook-Pro-23766  ·  **DG 3.0**  ·  **frontend-only**
+
+**⭐ 08-29 NIGHT LAND (A only):** `white-space: normal` + `overflow-wrap: anywhere` on
+`.dg-ui-tape__fact` (ui.css), rawCssAuditBaseline regenerated in the same change; TDD RED
+watched (right=1445), 3-refuter panel (2 minors fixed), gate 6494/0, vitest 311/311; live
+:8000 serves the rebuilt bundle. **MAJOR DISCOVERY for DG-091 to inherit: the daily-open axe
+assertion (visual-smoke.spec.ts:453) is NONDETERMINISTIC** — 3 pass / 4 fail over 7 runs on
+the same tree; failures report the real Problem-B debt (~39 serious nodes, fg `#767a7e` on
+`#161c21` = 3.97:1 @13px; note the rendered fg differs from the declared --dg-text-muted —
+find what dims it before retuning). The overflow fix unblocked the spec past the overflow
+assertion for the first time, exposing the flake (it pre-exists). Playwright is NOT in the
+land gate; any lane running `npx playwright test` on main hits coin-flip failures until DG-091
+retires the debt. Do NOT exclude the color-contrast rule — make the run deterministic
+(post-settle / reduced-motion) and retire the debt. Evidence: failed-run trace + pw logs
+preserved in the night session's scratchpad (`DG-090-runs-preserved/`).
 **Source:** exposed 2026-08-29 when DG-089 repaired the visual-smoke harness (strict-mode
 selector fixed; Playwright chromium installed — the harness had NEVER actually run).
 
