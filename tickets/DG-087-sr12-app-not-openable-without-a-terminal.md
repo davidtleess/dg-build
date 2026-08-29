@@ -1,6 +1,6 @@
 # DG-087 — SR-12: the product is not openable without a terminal (no launchd agent serves the API)
 
-**Layer:** 6  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**  ·  **Tier 2**
+**Layer:** 6  ·  **State:** todo  ·  **Lane:** ClaudeFable5-DG087-20260829  ·  **DG 3.0**  ·  **Tier 2**
 **Source:** SEASON-BUILD-SPEC SR-12 (SPEC:926-952), pulled forward from D7 (Mon 08-31) to Sat
 08-29 on David's panel selection "Today — I'm at the machine"; filed 2026-08-29.
 
