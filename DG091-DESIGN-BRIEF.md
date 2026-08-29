@@ -54,21 +54,31 @@ Verbatim: **"I really don't care for the caveats and the hard wording governance
 use prose and layman's language with respect to making this a world-class fantasy football
 dynasty front end. Not a data science, data engineering visualization."**
 
+He gave the parallel gap-audit session the same ruling in fuller words the same evening
+(recorded verbatim in DG-094): **"I don't care to persist the governance of language and
+caveats and lack of overall recommendation from the back end into the front end. I'd rather
+use layman's terms and call a spade a spade, and I've given it the green light to do so."**
+
 What this rules, applied throughout below:
 1. **The governance register is retired from the screen.** Caveat blocks, disclosure stamps,
    status lines, "not decision-grade" legalese — the furniture goes. Where a qualifier
    genuinely matters, it becomes one natural sentence in the flow, written the way a smart
    friend would say it ("The model hasn't scored this rookie yet" — not "dynasty_value_score
    unavailable: Engine B not yet validated; model_grade is PRE_MODEL").
-2. **The truth itself is not retired.** The product still never fabricates, still never shows
-   a stale number as fresh, still never recommends a move (the no-verdict law is a data law,
-   not a wording style, and David has not revoked it). But a world-class product doesn't
-   *announce* that it isn't lying six times per page — it simply tells the truth in prose and
-   keeps the receipts one press away for whoever wants the source.
-3. **The reference class changes.** Judge every screen against the best consumer fantasy
+2. **The frontend may call a spade a spade — overall recommendations included.** The
+   lack-of-recommendation law no longer persists into the front end: the product may say what
+   a trade looks like, what moved that matters, what to look at first, in plain fantasy
+   language. (This supersedes the presentation half of the 08-20 no-verdict standing
+   consequence; DG-094/095 were dropped and DG-104 re-scopes the banned-language linter
+   accordingly — presentation checks relax, backend checks stay.)
+3. **The backend's honesty machinery is unchanged.** Evidence-typing, `decision_supported`,
+   replay verification, never-fabricate, never-show-stale-as-fresh — all stay armed. The
+   frontend speaks plainly ON TOP of an evidence layer that still records exactly how much the
+   model actually knows; receipts stay one press away for whoever wants the source.
+4. **The reference class changes.** Judge every screen against the best consumer fantasy
    products a dynasty manager actually uses — not against a data-engineering dashboard. If a
    screen would look at home in Grafana, it fails.
-4. The locked-copy machinery (`DISCLOSURE_LINE` exact-string lock, the two byte-locked
+5. The locked-copy machinery (`DISCLOSURE_LINE` exact-string lock, the two byte-locked
    mitigation paragraphs) was built to protect wording David has now ruled against. The design
    pass replaces them with human prose; David reviews the replacement copy in this proposal's
    round-trip, which satisfies the sign-off those locks exist for.
@@ -160,12 +170,11 @@ N"; the single most valuable sentence (largest mover + delta) sits beneath it as
 non-clickable basis text (:357-361). Invert: largest mover leads, clickable (the selection
 sink is already passed in — `AppShell.tsx:177-179`), count becomes the qualifier.
 
-**"What should I look at?" — descriptive salience, legally.** The no-verdict law bars a
-nominated move; it does not bar ranking what's on screen by magnitude. The sanctioned pattern
-already ships: OpportunityCards' sort caveat — "A larger value reflects a wider mathematical
-magnitude, not a prioritized transaction order" (`league-pulse/OpportunityCards.tsx:42-43`).
-Apply that pattern to the morning read: one "largest movements first" ordering across model
-and market regions, carrying that caveat class. Salience without verdict.
+**"What should I look at?" — answer it directly (the ruling green-lights this).** Under the
+08-29 ruling the morning read may simply say it: "Worth a look today: …" — the largest
+movements and the model-vs-market gaps that matter, ranked, in plain prose, clickable. The
+evidence layer beneath (what the ranking is computed from, how much the model actually knows)
+stays one receipt-press away.
 
 **Density: retire the caveat furniture entirely (David's ruling).** Today `DisclosureLine`
 renders six times and "Status:" six times on one page, and caveat blocks stack at region,
@@ -201,9 +210,10 @@ raw-name-one-layer-down title-attr convention (`DailyWhatChanged.tsx:958-984`). 
 into one module; every surface imports it. Proof of the drift: `trade/DivergenceStrip.tsx:41-45`
 renders the same signal tokens raw that MarketLanePanel maps — one import fixes it.
 
-**Headline replacements** (full table in the vocabulary audit; all validated against
-`shell/banned_vocabulary.json` — note standalone "depth" IS banned, so `depth_credit_xvar`
-must not become "Depth credit"):
+**Headline replacements** (full table in the vocabulary audit; validated against
+`shell/banned_vocabulary.json` as it stands TODAY — note standalone "depth" is currently
+banned, so `depth_credit_xvar` must not become "Depth credit" until DG-104's linter re-scope
+lands; after DG-104, the ban list narrows to backend evidence-typing terms):
 
 | On screen today | Manager language |
 |---|---|
@@ -278,15 +288,17 @@ decision — "I3-owned", `shell/useUrlSurfaceState.ts:2-4`).
 
 ## Constraints that stand — as amended by tonight's ruling
 
-- **No-verdict law stands untouched:** the product never tells David what to do. Its
-  *expression* changes — a world-class product simply doesn't recommend, rather than
-  repeatedly announcing that it doesn't.
-- **`decision_supported` stays true and discoverable** (status surface + receipts), no longer
-  stamped as a label across screens — the ratified precedent at `lib/copy.ts:70-73` already
-  points this way.
+- **The frontend may state overall recommendations in layman's terms** (the 08-29 green
+  light, fuller verbatim above). The presentation half of the old no-verdict law is
+  superseded; DG-104 re-scopes the banned-language linter to match (presentation checks
+  relax; backend evidence-typing checks stay armed).
+- **The backend never fabricates and never shows stale as fresh** — `decision_supported`,
+  evidence grades, and replay verification are unchanged and stay discoverable through
+  receipts; the frontend's plain voice sits on top of them, not instead of them.
 - **The tape's honesty function survives any restyle** — restated in prose, per the ruling.
-- **Zod boundaries untouched.** Plus the enforcement layer in section 1e (code-level, invisible
-  to David) and the frontend-only safety category (nothing here can touch capture).
+- **Zod boundaries untouched.** The section-1e enforcement layer (code-level, invisible to
+  David) stays, with the banned-vocabulary validator updated per DG-104; the frontend-only
+  safety category holds (nothing here can touch capture).
 
 ---
 
