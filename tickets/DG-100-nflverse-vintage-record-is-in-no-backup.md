@@ -65,11 +65,12 @@ success), and the run-start sentinel left as the only local record that it began
 picked the 8 up as already-synced and continued additively. That is the append-only contract
 proving itself under an abnormal termination, which no test could have shown.
 
-**STILL OPEN for David's sitting (unchanged by the land):** bootstrap the plist (symlink, then
-`launchctl bootstrap gui/501`) and MOVE the label from `catchup_guard.json`'s `unguarded`
-section into `receipts` with `{"receipt_path": "app/data/ops/nflverse_vintage_backup_status.json",
-"timestamp_fields": ["finished_at", "started_at"]}` — the exact entry is quoted in the config
-itself. Until bootstrapped, nothing runs on a schedule; the backfill was run by hand.
+~~**STILL OPEN for David's sitting (unchanged by the land):** bootstrap the plist and MOVE the
+label from `catchup_guard.json`'s `unguarded` section into `receipts`.~~
+**✅ CLOSED 2026-08-30 on David's word "install it".** Plist symlinked + bootstrapped 07:34
+(15 dynasty labels, exactly 1 calendar slot, `runs=0` — no retroactive fire, so it never raced
+the backfill). Guard registration landed as **DG-107** (merge `9c020e5c`) once the backfill's
+marker existed; guard dry-run then read 13 jobs checked, 0 unconfigured, **`kicked: []`**.
 
 **Notes**
 - The nightly 10:15 job is untouched either way; this is a new, separate channel.
