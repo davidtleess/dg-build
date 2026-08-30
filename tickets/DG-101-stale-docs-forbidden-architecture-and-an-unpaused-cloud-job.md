@@ -1,6 +1,6 @@
 # DG-101 — Stale strategy docs still present forbidden architecture as the plan; a leftover cloud job is scheduled every minute
 
-**Layer:** process  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**  ·  **PRE-FREEZE (banners are docs-only; the job check needs a network call)**
+**Layer:** process  ·  **State:** todo  ·  **Lane:** ClaudeFable5-DG101-20260830  ·  **DG 3.0**  ·  **PRE-FREEZE (banners are docs-only; the job check needs a network call)**
 **Source:** filed 2026-08-29 night on David's delegation ("u decide", gap-audit session).
 
 **Problem:** Two pre-DG-3.0 docs still present themselves as the current plan: `docs/roadmap.md` (last commit 2026-04-30 — four months before the entire law set) and `docs/storage-strategy.md`, whose line 18 still reads "This doc is the blueprint. Code follows." while prescribing the Databricks/Delta architecture the master plan's restraint list (§9) forbids. And `infrastructure/resources/jobs.yml` declares `refresh_genius_state` with `quartz_cron_expression: "0 * * * * ?"` (:30) — every minute — which the master plan marks "Databricks — retire it or wire it. URGENT" (:814). Deployment/billing status unconfirmed; nothing in app/ or src/ imports Databricks.
