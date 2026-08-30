@@ -1,6 +1,6 @@
 # DG-112 — Delete the retired Databricks bundle from the repo
 
-**Layer:** process  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**  ·  **David: "ok go ahead remove it" (2026-08-30)**
+**Layer:** process  ·  **State:** done  ·  **Lane:** ClaudeFable5-DG112-20260830  ·  **DG 3.0**  ·  **David: "ok go ahead remove it" (2026-08-30)**
 **Source:** the last step of DG-101's teardown runbook, unblocked once the workspace destroy completed.
 
 **Problem:** `infrastructure/` holds a Databricks Asset Bundle for an architecture the master plan's restraint list (§9) forbids and that David retired on 2026-08-30. DG-101 deliberately kept the files so `databricks bundle destroy` would still have a definition to tear down with. The destroy is now done — the workspace holds zero jobs — so the definition has no remaining purpose, and leaving it invites a future agent to redeploy it.
