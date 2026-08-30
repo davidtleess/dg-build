@@ -32,8 +32,10 @@ first draft of the dictionary replaced opaque tokens with confident prose that w
 ways an opaque token cannot. Every mapping needs its producer read, not just a plausible reading.**
 
 ## ⚠ FOR DAVID'S EYES (judgement calls the lanes flagged rather than buried)
-1. **DG-111 reworded `TRUST_TRUTH_COPY`**, a constant whose own header marks it "never
-   free-typed", and moved away from wording recorded in its ticket as sign-off copy. Every factual
+1. **TWO lands touched `TRUST_TRUTH_COPY`** (corrected 08-30 by the closeout audit — this item
+   originally named DG-111 alone; `git show 59bab53e:frontend/src/trust/TrustTruthPanel.tsx`
+   proves **DG-109 removed the NDCG acronym first**, then DG-111 reworded further). The constant is marked "never free-typed" in its own header, and the wording moved away from what its ticket
+   recorded as sign-off copy. Every factual
    claim is preserved; the shouted acronym NDCG is gone. Worth his read.
 2. **`rawCssAuditBaseline.json` was edited BY HAND** in DG-111 (RosterAudit raw_font_size 3→2,
    total 45→44) because the generator can only insert, never decrement.
@@ -56,3 +58,64 @@ DG-111 removed elsewhere); "Value above replacement (xVAR)" still carries the ac
 Trade voice = both pricings plainly, NO blended take/pass · parked surfaces leave the nav ·
 green-up/red-down deltas (**reopens the enforced verdict-hue ban — re-point it at genuine buy/sell
 styling, do not delete it**) · build the phone shell now.
+
+
+---
+
+## ⚠ THIS CLOSEOUT WAS AUDITED BEFORE DAVID READ IT — corrections applied
+A three-auditor adversarial sweep (read-only; product truth, record honesty, unfinished business)
+was run against this session's own claims, because **this session made two wrong claims to David
+tonight** and a self-certified closeout had not earned trust. Both errors, recorded here because
+this is the newest file and the audit found they appeared only in older ones:
+- **36 orphaned CPU busy-loops** from this session's own DG-105 flake-under-load test ran 90+
+  minutes (load 63-84) and contaminated every performance reading in that window. Cause: in a
+  non-interactive `zsh -c`, `jobs -p` returns no background-subshell PIDs, so the teardown killed
+  nothing. The peer session killed them.
+- **A 4.6s players-API "problem" that does not exist** — reported to David as fact, then fully
+  retracted (clean re-measure: card renders 199ms after click; API 0.135-0.273s). **Refined by the
+  audit: do not generalise to "never slow" — one auditor's first cold request took 10.26s, then
+  0.209s. Cold-start latency after idle is real and unmeasured.**
+
+**What the audit CORRECTED in this session's claims:**
+1. **"The sprint tail is only Tuesday 09-01" — FALSE.** See the tail plan below.
+2. **DG-105 had NO board row at all** despite landing — added.
+3. **DG-091's own controlling ticket still said "todo · POST-FREEZE · nothing built"** — corrected.
+4. **DG-045's resume brief still instructed applying an amendment that landed Saturday** — Tuesday
+   would have redone finished work; corrected.
+5. **"Raw-literal contrast debt retired" (DG-105) is overstated** — the census is not emptied
+   (raw_oklch 40 / spacing 70 / radius 33 / font-size 45 across 18 of 21 files) and **21 composited
+   AA failures remain**, all `.dg-shell__parked-badge` at 2.89:1.
+6. **The deployed bundle declares `source_dirty: true`** — DG-076 raising exactly the flag it was
+   built for. "Deployed at 921ec892" was a +dirty build; the dirty files are outside frontend/ so
+   the bundle is faithful, but the claim hid the flag.
+7. **`fad9d12`'s message was overstated** — only DG-111 carries an acceptance record; DG-109/110
+   got one-word state flips, so 36 of the 52 panel findings exist only as a number.
+8. **vitest 402 is unverified by the audit** (running it was barred as machine load) — state it as
+   "green when I ran it", not as an independently checked fact.
+
+## THE HONEST TAIL — Monday first, NOT "only Tuesday"
+**MON 08-31 — two launchd jobs have NEVER fired (`launchctl print` → `runs = 0`):**
+- **07:00 `dynasty-nflverse-vintage-sync`** — the peer lane's D8 closeout calls this *"the last
+  proof needed before the freeze"*. Check its log appears and
+  `app/data/ops/nflverse_vintage_backup_status.json` `finished_at` moves off `2026-08-30T13:08:18Z`.
+  (Today's alert file carries a benign GAP line for it — the plist bootstrapped 07:34, after the
+  slot. It should self-clear Monday; nothing recorded that expectation until now.)
+- **12:00 `dynasty-replay-verify`** (DG-050) — first scheduled fire, unmentioned in any tail plan.
+**⛔ FIX THE TUESDAY CHECK BEFORE TUESDAY — it is structurally blind.** The spec (:1035-1037)
+prescribes `launchctl list | grep -E 'league-opportunity-map|roster-capacity-audit|realized-outcome-scoring'`
+expecting exit-status 0 — **but that column reads 0 for a job that has NEVER RUN** (proven on five
+labels). All three Tuesday-only jobs currently show `runs = 0`. Replace with
+`launchctl print gui/501/<label> | grep -E 'runs|last exit code'` and require **runs ≥ 1 AND exit 0**.
+This is the same failure class as tonight's two retractions: a reading taken without checking the
+conditions it was taken under.
+**TUE 09-01:** the corrected check, then the SR-09/SR-19 done-mark ONLY (amendment already landed).
+**WED–FRI:** buffer, minus **DG-102** (dg-land gate is pytest-only, blind to frontend breakage) —
+labelled PRE-FREEZE on its ticket, the board and the queue, now unblocked by DG-104, and seven
+frontend tickets landed through that blind gate this weekend. **Do it or explicitly retire the
+pre-freeze claim.** Note its scope honestly: a Playwright slice covers the reduced-motion path only.
+**ALSO OPEN:** DG-108 (repealed-vocabulary suppression still armed in the live API at
+`players.py:227` — fires zero times today across all 27 rostered ids, but can silently replace real
+evidence), DG-076's deferred backend half (no ticket), DG-106 (contracts 1.6GB/day).
+**AND: PLUG THE LAPTOP IN.** `pmset` → battery `sleep 45` vs AC `sleep 0`; macOS does not replay
+StartCalendarInterval jobs it slept through, so Monday's 07:00 proof, the 09:00 chain, the 10:15
+backup and the 10:30 alert are all exposed. One action removes the class.
