@@ -46,7 +46,7 @@
 | DG-040 | The daily nflverse capture has never once succeeded — upstream renamed contracts `cols` | **1** | **done — merge `6b5dceb9`, deployed to the trunk, capture run green same day** | ClaudeFable5-DG040-20260824 |
 | DG-041 | The inputs gate is permanently red — participation can never serve the season it is asked for | **1** | done | ClaudeFable5-DG041-20260825 |
 | DG-042 | David's "all games" PPG ruling is honoured by accident, not enforced (SR-21) | 3 | **done — merge `c2b11f0a` on `main`** | ClaudeOpus5-DG042-20260825 |
-| DG-043 | Player card two-lane furniture fails contrast, markup, and mobile width (pre-existing; found by DG-022 QA) | **6** | todo | — |
+| DG-043 | Player card two-lane furniture fails contrast, markup, and mobile width | **6** | **LANDED 08-30 `555fb7e4`, LIVE** — dl-of-spans → labeled pairs (run-on raw-key line GONE), divergence literal → tokens, 390px overflow 776→390 PROVEN in-browser; panel fixes: TE caveat speaks prose, caveat names its own source, offset-less dates stop showing tomorrow. ⚠ contrast + mobile remain ungated by automation | Davids-MacBook-Pro-23766 |
 | DG-044 | SR-11: the daily capture gap alert — the only detection channel that will exist (absorbs DG-035 option b) | **1** | **done — merge `b1b888be`; INSTALLED + LIVE-FIRE ACCEPTED 08-26 12:00 (banner seen)** | ClaudeFable5-DG044-20260826 |
 | DG-045 | SR-09: the dependency-ordered fail-soft daily chain (steps 1-7 BUILT + REVIEWED D4; LANDED + swap EXECUTED D5; step 8 = D8) | **1** | landed — merge `4048f25a` on main 08-27; D5 sitting DONE (12 labels — 11 + catchup-guard; slots 1/1/2/2); SR-09 closes after D8's SR-19 exercise | ClaudeFable5-DG045-20260826 |
 | DG-046 | The common-cohort divergence fix is built, tested, and NOT WIRED IN (archive stores raws — recomputable) | **5** | **done — merge `e976b1e2`; PRODUCTION-ACCEPTED 08-26 14:00 (rebased artifact live)** | ClaudeFable5-DG046-20260826 |
@@ -79,7 +79,7 @@
 | DG-073 | Scenario 2: hold-versus-move for a David-selected player — the first DOO client | **5** | todo (direct, 3d) | — |
 | DG-074 | Scenario 4: trade-partner EVIDENCE panels — receipts, not context cards | **5** | todo (direct, 2.5d) | — |
 | DG-075 | Read-model store: precompute, publish atomically, serve with receipts | **6** | todo (enabler, 3d) | — |
-| DG-076 | Frontend build manifest — source SHA, OpenAPI hash, build timestamp | **6** | todo (enabler, 0.5d) | — |
+| DG-076 | Frontend build manifest — source SHA, OpenAPI hash, build timestamp | **6** | **frontend half LANDED 08-30 `6bf4a155`** — dist manifest + status-drawer stamp; panel BLOCKING fixed: dirty-tree builds now emit `source_dirty` instead of a false clean sha (PROVEN live: trunk build stamps source_dirty:true). **NOT done — the health-endpoint sha-vs-HEAD comparison is deferred backend work** | Davids-MacBook-Pro-23766 |
 | DG-077 | Complete the resource layer: dedup, stale state, contract_mismatch, receipt invalidation | **6** | todo (enabler, 1.5d) | — |
 | DG-078 | Belief archive read model — what we believed about a player, dated | **6** | todo (enabler, 2d) | — |
 | DG-079 | Turn release evidence into a gate — goldens, state matrix, CI wiring | **6** | todo (enabler, 1.5d) | — |
@@ -107,8 +107,9 @@
 | DG-101 | Stale docs (roadmap.md 04-30, storage-strategy.md) present forbidden architecture as current; refresh_genius_state Quartz fires every minute, "retire it or wire it. URGENT" (MASTER :814) | process | todo — banners docs-only pre-freeze; deployment/billing check needs network | — |
 | DG-102 | dg-land gate is pytest-only (bin/dg-land.sh:92) — blind to frontend breakage; UI suite sat red on main 08-28→29 | process | todo — pre-freeze buffer (hours, tooling repo); extend tests/test-dg-land.sh for fire + skip paths | — |
 | DG-103 | decision_supported criteria + outcome finality — standing proposal drafted; both blanks bite at December's Gate-4 read | **5** | todo — RATIFICATION IS DAVID'S (MASTER §8.5); proposal text in the ticket; per the 08-29 frontend ruling this now gates only the BACKEND flag, not the frontend's voice | — |
-| DG-104 | CI banned-language linter now enforces a repealed presentation law — will block David's green-lit frontend language | **6** | todo — UNBLOCKS the frontend lane; presentation checks re-scoped per the 08-29 ruling, BACKEND evidence-typing checks stay armed; DG-102's gate sequences after this | — |
+| DG-104 | CI banned-language linter enforces a repealed presentation law | **6** | **LANDED 08-30 `67cf9f8b`** — presentation bans relaxed, backend evidence-typing bans STAY armed; panel found 3 BLOCKING (prose-bypass of the field gate, false `pass` on five tier-readiness components, a second cordon still armed) — all closed pre-land; PRODUCT.md law text amended | Davids-MacBook-Pro-23766 |
 | DG-106 | contracts writes a 1.6GB snapshot per capture — 19.3GB of 31.8GB, ~51GB/month compounding forever | **1** | todo — POST-FREEZE (capture-path change); options: weekly cadence / content-addressed pointers / gzip; found measuring DG-100's backfill | — |
+| DG-108 | Backend still strips David-facing evidence with the repealed presentation vocabulary (players.py `_contains_banned`) | **6** | todo — DG-104 panel follow-up; renumbered from DG-107 (collision with the peer lane's DG-100 sitting ticket; theirs keeps 107) | — |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
