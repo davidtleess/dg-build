@@ -1,6 +1,6 @@
 # DG-110 — Players reachable from anywhere: global search and the remaining dead ends
 
-**Layer:** 6  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**  ·  **frontend-only · DG-091 phase 2A**
+**Layer:** 6  ·  **State:** todo  ·  **Lane:** Davids-MacBook-Pro-80053  ·  **DG 3.0**  ·  **frontend-only · DG-091 phase 2A**
 **Source:** David's first-user verdict dimension 4 — *"hard to find things/clunky."* Direct
 consequence of his words; builds without the phase-2B design answers.
 
