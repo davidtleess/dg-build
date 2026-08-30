@@ -1,6 +1,6 @@
 # DG-116 — Trade Lab is visually unbuilt, and the verdict David ruled is missing
 
-**Layer:** 6 · **State:** todo · **Lane:** — · **DG 3.0** · **frontend-only · DG-091 phase 2B WAVE 1**
+**Layer:** 6 · **State:** done · **Lane:** Davids-MacBook-Pro-64976 · **DG 3.0** · **frontend-only · DG-091 phase 2B WAVE 1**
 **Source:** the 2026-08-30 closeout audit, observed on the LIVE product at every width.
 
 **Problem:** Trade Lab renders three bare white native `<input>`s and native `<button>`s ("David

@@ -1,6 +1,6 @@
 # DG-117 — Surface cleanup: the sideways scroll, the three names, and the QA language
 
-**Layer:** 6 · **State:** todo · **Lane:** — · **DG 3.0** · **frontend-only · DG-091 phase 2B WAVE 1**
+**Layer:** 6 · **State:** done · **Lane:** Davids-MacBook-Pro-65092 · **DG 3.0** · **frontend-only · DG-091 phase 2B WAVE 1**
 **Source:** the 2026-08-30 closeout audit, all measured on the LIVE product.
 
 **Four defects, all evidenced:**

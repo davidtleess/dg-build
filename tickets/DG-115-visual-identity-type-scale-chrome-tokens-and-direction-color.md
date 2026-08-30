@@ -1,6 +1,6 @@
 # DG-115 — Visual identity: the type scale, chrome tokens, and direction color
 
-**Layer:** 6 · **State:** todo · **Lane:** — · **DG 3.0** · **frontend-only · DG-091 phase 2B WAVE 1 (lands first — waves 2/3 build on it)**
+**Layer:** 6 · **State:** done · **Lane:** Davids-MacBook-Pro-64831 · **DG 3.0** · **frontend-only · DG-091 phase 2B WAVE 1 (lands first — waves 2/3 build on it)**
 **Source:** `DG091-STUDIO-SPEC.md` §1/§5 + `DG091-DESIGN-BRIEF.md` §1 + David's 2026-08-30 panel.
 
 **Build — the structure the token system is missing:**

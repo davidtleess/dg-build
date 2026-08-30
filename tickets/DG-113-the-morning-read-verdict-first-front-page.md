@@ -1,6 +1,6 @@
 # DG-113 — The morning read: a verdict-first front page
 
-**Layer:** 6 · **State:** todo · **Lane:** — · **DG 3.0** · **frontend-only · DG-091 phase 2B wave 2**
+**Layer:** 6 · **State:** done · **Lane:** Davids-MacBook-Pro-71019 · **DG 3.0** · **frontend-only · DG-091 phase 2B wave 2**
 **Source:** `DG091-STUDIO-SPEC.md` §2 + David's 2026-08-30 panel. Wave 2 — build AFTER DG-115 lands
 (it needs the new type scale and the green/red delta tokens).
 

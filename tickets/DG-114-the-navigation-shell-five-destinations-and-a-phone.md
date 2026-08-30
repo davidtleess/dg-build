@@ -1,6 +1,6 @@
 # DG-114 — The navigation shell: five destinations, a player drawer, and a real phone
 
-**Layer:** 6 · **State:** todo · **Lane:** — · **DG 3.0** · **frontend-only · DG-091 phase 2B wave 2**
+**Layer:** 6 · **State:** done · **Lane:** Davids-MacBook-Pro-71164 · **DG 3.0** · **frontend-only · DG-091 phase 2B wave 2**
 **Source:** `DG091-STUDIO-SPEC.md` §4 + David's 2026-08-30 panel (verbatim: *"Remove from nav
 entirely"* and *"Build the phone shell now"*). Wave 2 — build AFTER DG-115 lands.
 
