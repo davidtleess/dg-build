@@ -1,6 +1,6 @@
 # DG-109 — The copy dictionary: no raw pipeline key may reach the screen
 
-**Layer:** 6  ·  **State:** todo  ·  **Lane:** Davids-MacBook-Pro-79920  ·  **DG 3.0**  ·  **frontend-only · DG-091 phase 2A**
+**Layer:** 6  ·  **State:** done  ·  **Lane:** Davids-MacBook-Pro-79920  ·  **DG 3.0**  ·  **frontend-only · DG-091 phase 2A**
 **Source:** David's 2026-08-29 ruling (verbatim in [[david_rulings_dg3]] and DG091-DESIGN-BRIEF.md):
 *"prose and layman's language… Not a data science, data engineering visualization."* This ticket
 implements the Studio spec's §1 engineering requirement — it is a direct consequence of his words,
