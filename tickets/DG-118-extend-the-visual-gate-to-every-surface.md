@@ -1,6 +1,6 @@
 # DG-118 — Extend the visual evidence gate to every surface it is supposed to protect
 
-**Layer:** 6 · **State:** todo · **Lane:** — · **DG 3.0** · **frontend-only · DG-091 phase 2B WAVE 3 (last — it must gate the finished work)**
+**Layer:** 6 · **State:** done (2026-08-30, commits 55a3c694 + ee95d9b4 on ticket/DG-118, pushed) · **Lane:** Davids-MacBook-Pro-63904 · **DG 3.0** · **frontend-only · DG-091 phase 2B WAVE 3 (last — it must gate the finished work)**
 **Source:** the 2026-08-30 closeout audit.
 
 **Problem:** `frontend/e2e/visual-smoke.spec.ts` visits only `?surface=what-changed`,
