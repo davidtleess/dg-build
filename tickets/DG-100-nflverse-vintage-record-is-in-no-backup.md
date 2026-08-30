@@ -74,3 +74,23 @@ itself. Until bootstrapped, nothing runs on a schedule; the backfill was run by 
 **Notes**
 - The nightly 10:15 job is untouched either way; this is a new, separate channel.
 - Land by Wed/Thu 09-02/03 to observe at least one cycle before the Fri 09-04 EOD freeze; otherwise first in-season infra slot (after CAP-9). See `~/dg-build/IN-SEASON-QUEUE.md`.
+
+## ✅ BACKFILL COMPLETE + CHANNEL PROVEN 2026-08-30
+
+**One-time backfill, `status: completed`:** 1,584 of 1,584 files offsite, 1,575 uploaded this
+run (21.95 GB) on top of the 9 the killed first batch had already placed, `sha256_verified: true`,
+`failures: []`, 0 deferred, 0 dotfiles, 0 capped. The whole 31.8 GB vintage record is offsite and
+every object was verified by download-and-compare, not assumed.
+
+**The daily cost is 13 seconds.** A second run immediately after: `files_already_synced: 1584`,
+`files_uploaded: 0`, `bytes_uploaded: 0`, exit 0, 13.3s wall. So tomorrow's 07:00 scheduled run
+is trivial — the "scheduled job inherits an unfinished backlog" risk from installing the plist
+mid-backfill is closed by measurement, not by hope.
+
+**Known inefficiency, deliberately NOT fixed before the freeze:** the already-synced comparison
+calls `file_fingerprint()` and uses only the size, so each run sha256s the full 31.8 GB to learn
+sizes it could `stat()`. It costs ~10s of CPU a day and is correct, so it stays until after
+2026-09-04; a one-line change to `path.stat().st_size` would make the daily run ~1s. Recorded
+here rather than fixed, because a capture-adjacent change during freeze week buys nothing.
+
+**Guard registration** completed as DG-107 (merge `9c020e5c`); acceptance in that ticket.
