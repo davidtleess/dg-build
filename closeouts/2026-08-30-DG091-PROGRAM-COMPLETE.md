@@ -70,3 +70,35 @@ without gating it fails the unit suite. **8 defect classes were watched failing 
 - The deployed bundle declares `source_dirty: true` — three tracked files have sat uncommitted in
   the trunk for days (incl. a real one-line pytest determinism fix). Preserved at
   `preserved/2026-08-30-trunk-dirty-state/`; landing or discarding is David's call.
+
+---
+
+## FINISHING PASS — David: *"do the trade partners view and the raw token"* (2026-08-30)
+Both landed and live. Twelve tickets total in the program now.
+
+**DG-119 `6f766032` — the partners view is now "Who to call".** Framed cards, the manager's name
+leading, and one producer-entailed sentence per card: *"You're rebuilding and they're contending.
+They're deep at RB and WR — exactly where you're thin. We and the market price 5 of their players
+differently."* The raw `2.091` became a rank word on the face and moved to the receipt.
+**MEASURED: 6,401px → 1,378px at 1440 (−79%); 6,926px → 3,061px at 390.** The caveat went from
+11 renders to 1; the 11 "Market-influenced" badges to 0.
+**The honesty core, and it is the whole reason this ticket mattered:** `activity_recency_score` is
+the literal `0.0` at `league_opportunity_map.py:185` — never computed, no trade-activity input
+exists. The old card printed *"How recently they've traded — 0.00"*, which **told a manager these
+eleven teams had been quiet**. It now says *"We don't track trade activity, so this part scores
+nothing for anybody and moves no one up or down the list."* A test couples that copy to the
+producer literal, so if the field ever starts being computed the copy must change with it.
+
+**DG-120 `b1c532d7` — receipts distinguish identifiers from messages.** IDENTIFIERS stay raw and
+copyable (`model_forward_capture`, `capture_health`, `market_divergence_history` — byte-exact,
+because they are addresses and rewording destroys them). MESSAGES became prose: what used to read
+`roster_capacity: live_precondition_not_ok:capture_health_ok=degraded` now reads *"2 of 3 daily
+capture feeds are in a bad state. Which, and why:"* followed by *"Daily model scores — missing 1
+of 68 days (2026-08-12)"* with the identifier beneath it. **The render rule now FAILS a snake_case
+MESSAGE inside `[data-receipt]`**, so the exemption can no longer be a hiding place.
+Suite 575 → **621 tests**. Both panels' blocking findings were LATENT cases the lanes stated
+plainly (posture values and receipt bases that no live payload produces today) — flagged as
+unproven-on-real-data rather than claimed as verified.
+
+**Also filed, not built:** DG-121 — the detector behind the week-stale bundle (DG-076's deferred
+half, which the program closeout had named as having no ticket).
