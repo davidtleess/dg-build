@@ -1,6 +1,6 @@
 # DG-120 — The receipt layer still speaks pipeline, and David is one click from it
 
-**Layer:** 6 · **State:** todo · **Lane:** — · **DG 3.0** · **frontend-only · DG-091 follow-on**
+**Layer:** 6 · **State:** done · **Lane:** Davids-MacBook-Pro-66345 · **DG 3.0** · **frontend-only · DG-091 follow-on**
 **Source:** David, 2026-08-30: *"do the trade partners view and the raw token"*; and the closeout
 audit, which found that ONE CLICK on the header pill "Attention — details inside" — the first
 affordance in the top bar — puts raw pipeline strings on screen.
