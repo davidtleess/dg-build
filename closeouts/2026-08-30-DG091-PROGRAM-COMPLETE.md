@@ -102,3 +102,59 @@ unproven-on-real-data rather than claimed as verified.
 
 **Also filed, not built:** DG-121 — the detector behind the week-stale bundle (DG-076's deferred
 half, which the program closeout had named as having no ticket).
+
+---
+
+# ⛔ CORRECTIONS — 2026-08-31 adversarial audit of this very closeout
+Three read-only auditors were run against this document and the live product BEFORE David read it,
+because this session had already made four wrong claims to him. **They found five wrong numbers,
+two false safety claims, and one whole unbuilt destination this closeout called clean.**
+
+## The numbers in this file are WRONG. The truth:
+| This file says | Truth | Proof |
+|---|---|---|
+| "Ten tickets later" (line 6), "## The ten lands" over a list of 13, "Twelve tickets total" | **FIFTEEN** (4+3+6+2) | all 15 shas verified ancestors of `origin/main` |
+| "all seven surfaces" | **EIGHT** | `shell/destinations.ts:34-71` — 5 destinations over 8 views; DG-114 and DG-119 each added one |
+| gate "23 tests" | **25 at HEAD** | DG-119 added a surface after DG-118 landed |
+| gate "8/8 deterministic" | **4 consecutive runs, on the 23-test version** | DG-118's own ticket line 55; the 25-test gate has never been shown stable |
+| "roughly 160 findings fixed pre-land" | **unsupported** | the number appears nowhere but this file; 13 of 15 tickets have NO acceptance record |
+
+## Two claims that are FALSE as plain English
+1. **"Zero raw pipeline tokens."** True only under the checker's own definition.
+   `renderRule.ts:140` audits `aria-label`, `alt`, `placeholder` — **not `title`** — and
+   `renderRule.ts:35` says so deliberately. Raw keys are actively placed in `title=` tooltips on
+   VISIBLE PROSE, outside every exempt subtree: `model_multi_vintage_ambiguous` (Today),
+   `thin_unrostered_pool_below_min_4` and `valuation_coverage_below_floor` (Cut list),
+   `league_pulse_artifact_state_2026-08-30` (Trade partners, League). Hover and the pipeline speaks.
+   Separately, League prints `team_posture.v1` / `team_value_matrix.v1` / `league_opportunity.v2`
+   as **unlabelled body copy with no interaction at all**. → **DG-123**
+2. **"Nothing can be silently slept through."** A power reading dressed as a guarantee. AC
+   `sleep 0` kills IDLE sleep only — closing the lid still sleeps the machine, and unplugging
+   restores `sleep 45` instantly. The one observed miss (08-27) was the boot-to-login window,
+   which AC power does not address.
+
+## The finding this closeout missed entirely
+**LEAGUE — one of the five nav destinations — IS UNBUILT.** Measured independently by two
+auditors: **35,475px at 1440 and 44,020px at 390** (46,170 characters). That is **26× the
+partners view this document celebrates cutting by 79%**. Eight opportunity cards, **none of
+which names a team**; *"Something here is worth a look."* printed **16 times**; **"Unknown team"
+six times** for managers the same payload names. Section headings read "Model-native opportunity
+cards". **The visual gate passed it** — it checks overflow, content presence and axe, not page
+length or repetition. → **DG-122**
+
+## A second dead scoring term, one line above the one this program caught
+`league_opportunity_map.py:184`: `divergence_density_score` is `1.0` for **all eleven partners**
+on the live payload. DG-119 correctly caught `activity_recency_score` on line 185 and walked past
+this one. A term identical for every row does no ranking work while the card implies it does.
+→ folded into **DG-124**
+
+## And the latency retraction was wrong in the OTHER direction — third time on one issue
+This session reported a 4.6s API defect, retracted it, then retracted the retraction ("no latency
+problem exists; 199ms"). The audit measured `/api/health` **cold at 4.577s**, then 0.34-0.40s warm.
+**The original 4.6s reading was real as a cold-first-hit.** David's first request on a season
+morning is the cold one. Neither "4.6s is a defect" nor "nothing is slow" survives; the honest
+statement is *cold start is seconds, warm is sub-second, and it has never been measured cleanly.*
+
+**The lesson this session kept re-learning, and kept getting wrong:** a reading is not evidence
+until you state the conditions it was taken under — and a correction is a new claim that needs its
+own evidence, not a licence to generalise in the opposite direction.
