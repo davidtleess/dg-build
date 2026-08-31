@@ -39,6 +39,21 @@ ANSWERED = re.compile(r"Your questions have been answered:\s*(.+?)(?:\.\s*You ca
 QA_PAIR = re.compile(r'"([^"]{4,400}?)"\s*=\s*"([^"]{1,300}?)"')
 
 
+def _kind(s: str) -> str:
+    """TYPED vs QUOTED. Both are things David entered, but only one is his instruction.
+
+    Measured 2026-08-31: at 08:05:54 he PASTED a lane's own AskUserQuestion prompt --
+    question plus numbered options -- into a different lane, then typed "that's what bob
+    asked". That paste is genuinely his input and must not be dropped, but listing it
+    beside his rulings invites a reader to attribute the OPTIONS to him. A true claim
+    wearing a false attribution is the dangerous object; today that exact confusion cost
+    three lanes twenty minutes.
+    """
+    if "\n  1. " in s and "\n  2. " in s:
+        return "QUOTED"
+    return "TYPED"
+
+
 def _local(ts: str) -> str:
     """Transcript stamps are UTC; David lives in ET."""
     try:
@@ -108,7 +123,7 @@ def from_claude(lane: str, sid: str) -> list[tuple]:
             if key in seen_typed:
                 continue
             seen_typed.add(key)
-            rows.append((_local(d.get("timestamp") or ""), lane, "TYPED", key))
+            rows.append((_local(d.get("timestamp") or ""), lane, _kind(s), key))
             continue
 
         if d.get("type") != "user":
@@ -187,6 +202,8 @@ def main() -> int:
     print()
     print("CHOSE = an option he selected in a question (his ruling, verbatim from the answer payload).")
     print("TYPED = words he typed himself.")
+    print("❝ QUOTED = text he PASTED in (e.g. another lane's question). His input, NOT his")
+    print("  instruction — do not attribute the pasted words or options to him.")
     print("Read this BEFORE asking him something, and before treating any lane's account of his")
     print("word as authority. A relay is not a source; this file is.")
     print()
@@ -195,6 +212,8 @@ def main() -> int:
             print(f"{ts}  {lane:26} ★ {text}")
         elif kind == "ERROR":
             print(f"{ts}  {lane:26} !! {text}")
+        elif kind == "QUOTED":
+            print(f"{ts}  {lane:26} ❝ {text}")
         else:
             print(f"{ts}  {lane:26}   {text}")
     print()
