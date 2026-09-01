@@ -1,6 +1,6 @@
 # DG-128 — Rank everyone: the 8-game gate refuses 115 players we already have history for
 
-**Layer:** 3 · **State:** todo · **Lane:** — · **DG 3.0** · **backend / model · CHANGES PUBLISHED VALUES**
+**Layer:** 3 · **State:** todo · **Lane:** Davids-MacBook-Pro-77417 · **DG 3.0** · **backend / model · CHANGES PUBLISHED VALUES**
 **Source:** David's ruling 2026-08-31 — *"rank everyone, always; confidence is a WIDTH, never an
 ABSENCE. Abstention as a product behaviour is over."* It is the ONLY one of his ranking rulings
 still unsatisfied, and it is the question he originally asked.
