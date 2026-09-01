@@ -72,7 +72,14 @@ against the real models. Both new tests verified failing (`KeyError: 'games_t_mi
 implementation stashed. On real data: `games_t_minus_2` populates 300/505 for 2025 — identical to
 `ppg_t_minus_2`; Garrett Wilson `games_t = 7`, `games_t_minus_2 = 17`.
 
-**⚠ It will NOT appear in the served runtime CSV on landing day.** See
-`docs/agent-ledger/2026-09-01.md` §1 — the refresh source hash does not cover assembly code, so the
-runner noops. Proof it is not theoretical: `outcome_returned` was added 2026-08-31 and the served
-runtime still lacks it. Expect appearance at the first upstream data move (kickoff 2026-09-10).
+**⚠ Its ARRIVAL IS DECOUPLED FROM ITS LAND.** `compute_source_hash`
+(`feature_refresh_runner.py:44-58`) covers loader frames, seasons window, package version,
+builder_config, TE rubric and identity inputs — **not the assembly code or
+`ENGINE_B_OUTPUT_COLUMNS`** — so this change does not trigger its own rebuild. It rides the next
+DATA-triggered refresh, which in season is the next morning. Measured on the precedent:
+`outcome_returned` entered the tuple 08-31 (seed 16:56:44) and reached the served runtime at
+**09-01 09:00:43, ~16 hours later**. So expect `games_t_minus_*` in the served runtime at the first
+09:00 run after landing, and note it will appear on a morning with no commit to explain it.
+Changes no served value either way (carried, not consumed). See `docs/agent-ledger/2026-09-01.md` §1
+— **an earlier version of this note said "kickoff 09-10" and was wrong**, drawn from a runtime
+reading that a producer run had already overtaken.
