@@ -1,6 +1,6 @@
 # DG-127 — `games` has no lag while `ppg` has two, so the gate judges durability on one season
 
-**Layer:** 3 · **State:** todo · **Lane:** — · **DG 3.0** · **backend / model · ENABLER FOR DG-128**
+**Layer:** 3 · **State:** done · **Lane:** Davids-MacBook-Pro-26544 · **DG 3.0** · **backend / model · ENABLER FOR DG-128**
 **Source:** 2026-09-01, Bob lane, verified on the served pickle `runs/20260831T204458Z/wr_v2.pkl`.
 
 **Problem:** the 39-column Engine B feature table lags `ppg` TWICE (`ppg_t_minus_1`,
@@ -30,3 +30,49 @@ reaches 2026. Backfilling it is a plausible, expensive week that moves coverage 
 **Done:** `games_t_minus_1`/`_minus_2` are populated in the feature table with the same
 availability-flag convention the ppg lags use, and a test pins that a player with a full prior
 season is distinguishable from a true rookie at the same `games_t`.
+
+
+---
+
+## LANDED 2026-09-01 — what was actually done, and two corrections to this ticket
+
+**Design: CARRIED, NOT CONSUMED.** The four columns are registered in `ENGINE_B_OUTPUT_COLUMNS`
+(`scripts/assemble_engine_b_dataset.py`) and built at `feature_assembly.py` step 7. They are
+deliberately NOT added to `ENGINE_B_ALLOWED_FEATURES`, `ENGINE_B_BASE_FEATURES`, any per-position
+set, `availability.FEATURES`, or `_BOUNDED_UNIT_COLUMNS`. Reasons, each measured:
+- `FEATURES_UNIFIED` (`scripts/train_engine_b.py:148`) is DERIVED from `ENGINE_B_ALLOWED_FEATURES`,
+  so adding them there would have put them into a trained model matrix.
+- Adding them to `ENGINE_B_BASE_FEATURES` moves `feature_completeness` for 229 of 505 scored
+  players, changes the displayed value for 227, and renders the raw string "games t minus 1" into
+  David's caveat copy (`frontend/src/lib/copy.ts` has no `INPUT_NAMES` entry for the lags).
+- 15 columns already sit in the output table without being allowed model features
+  (`outcome_returned`, `total_points_t`, `route_participation`, …). This follows that precedent, and
+  the precedent the NGS work set at `engine_b_contract.py:254-261`.
+
+**The step-7 renames were converted from POSITIONAL to BY-NAME.** `df_t1.columns = [...]` relabels by
+order; adding a fifth column to `trend_base` without matching the list writes a game count into
+`ppg_t_minus_1` and a PPG into `snap_share_t_minus_1` — both REQUIRED features for all four
+positions, so every published value moves while the name-only guards at
+`scripts/assemble_engine_b_dataset.py:269-275` still pass. `.rename` cannot express that mistake.
+This removed the failure class rather than avoiding it.
+
+**CORRECTION 1 — the table is 40 columns, not 39** as stated above. `(3384, 40)`. 44 after this
+ticket.
+
+**CORRECTION 2 — the columns are LEFT-CENSORED at `MIN_GAMES_THRESHOLD` (4).** Step 2
+(`feature_assembly.py:178`) drops sub-4-game player-seasons BEFORE the step-7 join, so a 1-3 game
+prior season is indistinguishable from a true rookie. Verified on real data: min observed
+`games_t_minus_2` = 5.0. This ticket's Done criterion (full prior season vs true rookie) IS met;
+short-prior-season vs rookie is NOT, and cannot be without moving `MIN_GAMES_THRESHOLD`, which
+would change every feature value. Pinned by a test so DG-128 cannot assume otherwise.
+
+**Evidence.** Full suite `6606 passed, 32 skipped` in the DG-127 worktree; 0 QB-1/frozen-pickle
+skips and `v2_manifest.json` resolving the served `20260831T204458Z` bundles, so the gate ran
+against the real models. Both new tests verified failing (`KeyError: 'games_t_minus_1'`) with the
+implementation stashed. On real data: `games_t_minus_2` populates 300/505 for 2025 — identical to
+`ppg_t_minus_2`; Garrett Wilson `games_t = 7`, `games_t_minus_2 = 17`.
+
+**⚠ It will NOT appear in the served runtime CSV on landing day.** See
+`docs/agent-ledger/2026-09-01.md` §1 — the refresh source hash does not cover assembly code, so the
+runner noops. Proof it is not theoretical: `outcome_returned` was added 2026-08-31 and the served
+runtime still lacks it. Expect appearance at the first upstream data move (kickoff 2026-09-10).

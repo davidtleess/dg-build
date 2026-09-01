@@ -44,3 +44,31 @@ measured one.
 **Done:** every Sleeper-active NFL-rostered QB/RB/WR/TE resolves to a finite score AND a finite
 band, asserted by a serving-time test; no `None` reaches `team_value_matrix`; band width is
 demonstrably monotone in evidence.
+
+
+---
+
+## ⚠ ENABLER LANDED 2026-09-01 (DG-127) — read these three before designing the taper
+
+1. **`games_t_minus_1` / `_minus_2` now exist, and they are LEFT-CENSORED AT 4 GAMES.**
+   `feature_assembly.py:178` drops sub-`MIN_GAMES_THRESHOLD` player-seasons before the lag join, so
+   a 1-3 game prior season is written NaN/`_available = False` — byte-identical to a true rookie.
+   Min observed `games_t_minus_2` on real data is 5.0. **A taper keyed on absence will shrink an
+   injured veteran toward the rookie prior**, which is the exact population this ticket exists to
+   rescue. `n` for the shrinkage weight must not be read off availability flags alone.
+
+2. **The imputer guard is set OPPOSITE in training and evaluation, and this ticket is where it
+   detonates.** `scripts/train_engine_b.py` fits `SimpleImputer` at :207, :309 and :387 WITHOUT
+   `keep_empty_features`; `src/dynasty_genius/eval/backtest_harness.py:489` fits it WITH. The moment
+   the taper adds these lags to a per-position feature set, an all-NaN slice (a thin
+   position-season, an early fold) silently narrows the matrix while the bundle keeps advertising
+   the full feature list. The backtest and the trained model then disagree about the input set by
+   construction. Fix the flag before consuming the columns.
+
+3. **Adding them to `ENGINE_B_BASE_FEATURES` changes David's screen.** Measured: `feature_completeness`
+   moves for 229 of 505 scored players, the displayed value changes for 227, and the caveat sentence
+   renders the raw string "games t minus 1" because `frontend/src/lib/copy.ts` `INPUT_NAMES` has no
+   entry for the lags. Two existing tests break closed. Budget the copy-dictionary entry and the
+   contract-test updates as part of this ticket, not as a surprise.
+
+Detail and commands: `docs/agent-ledger/2026-09-01.md`.
