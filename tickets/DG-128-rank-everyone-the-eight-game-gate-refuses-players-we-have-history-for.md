@@ -109,9 +109,9 @@ the rows the blend produces — `app/services/roster_auditor.py:151-152` admits 
 moment (a) lands.
 
 **Engine A input for a veteran is his DRAFT-year age, never his current age.** `score_prospect`
-was trained on prospects aged ~20–24 (`feature_means.age = 22.13`, coefficient −0.81/yr); feeding a
-27-year-old's current age extrapolates the rookie model to an input it never saw (measured on one
-fixture: 48.6 vs 81.5). Draft capital comes from nflverse draft picks keyed on gsis; undrafted
+was trained on prospects aged ~20–24 (WR `feature_means.age = 22.13`, WR age coefficient −0.81/yr);
+feeding a 27-year-old's current age extrapolates the rookie model to an input it never saw (one WR
+fixture at games_t=4: the blend served 63.8 with current age 27 and 81.5 with draft age 22). Draft capital comes from nflverse draft picks keyed on gsis; undrafted
 stays undrafted (no Engine A prior, no blend — those players are the ticket's second half, not
 this one). Never impute a pick.
 
