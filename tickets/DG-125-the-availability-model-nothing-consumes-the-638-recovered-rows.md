@@ -1,6 +1,6 @@
 # DG-125 — The availability model: nothing consumes the 638 recovered rows
 
-**Layer:** 2 · **State:** todo · **Lane:** Greg · **DG 3.0** · **backend / model**
+**Layer:** 2 · **State:** todo · **Lane:** — · **DG 3.0** · **backend / model**
 **Source:** the 2026-08-31 attrition work (`58d3b20c`). That commit un-deleted 638 attrition
 player-seasons and labelled them `outcome_returned`, and its own HONEST LIMIT section says the
 job is half done: **the age coefficients did not move** (QB −0.0841 → −0.0850, RB −0.2162 →
