@@ -33,3 +33,5 @@ change once the cutoff is real — say so in the closeout so nobody reads it as 
 
 **Verify:** run the driver read-only against the runtime CSV into a scratch DB; provenance shows
 `training_cutoff: 2023`, `derived: true`; row count unchanged at 12,226.
+
+**Addendum 2026-09-02 06:15 (rehearsal reader, verified line refs):** the null is hashed into `provenance_hash` (`driver.py:182-185, :507`) and is stable day-over-day, so it does NOT perturb `vintage_changed` today — but the fix (reading `feature_season`, value 2023 on the current table) changes the hashed subset and will produce exactly ONE spurious `vintage_changed: true` on its first capture. Say so in the landing note so nobody reads that morning as a model change. Confirmed present in the real record `app/data/ops/dg131-capture-20260901T193159Z/report.json` (`engine_b_derived_training_cutoff: {status: derived, value: null}`, `feature_csv.max_training_season: null`).
