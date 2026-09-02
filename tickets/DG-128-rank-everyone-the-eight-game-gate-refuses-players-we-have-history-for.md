@@ -289,3 +289,118 @@ against a ranking. Nothing in this lane has computed it.
 **Housekeeping:** `frontend/openapi.json` regenerated both times via `npm --prefix frontend run
 openapi-gen`, never edited by hand. Branch head `f2341aad`, 11 commits over `origin/main`
 `3bc9ecd2`.
+
+## Build log 2026-09-02 — rebased onto DG-133, the measurement re-run through the real selector, and what its audit corrected
+
+**Rebase.** `ticket/DG-128` rebased onto `origin/main` `f8995d3d` (DG-133, `davidleess-0b`) —
+head `fde9a5ca`, 12 commits, no conflicts. Worktree suite: 6759 passed / 33 skipped / 1 failed;
+the one failure is the intentional RED test below. No reader file carries the spelling DG-133's
+contract test scans for.
+
+**Measurement, run twice, identical.** The harness (scratchpad `dg128-measure/harness.py`,
+`harness2.py`) calls the producer's own `_active_pvos_from_engine_b` in two trees against the same
+feature table, availability fit and σ pins — read-only, and `find -newer` confirms nothing under
+either tree's `app/data` was written. Run 1 (09-01 late): baseline `3bc9ecd2` vs `e1eda9b5`, the
+feature slice pre-filtered to `feature_season == 2025` (505 rows). Run 2 (09-02, after the rebase):
+baseline `f8995d3d` vs `fde9a5ca`, the FULL 3,384-row runtime table, each tree's own DG-133
+selector picking. Both runs: 505 selected → 503 PVOs — the two the identity join orphans
+(`sleeper_id_missing`) are Nick Kallerup TE and Ke'Shawn Williams WR, 2025 UDFAs, orphaned in both
+trees, nothing to do with this ticket. Run 2 vs run 1 per player: 0 value, 0 percentile, 0 band
+differences in either tree.
+
+- Coverage: **388 → 463** of 503 with a number. 75 filled, every one `blend` basis; `games_t`
+  4:22 · 5:18 · 6:22 · 7:13; WR 25 · RB 22 · QB 19 · TE 9; draft round 1:11 · 2:8 · 3:12 ·
+  4:12 · 5:10 · 6:17 · 7:5; w_B 0.36–0.58, median 0.50. 40 stay blank: 39 with no draft-capital
+  row (undrafted) + Bo Melton (13 games, crosswalk says CB).
+- Already-ranked VALUES: **0 of 388 moved.**
+- Within-position percentile (`xvar_percentile_position` = `dvs_pct`, the player card): 384 of
+  388 moved; 325 up, 59 down; max +19.4 (Brissett 33.3 → 52.7), min −2.6. By position: QB n=36
+  mean **+12.5**, RB +1.2, TE +2.0, WR +1.3. Population QB 37→56 · RB 99→121 · WR 163→188 ·
+  TE 89→98.
+- Overall percentile (`xvar_percentile_overall`, the 468 denominator in David's ruling 4): the
+  harness never reached it (it stops before `build_universe_pvo_batch`). Recomputed with the served
+  rule (`universe_pvo_batch.py:120-133`) by the audit and reproduced by me: population **468 →
+  543** (not 583 — the fill is 75, not 115); 464 of 468 move, 461 up / 3 down (Taylor −0.4,
+  St. Brown −0.2, Achane −0.1), max +4.1, mean +2.8; 77 of the 80 Engine-A rookies move, mean +2.9.
+- Bands: 463 of 463 Engine-B numbers carry one. Measured players get ONE width per position —
+  WR 40.0 / QB 44.8 / RB 45.6 / TE 47.2 (± one RMSE in DVS points; no per-player information).
+  Blends: median width 65.2, min 33.4; five span the whole scale, 0–100 (Trubisky, Zach Wilson,
+  Trey Lance, Andy Dalton, Cam Akers). 220 of 463 touch a clamp edge (157 measured + 63 blend) —
+  truncated, not narrower.
+
+**The audit** (ultracode workflow `wf_33759416-71e` — 11 findings, each adversarially judged;
+6 survived, 5 refuted). Verified figures, wrong paragraph, again: my readout draft was wrong six
+times and was amended before David read it. What it corrected, on the record:
+
+1. The overall percentile above was unmeasured in the draft.
+2. **The 80 Engine-A rookies carry NO band.** `resources/prospect_cards.json` (82 cards, 80 with
+   a sleeper_id, static since `e1139c7d` 2026-06-07) is read verbatim by `_load_prospect_pvos`
+   (`build_universe_pvo_batch.py:54`); 0 cards carry `dvs_band_low`; `universe_pvo_batch.py`
+   copies the null; the frontend's `likelyRange()` returns null on null. On David's roster the
+   range would render under 22 veterans and under none of his 4 rookies (Mendoza, Cooper Jr.,
+   Bell, Black) — his ruling 3 unmet on his own screen. Fix chosen: regenerate the cards through
+   `scripts/refresh_prospect_cards.py`, the assembler's own path (`assemble_pvo(..., is_prospect=
+   True)`, DVS-invariance tolerance 0.01 with exit 1 on drift, identity/age/grade/CFBD fields
+   preserved) — one band producer, no load-time shim. RED first:
+   `tests/contract/test_dg128_prospect_cards_carry_the_band.py` fails naming all 80 scored cards
+   (untracked until it is GREEN). **The regeneration has NOT run: the auto-mode permission
+   classifier refused the command. It writes three tracked files inside the worktree
+   (`resources/prospect_cards.json`, `resources/prospect_cards.js`, `docs/validation/phase15-2026-
+   rookie-rank-refresh.md`), nothing under `app/data`, nothing on trunk. David's word asked for;
+   the peer correctly declined to run it in my stead.**
+3. "Range only" is a code split, not a toggle. `load_draft_capital` is called unconditionally at
+   `scripts/build_universe_pvo_batch.py:266` and raises `draft_capital_snapshot_missing`; the band
+   (`d7e97e03`) and the draft-capital injection (`fbbefa36`) are one commit series. Range without
+   the fill = land without `fbbefa36` and re-cut `70fb424b` + `f2341aad` + their tests. Not cut,
+   not tested.
+4. "~380 have no 2025 row, under the 4-game floor" was FALSE — subtraction on an overwritten 08-31
+   census, with Dell's case generalised to the group. This morning's artifact: 904 addressable /
+   453 unranked = 107 ENGINE_B-gated + 346 PRE_MODEL. Of the 346, measured against 2025 offensive
+   snaps in `nflverse_usage.db` (± counts, snap-games ≠ `games_t`): **~49** played 1–3 games (the
+   floor's actual cases), **~270** took no 2025 offensive snap at all (104 are 2026 rookies),
+   **~27** played 4+ but have no row (identity / stat-line). Lowering the floor reaches ~49; the
+   ~300 with no NFL production need a prior — a different fix from this ticket.
+5. **Dell is a no-2025-row case, not a floor case** (Greg, `davidleess-0b`; verified read-only by
+   me): `player_snap_count` has Dell (DellNa00 / 00-0038977) 2023 11 games, 2024 14 games, 2025
+   NONE; the runtime table holds only his 2023 row (`games_t` 10); 2024 rows survive the keep mask
+   at `feature_assembly.py:127` only when window-complete and the table carries no 2024
+   `feature_season` rows at all. The audit's own amended line ("played 1–3 games") was wrong on
+   him. No threshold change ranks him; a carried-forward row would. Sleeper-Inactive today, so
+   outside the 904.
+6. The fill closes **72** addressable blanks, not 75: Trey Benson, Robbie Ouzts and Cedrick
+   Wilson are Sleeper-Inactive.
+7. **The percentile move is a floor of rank-everyone, not a cost of this prior.** 69 of the 75
+   have their measured half BELOW the prior, so any form that corrects veteran staleness lands
+   them lower and moves incumbents MORE. Arithmetic on the same formula, no fit and no comparison:
+   the 75 at their measured half → QB +15.8 (served +12.2) · RB +6.0 (+1.2) · WR +4.3 (+1.3) ·
+   TE +4.1 (+2.0); all 75 at the bottom → +17.3 / +9.1 / +6.6 / +4.6. Holding the fill defers
+   the move; it does not shrink it.
+8. Band claims scoped. σ_B is one RMSE of the pre-hurdle `E[points | plays]` on the promotion
+   holdout seasons [2022, 2023] (`train_engine_b.py:158`), ≥4-game rows, n = `test_rows`
+   95/185/303/161 — reproduced by me, RMSE to 4 dp. Coverage at ±1 RMSE on that holdout:
+   **QB 73.7 / RB 71.9 / WR 68.3 / TE 70.2 %** (clamped to the DVS scale 74.7 / 77.3 / 71.9 /
+   76.4). "Likely range" means about two in three. It is not an error of the served P×E number,
+   and no served range has been graded against a real outcome. "min 20" is the clamp, not a
+   tight band.
+9. Denominators bridged: 505 selected → 503 PVOs (2 orphans) → 388 / 463 Engine B; + 80 Engine A
+   = 468 served / 543 after. The 583 above assumed all 115 gated rows fill. 498 / 954 was the
+   08-31 census, since overwritten — today 453 / 904.
+10. "Aged prior" was never registered as a candidate; struck from my draft.
+
+**Context recorded, NOT acted on** (from Greg, `davidleess-0b`, 09-02): Codex (Lou) reports a
+shrinkage `w = games_t / (games_t + 6)` toward the player's own games-weighted career PPG —
+career-state test −0.058 RMSE, CI [−0.102, −0.014]; the 4–7-game group −0.164 [−0.319, −0.016];
+QB/RB gain, ~0 for WR/TE. Same functional form as this ticket's taper with a DIFFERENT ANCHOR
+(own history instead of draft capital). Under David's ruling that is a candidate-prior comparison
+— a hypothesis slot — so nothing in this lane computes it, compares it or ranks with it. From the
+same message, a benchmark: Garrett Wilson with the gate bypassed measures 68.5 → WR33 of 199 /
+overall 86; the blend serves 72.9 / 88.2, pulled up by his 79.1 draft prior.
+
+**Open with David** (asked 09-02 morning; Greg is counselling him directly, not through me):
+(a) permission to run the prospect-card regeneration; (b) the fill — ship blend + range as built,
+range-only via the code split, or hold both; (c) push of dg-build.
+
+**Still to do in this lane:** regeneration on his word → GREEN the RED test → field-by-field diff
+of the 82 cards (only `dvs_band_low/high` and `assembled_at` may change; exit 0 and "DVS
+invariance: OK" required) → suite → commit · ultracode review workflow · land · closeout audited
+by independent agents before he reads it.
