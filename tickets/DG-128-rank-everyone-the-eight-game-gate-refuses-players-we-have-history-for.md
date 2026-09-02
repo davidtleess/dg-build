@@ -595,8 +595,14 @@ to claims made ABOVE in this ticket, so the ticket does not carry them forward:
 - "ONLY surviving record" for the 29.7 — FALSE, see the strikethrough above.
 - "the full suite passes at every commit" — NOT ESTABLISHED at the time it was written: after
   the 06:33 fold every hash was rewritten and only the tip had been run in full. A detached
-  per-commit run (full pytest + vitest at each of the 11) was started 07:09; its result is
-  recorded in the closeout, not assumed here.
+  per-commit run (full pytest + vitest at each of the 11) was started 07:09 and finished 07:21:
+  ALL ELEVEN GREEN — Python 6696 → 6754 passed (32 skipped throughout), frontend 623 → 629,
+  monotonic, no failure at any commit (log: scratchpad `percommit/log.txt`). The claim is now true.
+- Second-pass audit (07:22): the batch also copies the 80 rookie cards' bands into their
+  ENGINE_A rows, so the served runtime will carry 468 non-null bands (388 vets + 80 rookies;
+  34 rookie bands touch an edge) — `grep -c dvs_band_low` would count 12,226 (nulls are
+  written), the proof is `grep -c '"dvs_band_low": [0-9]'`. Four refresh windows failed on
+  the DG-133 bug (09:00 on 08-31 and 09-01; 11:30 and 14:00 on 09-01), not two.
 - "wider than yesterday's" — both card regens were this morning (05:59 and 06:30); trunk's cards
   carry no band. The low side widened 6.1 on 21 of 22 (Royer 6.0); the high side only where not
   already clamped at 100 (four were).

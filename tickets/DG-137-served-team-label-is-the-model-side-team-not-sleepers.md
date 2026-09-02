@@ -1,6 +1,6 @@
 # DG-137 — The served team label is the model-side (2025 feature) team, not Sleeper's current team: 189 valued players disagree
 
-**Layer:** 2 · **State:** open · **Lane:** — · **DG 3.0** · **product truth / identity · small**
+**Layer:** 2 · **State:** open · **Lane:** Davids-MacBook-Pro-32886 · **DG 3.0** · **product truth / identity · small**
 **Source:** 09:00-chain rehearsal, verify-B agent (2026-09-02 06:3x, measured on the rehearsal artifact AND the live `universe_pvo_runtime.json`); sourcing lines verified by Tower; ticketed 2026-09-02 06:40 by Tower.
 
 **Problem:** for modeled rows the universe artifact sets
