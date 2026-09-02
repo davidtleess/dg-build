@@ -36,7 +36,7 @@ withheld score names its real cause in prose; the dead `dvs_pct` field is popula
 
 ---
 
-## Scope — 2026-09-02 15:05–15:50, Tower (two read-only readers over trunk `862a1afb` + live API pid 95078; every decisive line re-verified by Tower)
+## Scope — 2026-09-02 15:05–15:33, Tower (two read-only readers over trunk `862a1afb` + live API pid 95078; every decisive line re-verified by Tower)
 
 ### The three blanks on David's roster today, and the mechanical reason for each
 

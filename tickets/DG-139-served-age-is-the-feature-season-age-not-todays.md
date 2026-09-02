@@ -1,7 +1,7 @@
 # DG-139 — The served age is the model's feature-season age, not today's: 324 players read a year young, 255 of them scored, Garrett Wilson among them
 
 **Layer:** 2 · **State:** open · **Lane:** — · **DG 3.0** · **product truth / identity · small**
-**Source:** DG-130 scope reader (2026-09-02 15:20, side finding on Wilson's row); re-measured by Tower on the live artifact (`universe_pvo_runtime.json` 14:50:57) vs the 13:00Z Sleeper snapshot; ticketed 2026-09-02 15:45 by Tower. DG-137's bug in a second coat.
+**Source:** DG-130 scope reader (2026-09-02 15:20, side finding on Wilson's row); re-measured by Tower on the live artifact (`universe_pvo_runtime.json` 14:50:57) vs the 13:00Z Sleeper snapshot; ticketed 2026-09-02 15:32 by Tower. DG-137's bug in a second coat.
 
 **Problem:** `src/dynasty_genius/universe_pvo_batch.py:198` sets
 `"age": (pvo or {}).get("age") or player.get("age")` — the PVO's age is the FEATURE-ROW age
