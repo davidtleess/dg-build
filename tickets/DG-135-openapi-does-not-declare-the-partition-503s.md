@@ -54,3 +54,37 @@ was FALSE, recorded here so the closeout reads true:**
 - dg-land `--dry-run`: rebase clean on `862a1afb`, pytest 6770 passed / 33 skipped, frontend gate
   629, merge builds, push accepted. Commit `5cc99a86` (amended once to correct a "seven routes
   lie" claim in its own message to the measured three).
+
+**Adversarial review 2026-09-02 15:05–15:25 (3 lenses, every serious finding re-checked by a skeptic; 10 agents, 0 died):**
+contract-truth FIX_FIRST → regen-integrity LAND → frontend-consumer LAND. Independently verified by the
+lenses: openapi diff +84/−0, 6 added key paths, 0 removed/changed; committed openapi.json byte-identical to a
+fresh `app.openapi()` dump; generated client byte-identical to a fresh openapi-ts 0.98.1 run, 0 removed exports;
+no custom exception handler; all three raise sites validate against the declared model. Three findings survived
+and were fixed before landing (commit re-amended `5cc99a86` → `bda8c3a9`): (1) the test's `== {"200","503"}`
+would have failed the day the roster 422 is correctly declared → subset assertion; (2) the roster route's second
+503 site (assembler, "all roster rows failed to map") had no route-level test → added, six tests now; (3) the
+docstring's "never prose" was false on that site → reworded. One finding was overtaken (DG-138 "does not
+exist" — it was filed 3 minutes after the reviewer looked). Frontend lens: the typed 503 is INERT on screen —
+`RosterAudit.tsx:38-43` decides by status code and never reads a non-OK body; `/api/engine-b/scores` has no
+frontend consumer; the roster 422 (`roster_config_error`) is the one branch the frontend DOES distinguish and it
+stays undeclared — noted on DG-138.
+
+**Acceptance — landed 2026-09-02 15:29 ET by Tower (`~/dg-build/bin/dg-land.sh DG-135` from `~/dg-wt/DG-135`):**
+```
+ app/api/routes/dependency_unavailable_models.py    | 44 +++++++++++
+ app/api/routes/engine_b.py                         |  7 +-
+ app/api/routes/roster.py                           | 10 ++-
+ frontend/openapi.json                              | 84 +++++++++++++++++++
+ frontend/src/lib/api/index.ts                      |  2 +-
+ frontend/src/lib/api/types.gen.ts                  | 64 +++++++++++++++
+ frontend/src/lib/api/zod.gen.ts                    | 34 ++++++++
+ .../contract/test_dg133_503_is_in_the_contract.py  | 93 ++++++++++++++++++++++
+ 8 files changed, 335 insertions(+), 3 deletions(-)
+To https://github.com/davidtleess/dynasty-genius.git
+   862a1afb..60f6940f  HEAD -> main
+✔ DG-135 landed on main and pushed. Worktree and branch removed.
+```
+Rebase target DG-137's `862a1afb`; inside dg-land pytest 6772 passed / 32 skipped, frontend gate 629/629, build
+107ms. **Not live until trunk pull + frontend bundle rebuild + API restart** — the generated client under
+`frontend/src/lib/api/` changed, so this one DOES need the rebuild ([[reference_trunk_frontend_bundle_is_a_manual_build]]).
+Nothing on screen changes; the contract and the drift test now tell the truth about the DG-133 outage.

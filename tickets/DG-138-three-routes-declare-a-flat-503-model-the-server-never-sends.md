@@ -45,6 +45,13 @@ simpler, and the four honest routes are already the majority. Either way, one la
 routes together, and DG-135's contract test pattern (real body validates against the declared
 model) added for each.
 
+**Also in this ticket — the roster 422:** `app/api/routes/roster.py:26-30` raises
+`HTTPException(422, detail={"error": "roster_config_error", ...})` (since `64fbef20`, 2026-04-30) and it
+has NEVER been declared (`git log -S roster_config_error -- frontend/openapi.json` is empty) — yet it is the
+one error branch the frontend actually distinguishes (`frontend/src/roster/RosterAudit.tsx:40`, since
+2026-06-19). Declare it the DG-135 way (envelope model, `Literal` token). DG-135's route test uses a subset
+assertion precisely so this declaration can land without failing it.
+
 **Anti-scope:** no change to what any 503 SAYS (error tokens, messages) — only the envelope; no
 change to the four `JSONResponse` routes; no touching DG-135's two routes; never hand-edit
 `frontend/openapi.json` ([[reference_openapi_regen_trap]]).
