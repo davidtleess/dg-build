@@ -257,3 +257,35 @@ origin with the API up since 08-31 08:18 — pull + restart are sequenced after 
 **Still to do in this lane:** measurement (baseline vs branch, same table, per-player diff — the
 size in front of David before anything lands) · ultracode review workflow · land · closeout
 audited by independent agents before he reads it.
+
+## Build log 2026-09-01 late — the σ pin fails closed; one proposed candidate registered
+
+**`f2341aad` — the band refuses runs the served models did not come from.** Answering the DG-132
+lane's question (were σ_B/σ_A computed against the bundles `v2_manifest.json` points at, not
+`backtest_result_*.json`?) verified: manifest → `20260831T204458Z` for all four positions =
+`ENGINE_B_SIGMA_RUN`; tracked `latest.json` `model_version` → `20260502T153931Z` =
+`ENGINE_A_SIGMA_RUN`; `dvs_band.py` reads no backtest file. But only the A pin was checked, and
+only at test time — the B pin was a sentence in a docstring. `assert_band_sigma_runs_match_served_models()`
+now reads the two pointers the scorers load and stops `_active_pvos_from_engine_b` before it
+scores a row: `dvs_band_sigma_run_stale:<pos>:<run>` · `dvs_band_sigma_run_stale:A:<run>` ·
+`dvs_band_sigma_pointer_missing`. A position the manifest leaves at `None` is skipped (no B score,
+no band). Seven tests, red first; backend 6683 passed / 32 skipped. Consequence for a future
+retrain: promoting a manifest without moving the pin AND the σ constants halts the 09:00 chain at
+`run_pvo_refresh` with a bare token — loud by design.
+
+**Correction 3 — the partition fix is DG-133, not lane a0.** `tickets/DG-133-the-inference-
+partition-is-selected-by-the-wrong-flag.md` exists on the board (filed by the DG-132 lane,
+`davidleess-0b`); the "lane davidleess-a0" attribution in the section above was wrong. DG-128 does
+not touch `build_universe_pvo_batch.py:190` or `roster_auditor.py:636`; it rebases onto DG-133
+before the measurement. Awaiting David's confirmation of the owner.
+
+**Registered as PROPOSED, not built, not compared:** *n counts the last three seasons' games*
+(the taper's n reads `games_t + games_t_minus_1 + games_t_minus_2` instead of this season only).
+It would stop an injured veteran with two full prior seasons from shrinking toward the draft-day
+picture. It is a different pre-committed form, so it is a hypothesis slot under David's ruling —
+listed here so the candidate exists on paper with a date before anyone is tempted to try it
+against a ranking. Nothing in this lane has computed it.
+
+**Housekeeping:** `frontend/openapi.json` regenerated both times via `npm --prefix frontend run
+openapi-gen`, never edited by hand. Branch head `f2341aad`, 11 commits over `origin/main`
+`3bc9ecd2`.
