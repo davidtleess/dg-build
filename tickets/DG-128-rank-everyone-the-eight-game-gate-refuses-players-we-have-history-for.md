@@ -1,6 +1,6 @@
 # DG-128 — Rank everyone: the 8-game gate refuses 115 players we already have history for
 
-**Layer:** 3 · **State:** todo · **Lane:** Davids-MacBook-Pro-77417 · **DG 3.0** · **backend / model · CHANGES PUBLISHED VALUES**
+**Layer:** 3 · **State:** done · **Lane:** Davids-MacBook-Pro-77417 · **DG 3.0** · **backend / model · CHANGES PUBLISHED VALUES**
 **Source:** David's ruling 2026-08-31 — *"rank everyone, always; confidence is a WIDTH, never an
 ABSENCE. Abstention as a product behaviour is over."* It is the ONLY one of his ranking rulings
 still unsatisfied, and it is the question he originally asked.
@@ -624,3 +624,29 @@ to claims made ABOVE in this ticket, so the ticket does not carry them forward:
   own ticket.
 - Player cards render "Likely range —" (a dash) for the 115 gated players; the roster row omits
   the line. Neither is a fault.
+
+## LANDED 2026-09-02 07:43 — range-only cut on `main` at `1dff211f`
+
+Acceptance output (dg-land.sh DG-128, run by David from his own prompt after reading the audited
+closeout — typing it was his yes on the 29.7 amendment):
+
+    → rebasing ticket/DG-128 onto origin/main — Current branch ticket/DG-128 is up to date.
+    → running tests — Python gate green; frontend gate green
+    34 files changed, 2367 insertions(+), 201 deletions(-)
+    To https://github.com/davidtleess/dynasty-genius.git   f8995d3d..1dff211f  HEAD -> main
+    ✔ DG-128 landed on main and pushed. Worktree and branch removed.
+
+Also pushed beforehand by David: `origin/ticket/DG-128` (d72f27dc). The held fill remains on
+`ticket/DG-128-fill-held` (fde9a5ca) — pushed? NO, still local-only in the removed worktree's
+refs — see below.
+
+Post-land, on David's "go" (07:44): `git pull --ff-only` → trunk `1dff211f`; `npm --prefix
+frontend run build` → `frontend/dist` 07:44, bundle `index-BZ1jEJNN.js` contains "Likely range";
+`launchctl kickstart -k` → API pid 4070 started 07:44:16, `/api/roster/audit` 200 with
+`dvs_band_low` present (null) on 27/27 roster rows. Bands arrive with the next
+`run_pvo_refresh` from trunk (09:00 chain; 11:30/14:00 slots rebuild unconditionally).
+Greg (davidleess-0b) told the head sha at 07:45; his DG-137 rebases onto `1dff211f`.
+
+⚠ `ticket/DG-128-fill-held` was a LOCAL branch in the product repo. dg-land removed the
+worktree, not the branch — verify with `git -C ~/dynasty-genius-product branch --list
+'ticket/DG-128*'` and push it on David's word before anything recreates a worktree over it.
