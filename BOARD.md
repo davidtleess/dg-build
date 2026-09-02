@@ -140,6 +140,7 @@
 | DG-134 | The forward capture's provenance records `training_cutoff: null` every morning — it reads a `season` column the runtime table lacks (`feature_season`); swallowed KeyError | **2** | open — DG-133 follow-up, filed 09-02 06:05; cosmetic today (12,226 rows unchanged), a hashed blank tomorrow; fix = assembler's column constant + fail-closed token | unclaimed |
 | DG-135 | `frontend/openapi.json` does not declare the 503 that `/api/engine-b/scores` and `/api/roster/audit` return since DG-133 | **3** | open — DG-133 follow-up, filed 09-02 06:05; regenerate only (`npm --prefix frontend run openapi-gen`), commit alone, diff must be the two 503s and nothing else | unclaimed |
 | DG-136 | A capture-stage `abort()` exits 0 — the chain reports green on a morning that captured nothing; fired twice on 08-31 unnoticed | **2** | open — filed 09-02 06:15 by Tower from the chain rehearsal; fix = outer status follows `capture_report.status` in `run_pvo_refresh._publish_runtime`, exit 1, runtime pair stays published | unclaimed |
+| DG-137 | Served team label is the 2025 feature-season team, not Sleeper's current team — 189 valued players disagree, in cutdown week | **2** | open — filed 09-02 06:40 by Tower from the chain rehearsal (verify-B); fix = flip the `or` at `universe_pvo_batch.py:173` + `roster_auditor.py:222`, contract test; value/band untouched | unclaimed |
 
 DG-001 through DG-011 came from the independent consultant brief of 2026-08-18, except DG-004,
 which Tower found while checking evidence for DG-002.
