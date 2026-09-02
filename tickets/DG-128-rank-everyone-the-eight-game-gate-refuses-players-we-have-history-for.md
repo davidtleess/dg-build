@@ -173,3 +173,87 @@ Known before running: the fix fills Garrett Wilson and Braelon Allen; it does no
 who has no 2025 feature row at all (`feature_assembly.py:177` floors at 4 games before the lag
 join) — a censoring question for the second half. Bo Melton is unscored because the crosswalk
 carries him as CB, not because of the gate.
+
+---
+
+## Build log 2026-09-01 evening — what is on `ticket/DG-128`, and two corrections to the sections above
+
+Ten commits on top of `origin/main` (`3bc9ecd2`, DG-132). Nothing landed; nothing served has
+changed. Each step was RED→GREEN with a named test. Backend at the branch head: 6676 passed /
+32 skipped. Frontend: 629 passed, tsc clean, biome clean on touched files.
+
+    9538b92d  train: every SimpleImputer keeps an all-NaN fit column (enabler note 2). Numerically
+              identical predictions; takes effect at the next HAND-RUN retrain only — no scheduler
+              runs train_engine_b.py. Latent today (all four 08-31 bundles are width-aligned).
+    e6e73a03  the blend's B component pays the availability hurdle (it did not; the pure-B branch
+              had since ee57d802). A alone is not discounted — its training outcomes hold the busts.
+    e2130f11  Engine A reads `age_at_nfl_entry` for a veteran, never `age`; no fallback, no prior
+              without it (the DG-021 caveat says so).
+    2630164d  resources/draft_capital/: one-shot, content-hashed nflverse draft_picks snapshot,
+              2000-2026 QB/RB/WR/TE — 2165 rows, 2055 indexed by gsis, 110 without a gsis, 0
+              conflicts. Read offline; nothing imputed.
+    fbbefa36  the batch setdefaults pick / round / age_at_nfl_entry per veteran from the snapshot,
+              keyed on the CROSSWALK's gsis (the served PVO's `identity_ids.gsis_id` is None — do
+              not try to join off the artifact). Coverage counted in the batch report.
+    d7e97e03  dvs_band_low / dvs_band_high on the PVO, the pre-committed form verbatim; sigma
+              provenance tested from the tracked reports, not asserted.
+    1dd9a20e  band on every surface (universe row → roster index → RosterAuditPlayer /
+              PlayerModelLane → OpenAPI + generated client); the roster index admits BLEND_AB.
+    70fb424b  every PVO's source_versions pins dvs_band_sigma_run_b / _a.
+    c8db09d5  the blend caveat is the token `engine_ab_blend_low_sample:games=N`; the sentence
+              lives in copy.ts ("Only N pro games on record, so his number leans partly on his
+              draft pedigree — the range around it is wider for that").
+    4b78fa66  frontend: "range L to H" under the roster score; a "Likely range" fact on the player
+              page; "Scored by" names the basis; a prior-touched score renders muted, not bold.
+
+**Correction 1 — LANE and BASIS are two things, and the pre-committed section conflated them.**
+It says the basis marker "is `dvs_engine` (already served as `engine_path`)". They differ:
+`engine_path` is the LANE a row lives in (ENGINE_A = current-draft rookie row, ENGINE_B =
+active-player row, BLEND_AB = both contributed) and is what the roster auditor keys eligibility
+on; `dvs_engine` (A / B / blend) is the BASIS — what produced the number — and the band rides on
+it. I tried reordering `_route_from_pvo` to read `dvs_engine` first; the phase-17 test
+`test_active_engine_b_row_with_engine_a_dead_window_provenance_routes_engine_b` failed and it is
+right: an active row with a dead-window A provenance must still route ENGINE_B. Reverted;
+`_route_from_pvo` is byte-identical to main. What changed instead: the auditor treats
+`{ENGINE_B, BLEND_AB}` as the veteran lanes, and `PlayerModelLane` gained `dvs_engine` (so "no new
+field" holds for the PVO, not for the player-detail response — disclosed in the OpenAPI regen).
+Pinned by `tests/contract/test_dg128_band_reaches_the_surfaces.py::
+test_engine_path_is_the_lane_and_dvs_engine_is_the_basis`.
+
+Also true and worth knowing: the feature table floors at `games_t >= 4`, so n = 0 never occurs
+for a veteran and a pure-A veteran (`dvs_engine A` on an ENGINE_B lane) is unreachable in current
+data. The auditor still handles it (veteran-ness keyed on the lane; basis defaults to the lane's
+engine only when a score exists). The tracked seed `app/data/valuation/universe_pvo_latest.json`
+(2026-06-27) shows ENGINE_B rows with `dvs_engine "A"` — an older assembler's output, not what is
+served; do not read it as live. Served runtime artifact 09-01 06:02: 9404 PRE_MODEL · 2238
+INACTIVE · 388 ENGINE_B scored · 115 ENGINE_B with a null score · 70 + 10 ENGINE_A prospects · 1
+UNRESOLVED_IDENTITY.
+
+**Correction 2 — the taper as pre-committed does NOT read DG-127's lags.** n is `games_t`, this
+season only, exactly as Phase 15 stood. Enabler note 1 (an injured veteran shrinks toward the
+rookie prior) is therefore a property of the form David ruled on, not something this build
+avoids. Making n count prior seasons' games is a different form — a hypothesis slot, not this
+ticket. Consequence for the schedule: tomorrow's feature table changes nothing in DG-128's
+arithmetic, so the measurement can run against the table the chain already published today
+(features_runtime 09-01 09:00, 505 rows for 2025, 115 below the gate: games_t 4 → 34, 5 → 29,
+6 → 31, 7 → 21). David's "wait for tomorrow morning" forbade hand-regenerating; it did not
+require the lags.
+
+**The size of what this ticket closes, stated before the measurement so it cannot be softened
+after:** of the 115 gated rows, the fix fills those with a draft row AND a draft-season age —
+about 76; ~39 are undrafted and stay blank (no prior exists for them yet). Of the ~498 addressable
+blanks, the other ~380 have no 2025 row at all (fewer than 4 games, or none — Tank Dell is one),
+which the 4-game floor removes before any model sees them. **This ticket closes roughly 76 of
+498 blanks.** The rest are the second half: a UDFA/contract prior, and whether the floor moves.
+
+**De-emphasis is keyed on the basis, so the 80 draft-class rookies render muted too** (their
+number is 100% prior). That is a product choice David has not been asked yet.
+
+**Two blockers outside this lane before any of it reaches a screen:** the 09:00 PVO step fails on
+`engine_b_prediction_conflict` (09-01 09:00:44 and every refresh since; the board names lane
+davidleess-a0 for the partition fix; no fix verified by me), and the trunk is two commits behind
+origin with the API up since 08-31 08:18 — pull + restart are sequenced after that fix.
+
+**Still to do in this lane:** measurement (baseline vs branch, same table, per-player diff — the
+size in front of David before anything lands) · ultracode review workflow · land · closeout
+audited by independent agents before he reads it.
