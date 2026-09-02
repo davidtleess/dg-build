@@ -1,6 +1,6 @@
 # DG-134 — The forward capture's provenance records `training_cutoff: null` every morning because it reads a `season` column the runtime table does not have
 
-**Layer:** 2 · **State:** open · **Lane:** unclaimed · **DG 3.0** · **backend / capture provenance · cosmetic today, a lie tomorrow**
+**Layer:** 2 · **State:** open · **Lane:** — · **DG 3.0** · **backend / capture provenance · cosmetic today, a lie tomorrow**
 **Source:** DG-133 follow-up (filed 2026-09-01 in its LANDED section; ticketed 2026-09-02 06:05 by Tower).
 
 **Problem:** `src/dynasty_genius/capture/model_forward_capture_driver.py:116-129`

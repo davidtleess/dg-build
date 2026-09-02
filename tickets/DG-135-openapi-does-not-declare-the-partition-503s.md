@@ -1,6 +1,6 @@
 # DG-135 — `frontend/openapi.json` does not declare the 503 that `/api/engine-b/scores` and `/api/roster/audit` now return
 
-**Layer:** 3 · **State:** open · **Lane:** unclaimed · **DG 3.0** · **API contract / frontend · small, mechanical**
+**Layer:** 3 · **State:** open · **Lane:** — · **DG 3.0** · **API contract / frontend · small, mechanical**
 **Source:** DG-133 follow-up (its LANDED section, 2026-09-01); ticketed 2026-09-02 06:05 by Tower.
 
 **Problem:** DG-133 (`f8995d3d`) made two routes answer

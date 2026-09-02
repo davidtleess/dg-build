@@ -1,6 +1,6 @@
 # DG-136 — A capture-stage `abort()` exits 0: the chain reports green on a morning that captured nothing
 
-**Layer:** 2 · **State:** open · **Lane:** unclaimed · **DG 3.0** · **ops / forward capture · small**
+**Layer:** 2 · **State:** open · **Lane:** — · **DG 3.0** · **ops / forward capture · small**
 **Source:** 09:00-chain rehearsal readers (2026-09-02 ~06:00, trunk `f8995d3d`); verified against the live log by Tower; ticketed 2026-09-02 06:15 by Tower.
 
 **Problem:** every refusal inside `capture_model_pvo_snapshot`
