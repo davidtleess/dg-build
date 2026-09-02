@@ -523,8 +523,11 @@ event:
   leave-one-class-out over the 2018–21 classes, target best3of4_ppg) / P90 9.1 × 100. The
   head's `te_v3_metadata.json` is unrecoverable; `scripts/promote_head_a_te_v3.py:136`
   carries the RMSE it recorded as a constant, and the provenance test reads it from there.
-  This is the ONLY surviving record; if that is not good enough, the alternative is to
-  re-run the bakeoff, which is a slot.
+  ~~This is the ONLY surviving record~~ — CORRECTED 09-02 07:15 by the closeout audit: the
+  bakeoff artifact the constant was copied from survives, gitignored, in trunk's
+  `app/data/backtest/phase19/head_a_bakeoff_20260524T134221Z_826e5156.json`
+  (`positions/TE/ridge/candidate/oof_rmse = 2.7051`, plus `oof_logs/oof_TE_…826e5156.csv`).
+  Only the metadata JSON is gone. A re-run of the bakeoff is still a slot and still not needed.
 - `dvs_band(..., prior_head=)` selects it for a v3-scored prior and for a blend's unresolved
   share; a v3 head for a position with no pinned error is refused, never defaulted to v2's.
 - The served effect: the 22 v3 TE cards widen by 6.1 a side (Sadiq 60.7→54.6 low; four
@@ -584,3 +587,34 @@ retrain or re-promotion that moves a manifest stops the refresh with a named err
 `dvs_band.py`'s pins move with it — the re-pin is one constant per head, and the provenance
 tests will refuse a pin that does not match the artifact. DG-128 reaches his screen only
 after a second pull + restart (trunk is `f8995d3d` in the running API).
+
+## Closeout audit 2026-09-02 07:15 — what the three independent auditors corrected
+
+The closeout draft was audited (figures / prose / screen-path) before David read it. Corrections
+to claims made ABOVE in this ticket, so the ticket does not carry them forward:
+- "ONLY surviving record" for the 29.7 — FALSE, see the strikethrough above.
+- "the full suite passes at every commit" — NOT ESTABLISHED at the time it was written: after
+  the 06:33 fold every hash was rewritten and only the tip had been run in full. A detached
+  per-commit run (full pytest + vitest at each of the 11) was started 07:09; its result is
+  recorded in the closeout, not assumed here.
+- "wider than yesterday's" — both card regens were this morning (05:59 and 06:30); trunk's cards
+  carry no band. The low side widened 6.1 on 21 of 22 (Royer 6.0); the high side only where not
+  already clamped at 100 (four were).
+- "frontend 621 → 629" — trunk is 623 (vitest on a `git archive` of f8995d3d); the series adds 6.
+- "the accessibility gate" — there is none in the land path (`dg-land.sh` says so in its own
+  comment); axe runs only inside the hand-run Playwright smoke, which passed 25/25 at 06:48.
+- "stops the refresh with a named error" — true of the assert, but the chain is FAIL-SOFT from
+  David's seat: `run_pvo_refresh.py` records `status: aborted`, keeps yesterday's runtime pair
+  serving, and the chain continues; the token is only in `pvo_refresh.err.log` (the report's
+  `aborted_reason` is the CalledProcessError string). The check answered the DG-132 lane's
+  question; it is this lane's design, not a David ruling.
+- "reaches his screen after a second pull + restart" — INCOMPLETE. The band lives in the batch
+  artifact `universe_pvo_runtime.json` (live copy has 0 band keys) and the served frontend is a
+  gitignored `frontend/dist` built Aug 31 10:04 that nothing in the repo rebuilds. Pull + restart
+  + `npm run build` in trunk + the next PVO refresh from trunk (09:00 chain, or the 11:30/14:00
+  `dynasty-model-pvo-refresh` slots, which rebuild unconditionally) — one restart suffices, the
+  artifact and bundle are read per request. The running API process started Aug 31 08:18, so
+  DG-133 is not on his screen either until that restart. The trunk-bundle build gap deserves its
+  own ticket.
+- Player cards render "Likely range —" (a dash) for the 115 gated players; the roster row omits
+  the line. Neither is a fault.
