@@ -404,3 +404,24 @@ range-only via the code split, or hold both; (c) push of dg-build.
 of the 82 cards (only `dvs_band_low/high` and `assembled_at` may change; exit 0 and "DVS
 invariance: OK" required) → suite → commit · ultracode review workflow · land · closeout audited
 by independent agents before he reads it.
+
+**Feasibility, asked of this lane 09-02 05:40 (Greg's counsel to David, not a ruling — he put
+"own-history anchor by Thursday, else range only" to David and asked me whether it fits):**
+- *Own-history anchor by Thursday — NO at the quality bar.* (i) The games lags DG-127 added
+  (`738b7525`, in trunk `0def485d`) are in no served table yet — the runtime CSV is still the
+  09-01 09:00 file with zero `games_t_minus` columns; today's 09:00 regen is the first that could
+  carry them, and they are LEFT-CENSORED at the 4-game floor (`feature_assembly.py:318`): a 1–3-game
+  prior season reads as no season. "Career" from the table is two lagged seasons with short ones
+  invisible. (ii) It shrinks the INPUT `ppg_t` before Engine B scores, where this ticket blends
+  OUTPUTS after; σ_B was measured on unshrunk inputs, so the band needs a new pre-committed form.
+  (iii) w = g/(g+6) is 0.57 at g=8: ungated it moves the 388; gated to n<8 it reintroduces a
+  step at 8. (iv) The form was chosen by comparing it against the holdout — the thing David's
+  ruling says to stop at and register. It is a slot; only he registers it. Not built.
+- *Range-only this week — YES, feasible today.* Post-rebase hashes: injection `6c68492b`
+  (batch + its test only); sigma pin `848a3241` and fail-closed `60e86f4b` add hunks to the same
+  file and tests to the injection's test file. Split = drop `6c68492b`, re-cut those two hunks and
+  move their tests, drop the then-dormant snapshot/module `937e1109` and draft-age `b67a873d` so
+  no dead code lands, re-measure (expect 388/388 identical, bands only, ZERO percentile moves —
+  nothing for his gate), prospect bands on his permission, review, land. Half a day plus audit.
+- Either way the measurement is re-taken on the 09:00 table before landing — it was taken on
+  the 09-01 file, and `score_rows` fits at scoring time from the CSV.
