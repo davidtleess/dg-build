@@ -105,6 +105,23 @@ no `XVAR_LAMBDA_ENGINE_B` edit, no `frontend/openapi.json` edit.
 45263) has been up since 08-31 08:18. The order is fixed: trunk `git pull --ff-only` → API restart →
 the next 09:00 chain is the real end-to-end proof (the dry-run used the seed table, not the runtime
 one). Sequenced with davidleess-a0's chain work; do not restart the API before trunk carries this sha.
+**Why that order, not just the order (a0, 2026-09-02):** restart-before-pull puts the running service on the
+old flag mask; `app/services/roster_auditor.py:636` builds `engine_b_scores` with a last-wins dict
+comprehension, so for the 29 duplicated players it would silently serve whichever prediction came last —
+no error, no log line. **Neither lane holds David's word on the pull or the restart as of 09-02 05:45;
+it is his production service and the decision is his.** Pull is verified clean by a0: trunk's three dirty
+tracked files (`.mcp.json`, `docs/agent-ledger/2026-08-19.md`, `tests/test_aging_curves.py`) are untouched
+by the four incoming commits, so `git pull --ff-only` needs no stash.
+
+**Why `inference_season_rule → max(seasons)` is safe here (raised by a0 in review):** the objection was
+that a bare `.max()` silently scores training rows if the inference season's rows are ever absent. The
+selector answers it by construction: if 2025 rows were missing, `max` would pick 2024, every 2024 row is
+`training_eligible`, and `_assert_one_row_per_player` (`inference_partition.py:187-193`) raises
+`inference_partition_contains_training_rows` before anything is scored. Covered by
+`test_a_training_row_in_the_latest_season_fails_closed` (`tests/contract/test_inference_partition_selector.py:161`).
+Fred also measured the selector on the full 3,384-row table: 505 rows → 503 PVOs; the two orphans (Nick
+Kallerup TE, Ke'Shawn Williams WR, 2025 UDFAs with no `sleeper_id`) are pre-existing, not a regression —
+the live check after restart is 505 scores / 503 PVOs.
 
 **Follow-ups filed here, not fixed (out of scope):**
 - `_derived_training_cutoff` in the capture driver reads a `season` column the live CSV does not
