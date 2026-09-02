@@ -78,3 +78,18 @@ To https://github.com/davidtleess/dynasty-genius.git
 Rebase target was DG-128's `1dff211f`; pytest + `npm run gate` green inside dg-land (frontend built in 87ms,
 bundle `index-BZ1jEJNN.js` unchanged — DG-137 is backend-only). Not live until trunk pull + API restart
 (roster audit + card) and the next green `run_pvo_refresh` from trunk (artifact `player.team`, 189 → 0 check).
+
+**LIVE 2026-09-02 — both halves, verified by Tower on the machine, not from the relay:**
+- 14:30:23 Fred pulled trunk `--ff-only 1dff211f → 862a1afb` and kickstarted the API on David's "go": pid
+  4070 → **95078**. No bundle rebuild (none of the 5 files is under `frontend/`). Live `/api/roster/audit`:
+  Adonai Mitchell → NYJ, Fernando Mendoza → LV, Kaelon Black → SF — the 3 of 27 predicted above.
+- The 14:00 standalone refresh had run 30 min BEFORE the pull, so its artifact was still built by `1dff211f`:
+  142 of 468 scored rows disagreed with the 13:00Z Sleeper snapshot (Demercado served ARI, Sleeper DAL).
+  On David's word (verbatim: "send your recommendation to fred as an authotized next move") Fred kicked
+  `com.davidleess.dynasty-model-pvo-refresh` at 14:50:55: label exit 0, receipt `ok / ok`, `aborted_reason`
+  null, 12,227 rows, `vintage_changed: true` (the predicted one-time flip), artifact rewritten 14:50:57.
+- Tower's count on that artifact vs the same snapshot: scored rows served ≠ Sleeper **142 → 0**; across
+  ALL 12,227 rows **0**; Demercado → DAL; bands still 468. No restart needed — the audit route reads the
+  artifact per request (200 in 0.76s after the rewrite).
+- The ticket's "189" was measured 09-01 artifact vs 09-01 snapshot; the same measure on 09-02 data was 142
+  before the fix. Both go to 0 by the same rule.
