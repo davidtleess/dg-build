@@ -503,3 +503,84 @@ caution and the framing.
 
 **Open.** Review (ultracode) → `dg-land.sh DG-128 --dry-run` → land. Pushes are David's
 (`git push` is classifier-blocked in this session; the `!` one-liners are in his hand).
+
+## Build log 2026-09-02 (late morning) — the pre-land review's findings, and an AMENDMENT to the pre-committed form
+
+The ultracode review of the range-only series confirmed six findings. All six are fixed on
+`ticket/DG-128`, series now ELEVEN commits on `f8995d3d`, head `d72f27dc`; the as-built
+`ticket/DG-128-fill-held` = `fde9a5ca` is untouched. Safety ref `backup/DG-128-pre-fold` =
+`902bb788` (the old head) is local.
+
+**1. AMENDMENT — Engine A is two heads, and the pre-commitment named one.** The 23:55Z form
+pinned σ_A from the v2 ridge's 2021 holdout (`20260502T153931Z`). The assembler tries the v3
+TE head first (`EngineAV3Scorer`, Head A Ridge over draft slot + college features, promoted
+`20260524T140748Z`, `engine_used = engine_a_v3_head_a_ridge`), and 22 of the 80 rookie cards
+are scored by it. Their bands carried the v2 ridge's error (23.6) around a number the v2
+ridge did not produce. Fix, in a separate dated commit (`c8cf0931`) rather than folded into
+the 09-01 commit that claims the pre-commitment — a pre-commitment amended is a visible
+event:
+- `DVS_SIGMA_A_V3 = {"TE": 29.7}` = the promotion's out-of-fold RMSE 2.7051 PPG (4-fold
+  leave-one-class-out over the 2018–21 classes, target best3of4_ppg) / P90 9.1 × 100. The
+  head's `te_v3_metadata.json` is unrecoverable; `scripts/promote_head_a_te_v3.py:136`
+  carries the RMSE it recorded as a constant, and the provenance test reads it from there.
+  This is the ONLY surviving record; if that is not good enough, the alternative is to
+  re-run the bakeoff, which is a slot.
+- `dvs_band(..., prior_head=)` selects it for a v3-scored prior and for a blend's unresolved
+  share; a v3 head for a position with no pinned error is refused, never defaulted to v2's.
+- The served effect: the 22 v3 TE cards widen by 6.1 a side (Sadiq 60.7→54.6 low; four
+  highs already clamped at 100). No veteran PVO changes — the universe batch never scores
+  through Engine A. Re-measured (`out/branch4.json` vs `baseline2`): still the band on 388
+  and nothing else; identical to `branch3` on every field.
+- The form is unchanged. The CONSTANT SET was incomplete. Not a candidate comparison.
+
+**2. The fail-closed assert had a hole: `manifest[pos] = None` was skipped** as "no B score,
+nothing to be stale." False — `EngineBService` falls back to its v1 bundle there
+(`engine_b_service.py:177`, `... or self._v1_bundle`), the number serves as `dvs_engine B`,
+and no error is pinned for v1. Now refused: `dvs_band_sigma_run_unpromoted:<pos>`. The
+test that pinned the skip is flipped. Today's manifest names all four positions at
+`20260831T204458Z`, so this changes nothing served; it changes what a failed retrain gate
+can do silently.
+
+**3. The v3 pointer is now pinned too.** `assert_band_sigma_runs_match_served_models` reads
+`app/data/models/head_a/v3_manifest.json` (gitignored like the B manifest; absent ⇒ the v2
+ridge serves every prospect and there is nothing to pin) and refuses a head at another run
+(`dvs_band_sigma_run_stale:A_v3:TE:<run>`) or a promoted position with no pinned error.
+**And the card regen now runs the assert** — it never did; it was the one path where the v3
+head actually serves. `ENGINE_A_V3_SIGMA_RUN` rides in `source_versions` on every veteran PVO
+and, new, on every scored card (cards had `source_versions: {}` — nothing was ever recorded
+there).
+
+**4. The roster band read 2.78:1.** `.dg-roster__band` used `--dg-text-muted`; the band
+prints mostly on rows whose model status does not apply (every prior-scored or blended
+player), and those rows carry opacity 0.55. The same defect the model-status toggle's CSS
+already documents for itself. The smoke fixture predated the band, so axe never had a band
+to measure: I gave its three prior-scored rows their σ_A band (six-line fixture diff), watched
+axe name exactly those three `.dg-roster__band` nodes at both widths (2.78 on #0a0e11),
+switched to `--dg-text`, watched it pass. The band is quieter than the number through size.
+
+**5. The label was spelled twice** — `range` hard-coded in the roster row, `Likely range` in
+the dictionary and on the player card. The roster now reads `fieldLabel("dvs_band_low")`:
+"Likely range 41 to 82" under the number. 390px overflow re-checked.
+
+**6. Prose describing the dropped fill** in five places (a test docstring that said this cut
+"arms" the imputer fix by consuming `games_t_minus_*`; "the first blend rows ever served";
+"keep David's blanks blank after the fix"; a commit message with the same claim; "carry the
+band keys as null" — the watchlist cards have NO band keys). All reworded to say what this
+cut does and what the held fill would.
+
+**Verification.** Python 6754 passed / 32 skipped at the tip; the full suite green at each of
+the first ten commits (an accidental full-suite-per-commit run — zsh did not split my file
+list — which is stronger than the per-commit file check I meant to run; the eleventh is the
+tip). Frontend gate 629 (was 621; 7 lint warnings pre-exist at the same count). OpenAPI
+regen: no drift. Roster smoke 4/4 green after the CSS fix; full smoke run in progress at
+time of writing. `dg-land.sh DG-128 --dry-run`: rebase no-op on `f8995d3d`, both gates,
+merge builds, `push --dry-run` accepted, nothing pushed.
+
+**What David should know before he reads a screen.** Ranges like "Likely range 46 to 100"
+are expected — σ_B is 20–23.6 a side, 157 of 388 veteran bands touch an edge. The TE rookie
+cards are wider than yesterday's by 6.1 a side and that is a correction, not a change of
+mind. The stale-run refusal is a NEW failure mode for the 09:00 chain and the card regen: a
+retrain or re-promotion that moves a manifest stops the refresh with a named error until
+`dvs_band.py`'s pins move with it — the re-pin is one constant per head, and the provenance
+tests will refuse a pin that does not match the artifact. DG-128 reaches his screen only
+after a second pull + restart (trunk is `f8995d3d` in the running API).
