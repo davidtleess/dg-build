@@ -637,8 +637,7 @@ closeout — typing it was his yes on the 29.7 amendment):
     ✔ DG-128 landed on main and pushed. Worktree and branch removed.
 
 Also pushed beforehand by David: `origin/ticket/DG-128` (d72f27dc). The held fill remains on
-`ticket/DG-128-fill-held` (fde9a5ca) — pushed? NO, still local-only in the removed worktree's
-refs — see below.
+`ticket/DG-128-fill-held` (fde9a5ca) — **PUSHED by David 2026-09-02 ~11:45: `origin/ticket/DG-128-fill-held` = fde9a5ca (ls-remote verified).** The ⚠ below is history.
 
 Post-land, on David's "go" (07:44): `git pull --ff-only` → trunk `1dff211f`; `npm --prefix
 frontend run build` → `frontend/dist` 07:44, bundle `index-BZ1jEJNN.js` contains "Likely range";
