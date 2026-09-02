@@ -425,3 +425,81 @@ by independent agents before he reads it.
   nothing for his gate), prospect bands on his permission, review, land. Half a day plus audit.
 - Either way the measurement is re-taken on the 09:00 table before landing — it was taken on
   the 09-01 file, and `score_rows` fits at scoring time from the CSV.
+
+## Build log 2026-09-02 (cont.) — the range-only cut, built and measured
+
+David, 2026-09-02 (verbatim): "push the branch, run the regen, range-only this week."
+
+**Branches.** `ticket/DG-128-fill-held` = `fde9a5ca` holds the as-built 12-commit fill series
+untouched (unpushed until David runs the push). `ticket/DG-128` was reset onto `origin/main`
+(`f8995d3d`, DG-133) and rebuilt as the range-only series — ten commits, head `902bb788`:
+
+| commit | from | what |
+|---|---|---|
+| 25abd74c | 0aadf97b | train fix — all-NaN fit column kept |
+| d48f3f78 | f112279b | blend's Engine B component pays the hurdle |
+| 8ac643cf | da99c7f5 | band on the PVO (`dvs_band_low/high`) — fixture fixed, see below |
+| 973873e2 | b59bc2d2 | band reaches every surface; roster index admits the blend |
+| 64723ba4 | 848a3241 | **re-cut**: sigma-run pins only; the draft-capital `source_versions` lines went with the injection |
+| 4009c0d3 | 0133bffc | blend caveat token — fixture fixed, see below |
+| 363b073a | 2acc94bc | frontend range |
+| c121bbcd | 60e86f4b | **re-cut**: fail-closed `assert_band_sigma_runs_match_served_models()` now at the head of `_active_pvos_from_engine_b` |
+| 5915d1ae | fde9a5ca | no greying |
+| 902bb788 | new | the 80 rookie cards regenerated with the band |
+
+Dropped, not landed this week: `6c68492b` (injection), `937e1109` (draft-capital snapshot),
+`b67a873d` (Engine A reads draft-season age). `grep` over src/scripts/app/tests/frontend/resources
+finds no reference on the branch to anything those three introduced.
+
+**One fixture leaned on a dropped commit.** `test_dg128_assembler_ships_the_band.py` fed the
+blend fixture `age_at_nfl_entry` without `age`, which only reaches Engine A under `b67a873d`.
+On trunk's semantics Engine A v2 reads `age`; the fixture now states `"age": 22.0` (a rookie
+in his first season — the two ages coincide). Folded into the two commits that introduced it
+(`git rebase --autosquash`, non-interactive) so every commit is green on its own:
+per-commit run of the DG-128 + phase14/15 contract tests → 40 / 49 / 50 / 51 / 51 / 58 / 58.
+
+**Suite.** Python 6,741 passed / 33 skipped, serial (trunk archive: 6,695). Frontend 90 files /
+629 tests. Ruff: the branch's files pass; the tree's 11 errors are trunk's own (same 11 on the
+`f8995d3d` archive). `npm --prefix frontend run openapi-gen` on this tree reproduces the
+committed `openapi.json`, `types.gen.ts`, `zod.gen.ts` byte-for-byte.
+
+**Regen (David: "run the regen").** `scripts/refresh_prospect_cards.py` on this tree: exit 0,
+"DVS invariance: OK — all 74 scored players match baseline exactly". Field-by-field over all
+82 cards vs. the committed copy: `dvs_band_low/high` ADDED on the 80 scored, `assembled_at`
+moved on those 80, no other field changed, 2 watchlist cards carry the keys as null. All 80
+are Engine A → one σ_A a side, clamped to [0,100]; unclamped widths QB 80.0 (×3), WR 64.8
+(×17), TE 47.2 (×18), RB 40.8 (×8); the rest touch an edge. The validation doc's only diff is
+its `Generated:` stamp. `.js` mirrors `.json` (test pins it).
+
+**Re-measurement — range-only head `902bb788` vs. trunk `f8995d3d`, same table** (trunk's
+`app/data/features_runtime/engine_b_features_runtime.csv`, mtime Sep 1 09:00, 3,384 rows —
+the 09:00 chain had not fired at 06:01 EDT; the DG-133 selector picks 505 → 503 PVOs after
+the 2 crosswalk orphans). Harness `harness2.py`, output `out/branch3.json`:
+- 503 players, same set. **Every served field other than the band identical to trunk on all
+  503** (values, `dvs_pct`, engine, availability_p, caveats, decision_supported…).
+- 388 ranked before → 388 after; **0 filled, 0 lost, 0 value moves, 0 percentile moves**;
+  percentile population per position unchanged (QB 37 / RB 99 / WR 163 / TE 89).
+- **388/388 carry a band, 115/115 blank carry null.** All 388 are engine B, no blend fires
+  (no Engine A input for veterans without the injection — by construction).
+- Unclamped width = 2σ_B per position: WR 40.0 (103), QB 44.8 (25), RB 45.6 (58), TE 47.2
+  (45); **157 of 388 bands touch 0 or 100** (QB 12 / RB 41 / TE 44 / WR 60). That is the
+  form — σ_B is 20–23.6 points a side on a 0–100 scale — not a defect; worth David seeing.
+- Band contains the score and sits inside [0,100] for every one of the 388.
+- The fail-closed check ran for real against the worktree's served model pointers on this
+  measurement (it is the first thing `_active_pvos_from_engine_b` does) and passed.
+
+**Context for the registered slot, not this cut** (Greg `davidleess-0b`, verified twice with
+a0, read-only on `app/data/training/engine_b_features_v2.csv`, n=2,879 rows with
+`outcome_returned`, `feature_season<=2023`) — raw "posted a qualifying season at t+1 or t+2"
+rate by `games_t`: 4→46.3% (164) · 5→48.8 (166) · 6→56.3 (158) · 7→60.1 (163) · 8→59.9 (162)
+· 9→74.3 (148) · 10→73.1 (171) · 11→80.0 (165) · 12→80.2 (177) · 13→85.7 (182) · 14→89.7
+(194) · 15→86.1 (209) · 16→95.9 (339) · 17→92.5 (255) · 18→96.1 (127) · 19→98.4 (62) ·
+20–21→100 (37). No discontinuity at 8 (7 games 60.1%, 8 games 59.9%): a monotone ramp, and
+the 8→9 step (+14.4pp) is the max of 17 adjacent comparisons at per-point SE ≈ 3.8pp — do not
+read it as "the cliff is 9". Relevance: this is the empirical curve the pre-committed
+`w_B = n/(n+k)` approximates, so the form can be checked against it rather than assumed —
+when the slot is registered. Nothing here changes the range-only cut. Credit a0 for the
+caution and the framing.
+
+**Open.** Review (ultracode) → `dg-land.sh DG-128 --dry-run` → land. Pushes are David's
+(`git push` is classifier-blocked in this session; the `!` one-liners are in his hand).
