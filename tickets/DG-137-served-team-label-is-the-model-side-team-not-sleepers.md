@@ -30,4 +30,33 @@ feature (`ENGINE_B_BASE_FEATURES`); no change to the roster route's own rows
 feature assembly — the feature table's team is correct FOR THE FEATURE SEASON and must stay.
 
 **Verify:** count of ENGINE_B rows whose served `player.team` ≠ snapshot team goes 189 → 0 on the
-next artifact; Demercado's card shows Sleeper's team; David's roster rows unchanged.
+next artifact; Demercado's card shows Sleeper's team.
+
+**Built 2026-09-02 07:10–07:55 on `ticket/DG-137` (Tower), reviewed by 2 of 5 adversarial lenses
+(3 died on the spend limit) — corrections the review forced, recorded here so the closeout reads true:**
+- **"David's roster rows unchanged" above was FALSE for the roster audit** — that is the surface the
+  `roster_auditor.py:222` flip changes. Measured on the live artifact (captured 09-01 10:02Z) vs the
+  09-01 snapshot, 3 of his 27 rows change at API restart: Adonai Mitchell IND→NYJ (real move),
+  Fernando Mendoza LVR→LV and Kaelon Black SFO→SF (nflverse vs Sleeper abbreviation conventions).
+  The untouched line is `roster_auditor.py:694` (no-universe-row fallback), which already reads live.
+- One rule, one place: `served_team(sleeper_player, fallback)` in `universe_pvo_batch.py`, imported
+  by the roster audit. Sleeper wins whenever its block carries the `team` key — **`None` is Sleeper
+  speaking** (no team now; `""` reads the same) — the fallback is only for a block with no key, which
+  the snapshot builder never writes (12,226/12,226 rows carry it). A plain `or`-flip would have
+  served the 2025 team for every cut player, which is the bug in a new coat.
+- **Presentation decision (beyond the ticket's fix shape, David may overrule):** the player-detail
+  route serves `"FA"` for a player Sleeper lists **Active** with no team (5,567 rows today) — the
+  roster audit's existing convention — and keeps the blank for Inactive/IR/PUP/NFI with no team
+  (3,511 rows; Larry Fitzgerald is not a free agent). `PlayerIdentity.team` stays `str | None`;
+  OpenAPI component byte-identical, no `frontend/openapi.json` regen.
+- The one existing test that pinned the OLD precedence (`test_surface3_pvo_preservation.py`, PVO
+  "KC" over snapshot "FA") was deliberately flipped to "FA" — it was the single failure of the
+  first full run.
+- **When it is live:** the roster audit + detail-card label change need trunk pull + API restart;
+  the artifact half only changes when `run_pvo_refresh` next runs TRUNK's
+  `build_universe_pvo_batch.py` green (09:00 chain, or the standalone label at 11:30/14:00) —
+  every scheduled refresh 09-01 06:02 → 14:00 aborted on DG-133. `player.team` is in the capture's
+  semantic projection, so that first rebuild flips `vintage_changed=true` ONCE; nothing gates on it
+  (`daily_diff` reports `vintage_changed_no_score_delta`, an OK status).
+- Not pinned, by choice: `get_my_roster`'s `or "FA"` (`roster_auditor.py:481`) — pre-existing,
+  needs three Sleeper mocks, and with the key-presence rule it is no longer load-bearing.
