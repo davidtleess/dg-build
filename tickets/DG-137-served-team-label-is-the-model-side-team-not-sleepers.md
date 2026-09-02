@@ -1,6 +1,6 @@
 # DG-137 — The served team label is the model-side (2025 feature) team, not Sleeper's current team: 189 valued players disagree
 
-**Layer:** 2 · **State:** open · **Lane:** Davids-MacBook-Pro-32886 · **DG 3.0** · **product truth / identity · small**
+**Layer:** 2 · **State:** landed `862a1afb` 09-02 07:47 · **Lane:** — · **DG 3.0** · **product truth / identity · small**
 **Source:** 09:00-chain rehearsal, verify-B agent (2026-09-02 06:3x, measured on the rehearsal artifact AND the live `universe_pvo_runtime.json`); sourcing lines verified by Tower; ticketed 2026-09-02 06:40 by Tower.
 
 **Problem:** for modeled rows the universe artifact sets
@@ -60,3 +60,21 @@ next artifact; Demercado's card shows Sleeper's team.
   (`daily_diff` reports `vintage_changed_no_score_delta`, an OK status).
 - Not pinned, by choice: `get_my_roster`'s `or "FA"` (`roster_auditor.py:481`) — pre-existing,
   needs three Sleeper mocks, and with the key-presence rule it is no longer load-bearing.
+
+**Acceptance — landed 2026-09-02 07:47 ET by Tower (`~/dg-build/bin/dg-land.sh DG-137` from `~/dg-wt/DG-137`):**
+```
+→ merging into main
+Merge made by the 'ort' strategy.
+ app/api/routes/players.py                        |  13 +-
+ app/services/roster_auditor.py                   |   5 +-
+ src/dynasty_genius/universe_pvo_batch.py         |  17 +-
+ tests/contract/test_served_team_is_sleepers.py   | 199 +++++++++++++++++++++++
+ tests/contract/test_surface3_pvo_preservation.py |   4 +-
+ 5 files changed, 234 insertions(+), 4 deletions(-)
+To https://github.com/davidtleess/dynasty-genius.git
+   1dff211f..862a1afb  HEAD -> main
+✔ DG-137 landed on main and pushed. Worktree and branch removed.
+```
+Rebase target was DG-128's `1dff211f`; pytest + `npm run gate` green inside dg-land (frontend built in 87ms,
+bundle `index-BZ1jEJNN.js` unchanged — DG-137 is backend-only). Not live until trunk pull + API restart
+(roster audit + card) and the next green `run_pvo_refresh` from trunk (artifact `player.team`, 189 → 0 check).
