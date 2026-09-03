@@ -1,6 +1,6 @@
 # DG-140 — The player card's age verdict is computed from the feature-season age, so it contradicts the age printed beside it on 97 rows
 
-**Layer:** 2 · **State:** open · **Lane:** unclaimed · **DG 3.0** · **product truth · small-medium**
+**Layer:** 2 · **State:** open · **Lane:** Davids-MacBook-Pro-32886 · **DG 3.0** · **product truth · small-medium**
 **Source:** DG-139's adversarial review, 2026-09-02 22:0x — found independently by all three lenses, reproduced by
 five skeptics against the live artifact (`captured_at 2026-09-02T18:50:56Z`) and the snapshot it was built from
 (`league-20260902T130044Z/snapshot.json`, `lineage.sleeper_snapshot_hash` matches, so the pairing is exact).
@@ -42,3 +42,30 @@ sentence. Do not touch the roster audit row's driver path, which is already corr
 
 **Verify:** rows whose age driver disagrees with their own served age: 97 → 0; Wilson's card carries a
 within-two-years verdict, matching his roster row; the 33 past-cliff players carry `age_past_position_cliff`.
+
+**Landed 2026-09-03 06:53 by Tower (`dg-land.sh DG-140`), `32ceb8fb..6f517027`.** 6 files, none under
+`frontend/`; suite 6816 passed / 33 skipped; OpenAPI byte-identical.
+
+**Review — 3 lenses + 6 skeptics, 9 agents, 0 died. One blocking finding, FIXED before landing:**
+- **`counter_argument` is a FUNCTION of `risk_flags`** (`pvo_assembler.py:623` -> `counter_arguments.py:15`,
+  where `age_past_position_cliff` is the priority-1 branch). Restating the flags and copying the argument
+  verbatim left 33 rows inconsistent and **dropped the mandatory counter-argument entirely on 16 of them**,
+  against Product Constitution Rule 4. Fixed with `counter_argument_for()`, regenerating only when the flags
+  actually moved. Measured 16 -> 0.
+- **Crash risk introduced by the fix:** `int(age)` ran on Sleeper's uncoerced value inside the single
+  artifact-build loop, so one bad value would abort the whole 12,227-row build. Guarded + pinned.
+- **"The rule now lives in one place" was FALSE when written** — `roster_cut_engine.py` held a third
+  `CLIFF_AGES` and `age_cliff` had added a FOURTH copy of the banding ladder while consolidating the
+  constants. Both actually consolidated before landing; there is now one table and one ladder.
+- Noted, not fixed (out of scope): `position` is still served model-first while team and age are Sleeper-first,
+  so 4 rows compute the age band at the model's position (Bo Melton, served CB, loses a verdict true at WR).
+
+**LIVE 2026-09-03 09:00:47** — the chain rebuilt the artifact from `league-20260903T130044Z`. Measured by Tower
+on that artifact: age verdicts contradicting the served age **97 -> 0**; past-cliff rows with no
+counter-argument **16 -> 0**; rows flagged past-cliff 108 -> 141; served age != Sleeper 0; served team != Sleeper 0.
+Garrett Wilson serves age 26 with `age_within_two_years_of_position_cliff`.
+
+**⚠ NEAR MISS worth keeping:** landing was NOT enough. The scheduled chain runs from trunk's checkout and
+nothing pulls it; at 08:05 trunk was still `32ceb8fb`, so the 09:00 rebuild would have served DG-139's true ages
+beside DG-140-less stale verdicts — the exact 97-card contradiction this ticket exists to prevent. Caught by
+Fred (davidleess-45) at 08:04; David ran `git pull --ff-only` himself at 08:06.
