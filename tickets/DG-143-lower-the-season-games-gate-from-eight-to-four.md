@@ -59,24 +59,31 @@ Allen 20.5; the percentile shift on his 27 reported to him in writing before the
 **Built 2026-09-03 08:20-08:58 by Tower, committed `ef08020c`, branch PUSHED to origin (backed up).
 NOT adversarially reviewed and NOT landed — David said "close out" before the review ran.**
 
-Suite 6816 passed / 33 skipped. Five new contract tests in
+Suite **6821 passed / 33 skipped** on the committed tree (6816 is the count WITHOUT this ticket's own five tests). Five new contract tests in
 `tests/contract/test_dg143_short_season_still_gets_a_number.py`.
 
-**Six test files pinned the old gate with a literal `4` as "below the gate"**, so
+**FOUR test files pinned the old gate with a literal `4` as "below the gate"** (the commit touches six FILES: one source, those four tests, one new test file), so
 `test_engine_b_dvs_does_not_fire_below_games_gate` asserted the OPPOSITE of its own name once the constant
-moved — and still passed, for the wrong reason. All six now read `ENGINE_B_MIN_GAMES_T - 1`, including the
+moved — and still passed, for the wrong reason. All four now read `ENGINE_B_MIN_GAMES_T - 1`, including the
 blend-weight and caveat-token expectations.
 
 **The market check David asked for, run before building (this is the justification, not the RMSE argument):**
-new scores vs FantasyCalc **Spearman 0.711** (n=32 priced of 114) against a **0.795** baseline (n=336) for the
-players already scored. Of the 82 the market declines to price at all, **94% score below 20** (median 6.6) —
+new scores vs FantasyCalc **Spearman 0.711** (n=32 priced of 114) against **0.795** (n=336) for the players
+already scored — **but that was DATE-LUCKY and is the most favourable of seven daily snapshots. Corrected by
+the closeout audit: across the seven market snapshots on file the new-cohort figure runs 0.634-0.711 (mean
+~0.67; 0.643 on 09-03's own market) while the baseline holds 0.788-0.805, so the real gap is ~0.13, not 0.08.
+At n=32 the 95% interval is 0.47-0.86 and 15% of random 32-player subsets of ALREADY-SCORED players land at
+or below 0.711 by chance. Do not quote 0.711-vs-0.795 as a clean pass.** Of the 82 the market declines to price at all, **94% score below 20** (median 6.6) —
 two systems sharing no inputs reaching the same verdict. Named top of the unlocked cohort: Malik Nabers 76.8,
 Garrett Wilson 68.5, Jayden Daniels 61.0, Jayden Reed 46.2. Tyreek Hill lands 29.0 and the MARKET is harsher
 still (634, below Calvin Ridley) — Tower's initial worry that 29.0 was too low was wrong in the other direction.
 
 **⛔ STILL OPEN AND UNDECIDED — David has the numbers, has not ruled:** percentiles are population statistics,
-so adding 114 rows moves every existing player's `xvar_percentile_overall` by a mean **7.1 points** (max 11.7;
->5 points on **322 of 468**) and drops the population median DVS **42.7 -> 34.1**. Nothing about those players
-changed. Tower proposed freezing the reference population, then withdrew the recommendation on inspection:
+so adding 114 rows moves every existing player's `xvar_percentile_overall` by a mean **6.8 points** (max 11.2;
+>5 points on **329 of 468**) and drops the population median DVS 42.7 -> 34.1. **CORRECTED by the closeout
+audit — the earlier 7.1/11.7/322 figures ranked on DVS; the field actually ranks on `xvar`
+(`universe_pvo_batch.py:123-136`). And the shift is far less alarming than first reported: 463 of 468 move UP,
+2 fall by 0.1, and NO existing player's rank relative to another changes — the ordering is mathematically
+untouched, since each player's position is fixed by his own xvar.** Tower proposed freezing the reference population, then withdrew the recommendation on inspection:
 freezing would silently redefine the statistic as "rank among players with 8+ games". **Do not land DG-143
 without putting this to David with both variants measured on his own 27 rows.**
