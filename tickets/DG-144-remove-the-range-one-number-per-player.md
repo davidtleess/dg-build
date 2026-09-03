@@ -1,6 +1,6 @@
 # DG-144 — Remove the range: one number per player
 
-**Layer:** 6 · **State:** todo · **Lane:** — · **DG 3.0** · **product truth / presentation · small**
+**Layer:** 6 · **State:** doing · **Lane:** Davids-MacBook-Pro-54105 · **DG 3.0** · **product truth / presentation · small**
 **Source:** David's ruling 2026-09-03 06:22 ET (Tower session `6f07a6c0`, message stamped 10:22:36Z), verbatim:
 *"So then, plus or minus 20, remove it, one number per player."* Twenty-three minutes earlier (05:59 ET):
 *"I don't see the point of a range if it's going to be 40 points. So either predict a number … Generally
