@@ -1,6 +1,6 @@
 # DG-136 — A capture-stage `abort()` exits 0: the chain reports green on a morning that captured nothing
 
-**Layer:** 2 · **State:** landed `a1f1023f` 09-02 21:29 (David ran push + dg-land; not yet on trunk) · **Lane:** Fred (`davidleess-45`) · **DG 3.0** · **ops / forward capture · small**
+**Layer:** 2 · **State:** LIVE on trunk 09-02 21:34 (landed `a1f1023f` 21:29; trunk pulled 21:33, API pid 90590) · **Lane:** Fred (`davidleess-45`) · **DG 3.0** · **ops / forward capture · small**
 **Source:** 09:00-chain rehearsal readers (2026-09-02 ~06:00, trunk `f8995d3d`); verified against the live log by Tower; ticketed 2026-09-02 06:15 by Tower.
 
 **Problem:** every refusal inside `capture_model_pvo_snapshot`
@@ -155,6 +155,21 @@ To https://github.com/davidtleess/dynasty-genius.git
 Rebase target was DG-135's `60f6940f` (already the base — no-op). The frontend gate rebuilt a bundle
 (`index-C6XzDCYI.js`) inside the worktree only; trunk's `frontend/dist` is untouched and still
 `index-BZ1jEJNN.js`. Remote branch `origin/ticket/DG-136` still exists at `11646a09` (dg-land deletes
-the local one only) — merged, harmless. **Not live: trunk is at `862a1afb`, two landings behind
-(`60f6940f` DG-135, `a1f1023f` DG-136).** Trunk pull → `npm --prefix frontend run build` (for DG-135) →
-API kickstart → pid to Greg; the first scheduled run to carry DG-136 is then the 09-03 09:00 chain.
+the local one only) — merged, harmless. ~~Not live: trunk is at `862a1afb`~~ — **superseded below.**
+
+## Live on trunk — 2026-09-02 21:33–21:34 (David's "go")
+All four steps run by Fred from `~/dynasty-genius-product`, receipts as read back:
+1. 21:33:34 `git pull --ff-only` → `862a1afb..a1f1023f`, 10 files / +653 −3, the three pre-existing
+   dirty files (`.mcp.json`, `docs/agent-ledger/2026-08-19.md`, `tests/test_aging_curves.py`) were not
+   in the incoming diff and are untouched.
+2. 21:33:41 `npm --prefix frontend run build` → `dist/assets/index-C6XzDCYI.js` (474,214 B) replaces
+   `index-BZ1jEJNN.js` (07:44); `dist/index.html` references the new hash.
+3. 21:34:03 `launchctl kickstart -k gui/501/com.davidleess.dynasty-api` rc 0 → **pid 90590** (was 95078),
+   state running; pid unchanged at 21:34:53.
+4. Probes on the new pid: `/api/health` 200 · `/api/engine-b/scores` 200 · `/api/system/capture-health`
+   200 · `/api/roster/audit` 200 (27 players) · `/api/roster/capacity` 200; `/` serves
+   `index-C6XzDCYI.js`; the served `/api/engine-b/scores` contract lists `200` and `503` (DG-135).
+   Greg (`davidleess-0b`) sent the pid at 21:35.
+No publish lock and no refresh/chain process at restart time. **First scheduled run to execute DG-136's
+code: the 09-03 09:00 chain** (the 11:30/14:00 standalone label executes trunk's script too). Nothing
+in this ticket has yet been exercised by a real refusal — the tests are the evidence, not a live run.
