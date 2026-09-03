@@ -168,3 +168,27 @@ sequence is: land on main → `git -C ~/dynasty-genius-product pull --ff-only` �
 `curl -s localhost:8000/api/roster/audit | python3 -m json.tool` and read `status`,
 `model_status_by_position`, `caveats`. **No frontend rebuild** — this change touches no `frontend/`
 file. That curl output is the receipt and belongs in this ticket.
+
+
+---
+
+## Landed — main `1812a5c8`, 2026-09-03 08:08 (David: "land 142")
+
+David released the after-09:15 hold early. That is safe and was said so before landing: **landing
+alone changes nothing on screen.** The route is served from a process reading trunk's checkout, so
+until trunk is pulled and the API restarted, the roster page still shows the old VALIDATED chips.
+
+Gate output read directly rather than trusting its ✔: **6829 passed / 33 skipped** (higher than this
+ticket's own 6817 because DG-140 landed underneath in between), frontend suites 90 and 629 passed,
+and zero occurrences of "failed", "error" or "abort" in the log. Worktree and branch removed by the
+lander.
+
+**State at landing:** main `1812a5c8`; trunk `6f517027` (DG-140, pulled by another lane while this
+was building — so DG-140 did make its 09:00 window); trunk behind 2. API pid 50754.
+
+**To make it live** — a deliberate act, not a side effect:
+`git -C ~/dynasty-genius-product pull --ff-only` → `launchctl kickstart -k
+gui/501/com.davidleess.dynasty-api` → `curl -s localhost:8000/api/roster/audit | python3 -m json.tool`
+and read `status`, `model_status_by_position`, `caveats`. No npm build. That curl output is the
+acceptance receipt and belongs here. **Expect it to be unflattering**: four "not proven" badges and
+a degraded read. That is the ticket working.
