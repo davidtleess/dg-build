@@ -1,6 +1,6 @@
 # DG-134 — The forward capture's provenance records `training_cutoff: null` every morning because it reads a `season` column the runtime table does not have
 
-**Layer:** 2 · **State:** LANDED on main `32ceb8fb` 2026-09-03 05:23 (not yet live — trunk unpulled) · **Lane:** Davids-MacBook-Pro-77417 · **DG 3.0** · **backend / capture provenance · cosmetic today, a lie tomorrow**
+**Layer:** 2 · **State:** LIVE on trunk 2026-09-03 05:30 (main `32ceb8fb`, API pid 50754) · **Lane:** Davids-MacBook-Pro-77417 · **DG 3.0** · **backend / capture provenance · cosmetic today, a lie tomorrow**
 **Source:** DG-133 follow-up (filed 2026-09-01 in its LANDED section; ticketed 2026-09-02 06:05 by Tower).
 
 **Problem:** `src/dynasty_genius/capture/model_forward_capture_driver.py:116-129`
@@ -206,3 +206,23 @@ pulls it, the 09:00 chain runs the old script and writes `training_cutoff: null`
 morning. Going live needs a `git pull --ff-only` on trunk plus one `launchctl kickstart -k` of the
 API label — the kickstart is for DG-139, which is in the same pull; DG-134 alone would need neither
 that nor an npm build.
+
+
+## Live on trunk — 2026-09-03 05:29:53–05:30 (David's "run it")
+
+- `git -C ~/dynasty-genius-product pull --ff-only` → `a1f1023f..32ceb8fb`, fast-forward, trunk level
+  with origin. Ten files: DG-134's five plus DG-139's `universe_pvo_batch.py`, `roster_auditor.py`,
+  `test_served_age_is_sleepers.py`, `test_surface3_pvo_preservation.py`.
+- `launchctl kickstart -k gui/501/com.davidleess.dynasty-api` → **pid 90590 → 50754**.
+- Probes, real routes off the served openapi: `/api/health` 200 (9.5s cold, 0.40s warm),
+  `/api/engine-b/scores` 200, `/api/system/capture-health` 200, `/api/roster/audit` 200 with 27
+  players all carrying an age, `/api/roster/capacity` 200.
+- **Zero `frontend/` files in the pull** — confirmed with `git diff --name-only`, so the bundle
+  needed no rebuild. The kickstart was DG-139's requirement, not DG-134's.
+
+**What is and is not proven.** The code trunk runs is now the new code. DG-134's derivation only
+executes at capture time, so **no real cutoff has been written yet** — the first capture to write
+`{"value": 2023, "status": "derived"}` is the **09:00 chain on 2026-09-03**. Read
+`capture_report.status` and today's row count, not the chain's exit code (DG-136's lesson). Nothing
+so far has exercised the new refusal path in production either; the tests are still the only
+evidence for it.
