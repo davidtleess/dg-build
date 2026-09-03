@@ -72,9 +72,12 @@ Corrections the review forced, recorded so the closeout reads true:**
   age matching the 2025 feature age on 503/503, and the codebase already uses that join
   (`model_forward_capture_driver.py:390-419`). The ticket's wording was conditional and the key is not needed.
 - The float→int JSON type change on 582 artifact rows is harmless (Pydantic coerces to `float` on both response
-  models; `team_value_matrix` casts). The one-time `vintage_changed: true` is a CODE fact, not an analogy —
-  `_semantic_projection` (`model_forward_capture_driver.py:78-84`) excludes only captured_at/assembled_at/
-  pipeline_run_id/market_overlay/divergence, so `player.age` is inside the semantic hash.
+  models; `team_value_matrix` casts). `player.age` IS inside the semantic hash (`_semantic_projection`,
+  `model_forward_capture_driver.py:78-84`), so `semantic_output_hash` will move. **But the "expect ONE spurious
+  `vintage_changed: true`" wording carried here from DG-137 is RETRACTED as misleading — measured 2026-09-02
+  night, `vintage_changed` has been true on 9 of 9 consecutive capture-date pairs because a microsecond
+  timestamp is hashed into `provenance_hash` (`:158`). The flag was always going to be true tomorrow. Filed as
+  DG-141.** Do not read tomorrow's flip as evidence that DG-139 reached the artifact — count served ages.
 - **The blocking finding, and why it did not block: DG-140.** All three lenses found that the artifact's age
   DRIVERS are computed at the feature age and are not recomputed, so on the card a true age would sit beside a
   cliff sentence computed from the stale one on 97 rows. The skeptics established that those 97 sentences are
