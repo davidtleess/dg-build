@@ -1,6 +1,6 @@
 # DG-134 — The forward capture's provenance records `training_cutoff: null` every morning because it reads a `season` column the runtime table does not have
 
-**Layer:** 2 · **State:** open · **Lane:** Davids-MacBook-Pro-77417 · **DG 3.0** · **backend / capture provenance · cosmetic today, a lie tomorrow**
+**Layer:** 2 · **State:** LANDED on main `32ceb8fb` 2026-09-03 05:23 (not yet live — trunk unpulled) · **Lane:** Davids-MacBook-Pro-77417 · **DG 3.0** · **backend / capture provenance · cosmetic today, a lie tomorrow**
 **Source:** DG-133 follow-up (filed 2026-09-01 in its LANDED section; ticketed 2026-09-02 06:05 by Tower).
 
 **Problem:** `src/dynasty_genius/capture/model_forward_capture_driver.py:116-129`
@@ -190,3 +190,19 @@ trunk's script from disk, so DG-134 alone needs only a `git pull --ff-only`; the
 the derivation. **But DG-139 is now underneath it**, and Greg's ticket needs an API restart — so a
 pull that brings both must be followed by a `launchctl kickstart -k` of the API label, still with no
 npm build. The first capture to write a real cutoff is the next scheduled run after the pull.
+
+
+---
+
+## Landed — main `32ceb8fb`, 2026-09-03 05:23:10 (David ran `dg-land.sh DG-134` himself)
+
+`c62783b1..32ceb8fb`. The land gate's own output, read rather than trusting its ✔:
+**6804 passed / 33 skipped** (the exact number measured in the worktree), frontend suites 90 and
+629 passed, and zero occurrences of "failed", "error" or "abort" anywhere in the 35KB log. The
+worktree `~/dg-wt/DG-134` and the branch were removed by the lander.
+
+**NOT LIVE.** Trunk `~/dynasty-genius-product` is still at `a1f1023f`, behind 4. Until someone
+pulls it, the 09:00 chain runs the old script and writes `training_cutoff: null` for one more
+morning. Going live needs a `git pull --ff-only` on trunk plus one `launchctl kickstart -k` of the
+API label — the kickstart is for DG-139, which is in the same pull; DG-134 alone would need neither
+that nor an npm build.
