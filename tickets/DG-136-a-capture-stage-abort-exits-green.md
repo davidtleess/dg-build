@@ -1,6 +1,6 @@
 # DG-136 — A capture-stage `abort()` exits 0: the chain reports green on a morning that captured nothing
 
-**Layer:** 2 · **State:** built `11646a09` on `ticket/DG-136`, awaiting David's push + land · **Lane:** Fred (`davidleess-45`) · **DG 3.0** · **ops / forward capture · small**
+**Layer:** 2 · **State:** landed `a1f1023f` 09-02 21:29 (David ran push + dg-land; not yet on trunk) · **Lane:** Fred (`davidleess-45`) · **DG 3.0** · **ops / forward capture · small**
 **Source:** 09:00-chain rehearsal readers (2026-09-02 ~06:00, trunk `f8995d3d`); verified against the live log by Tower; ticketed 2026-09-02 06:15 by Tower.
 
 **Problem:** every refusal inside `capture_model_pvo_snapshot`
@@ -136,3 +136,25 @@ must still carry that morning's `artifact_vintage`.
 **Live when:** trunk `git pull` alone — both launchers run `scripts/run_pvo_refresh.py` from trunk's
 checkout, so the next scheduled run (11:30 / 14:00 / 09:00) carries it; no API restart, no bundle for
 THIS ticket. (The same pull brings DG-135, which DOES need `npm --prefix frontend run build` + restart.)
+
+**Acceptance — landed 2026-09-02 21:29 ET (merge commit timestamp), David ran both one-liners himself (`git push -u origin ticket/DG-136`
+at 11646a09, then `~/dg-build/bin/dg-land.sh DG-136`):**
+```
+→ rebasing ticket/DG-136 onto origin/main
+Current branch ticket/DG-136 is up to date.
+→ running tests            (Python suite green; frontend gate green, built in 178ms)
+→ merging into main
+Merge made by the 'ort' strategy.
+ scripts/run_pvo_refresh.py                         |  53 +++++
+ .../contract/test_dg136_capture_abort_exits_red.py | 265 +++++++++++++++++++++
+ 2 files changed, 318 insertions(+)
+To https://github.com/davidtleess/dynasty-genius.git
+   60f6940f..a1f1023f  HEAD -> main
+✔ DG-136 landed on main and pushed. Worktree and branch removed.
+```
+Rebase target was DG-135's `60f6940f` (already the base — no-op). The frontend gate rebuilt a bundle
+(`index-C6XzDCYI.js`) inside the worktree only; trunk's `frontend/dist` is untouched and still
+`index-BZ1jEJNN.js`. Remote branch `origin/ticket/DG-136` still exists at `11646a09` (dg-land deletes
+the local one only) — merged, harmless. **Not live: trunk is at `862a1afb`, two landings behind
+(`60f6940f` DG-135, `a1f1023f` DG-136).** Trunk pull → `npm --prefix frontend run build` (for DG-135) →
+API kickstart → pid to Greg; the first scheduled run to carry DG-136 is then the 09-03 09:00 chain.
