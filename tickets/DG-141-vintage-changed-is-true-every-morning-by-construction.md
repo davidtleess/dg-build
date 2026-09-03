@@ -1,7 +1,9 @@
-# DG-141 — `vintage_changed` is true every morning by construction: a microsecond timestamp is hashed into the vintage, so the flag cannot distinguish a model change from a rerun
+# DG-141 — `vintage_changed` is true every morning by construction: a microsecond timestamp is hashed into `provenance_hash`, poisoning the PAIR while the semantic half still works
 
 **Layer:** 2 · **State:** open · **Lane:** unclaimed · **DG 3.0** · **capture provenance / signal integrity · small**
-**Source:** measured by Fred (davidleess-45) 2026-09-02 ~22:30 while closing DG-134, after Tower asserted in two
+**Source:** measured by Fred (davidleess-45) 2026-09-02 ~22:30; the narrower framing below (the pair is
+poisoned, the semantic half works) came out of Tower's counter-example and Fred's own correction of his first
+wording — each session corrected the other, and neither claim here is one session's unchecked assertion. Filed while closing DG-134, after Tower asserted in two
 tickets (DG-137, DG-139) and to David that a landing would produce "exactly ONE spurious `vintage_changed: true`".
 Fred refuted the premise; **Tower reproduced the measurement independently before accepting it** and found the
 mechanism. Both records agree.
@@ -19,8 +21,10 @@ on 9 of 9 consecutive date pairs.** Fred's independent count matches exactly.
 **The driver's own docstring is wrong about this.** `:138-142` says the subset "EXCLUDES git_sha / artifact_sha256
 / **dates** / row_lineage (those are kept out of the vintage hash)" — and `:158`, sixteen lines later, hashes a date.
 
-**What the flag costs us today:** `vintage_changed` carries no information across days. It cannot confirm or deny
-that a landed change reached the artifact, which is exactly what a morning receipt is read for. Two tickets
+**What the flag costs us today — stated narrowly, because the broad version is false:** it is the PAIR that is
+poisoned, not the vintage machinery. `vintage_changed` carries no information ACROSS DAYS, so it cannot confirm
+or deny that a landed change reached the artifact — which is exactly what a morning receipt is read for. The
+semantic half is a working content signal and must not be changed (see the counter-example below). Two tickets
 (DG-137, DG-139) put a "one-time flip" prediction in their landing notes on the strength of it; the prediction was
 true in the trivial sense and misleading in the useful one.
 
