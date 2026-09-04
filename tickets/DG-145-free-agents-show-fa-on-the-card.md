@@ -13,9 +13,12 @@ partners and movers are to be measured).
 **How we know:** David's sentence above; `grep -n nfl_team frontend/src/roster/RosterAuditRow.tsx` → `:73` (2026-09-03
 20:5x ET). First measurement, before any build: how many served rows carry a null team, and how many of David's 27.
 
-**Reading of "free agent" — an ASSUMPTION stated to David 09-03 evening; correct it on his word:** NFL free agent, i.e.
-no NFL team on Sleeper, the fact Sleeper itself prints as "FA". NOT "unrostered in his league", which is a different
-fact (the league stores) and a different surface.
+**Reading of "free agent" — RULED by David 2026-09-03 ~21:35 ET.** Greg asked: *"FA: do you mean players with no NFL
+team, the way Sleeper shows FA? Or players nobody in your league owns?"* David, verbatim: **"1) nobody in the league
+owns."** So "FA" = a player on no roster in his 12-team Sleeper league — a LEAGUE free agent, read from the latest
+league roster capture, never a training-time fact. *(Greg's first filing assumed NFL free agent; that reading is
+retired. Bob's measurement before the ruling — roster row already prints "FA" for any missing NFL team; the card
+prints it only when Sleeper marks him Active; movers print nothing — is a real discrepancy, recorded here, UNBUILT.)*
 
 **Done looks like:** every surface that prints a team prints "FA" for a player with no NFL team, never "—" or blank for
 that reason; a fixture with `nfl_team: null` renders "FA" in the roster-row and card tests, watched red first;
