@@ -1,6 +1,6 @@
 # DG-121 — Nothing detects a served bundle that has drifted from HEAD
 
-**Layer:** 6 · **State:** todo · **Lane:** — · **DG 3.0** · **DG-076's deferred half, finally ticketed**
+**Layer:** 6 · **State:** todo · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **DG-076's deferred half, finally ticketed**
 **Source:** DG-076 shipped the frontend half (a build manifest carrying `source_sha`,
 `openapi_sha256`, `built_at` and `source_dirty`) and explicitly deferred the backend half. The
 closeout named it an honest limit with **no ticket**; this is that ticket, filed 2026-08-30.
