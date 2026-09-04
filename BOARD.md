@@ -29,8 +29,8 @@
 | DG-023 | Health gate labels good participation data "empty" | **1** | **done — merge `b4662707` on `main`** | Parallel-DG023-20260825 |
 | DG-024 | PPG counts **ALL GAMES**, postseason included — David 2026-08-19 | 3 | **decided** | — |
 | DG-025 | Ablate usage features under a scaled, tuned fit — the deciding test | 3 | todo | — |
-| DG-026 | Train and test labels share the 2023 season | 3 | todo | — |
-| DG-027 | Penalty chosen by random CV on repeated-player data | 3 | todo | — |
+| DG-026 | Training labels and test labels share the 2023 season | **3** | done — LANDED `e7391650` 09-04 (Bob), with DG-027. Admissibility follows the LABEL window; feature season 2021 dropped. Stricter variant available but NOT default — measured to leave 1 fold and 80 QB rows. ⚠ r² drops are confounded (leak + data both removed) | — |
+| DG-027 | The penalty is chosen by random CV on repeated-player panel data | **3** | done — LANDED `e7391650` 09-04 (Bob), with DG-026. Penalty now chosen on expanding-time folds clustered on player (3 folds/position); **QB 1000 (grid CEILING) → 1**, RB 500→10, WR 200→0.1, TE unchanged. REFUSES rather than falling back to random. ⛔ nothing retrained or promoted | — |
 | DG-028 | "We changed nothing" check cannot see the artifacts it guards | 3 | landed 08-28 night — seeing guard hashes all 10 registry artifacts + serving-binding checks (manifest hijack, v1-fallback scan — both review-found BLOCKERS closed RED-first); v1 fallback custodially registered + backup-covered | — |
 | DG-029 | Is feature season 2024 absent by design or by gap? | **2** | **done — BY DESIGN, same mechanism; merge `849f3eaf` on `main`** | ClaudeFable5-DG029-20260825 |
 | DG-030 | Compare model families to each other, not just to naive | 3 | todo | — |
