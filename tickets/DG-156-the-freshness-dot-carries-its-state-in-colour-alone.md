@@ -1,6 +1,6 @@
 # DG-156 — The morning freshness dot carries its state in colour alone
 
-**Layer:** 6 · **State:** todo · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **frontend / accessibility · small**
+**Layer:** 6 · **State:** done · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **frontend / accessibility · small**
 **Source:** Greg (`davidleess-eb [a78c76]`), 2026-09-04 ~17:2x ET, as the smallest true instance of David's glyph
 ruling; filed by Bob after verifying the surface at source. **David, 2026-09-04 09:24 ET, verbatim:** *"we need
 glyphs and symbols, not full sentences. This is UI/UX."*
@@ -44,3 +44,26 @@ and it is not a state David acts on — settled 2026-09-04 when DG-150 landed).
 - Worth checking during the build, not assumed: whether `attention` and `unknown` are visually distinguishable in
   BOTH themes once shape is doing the work, and whether the mark survives at the 390px width where the rail's box is
   `display:none` (the DG-114 case where a line that only exists on the box is a line David never sees on his phone).
+
+**Acceptance — LANDED `cfffd0c1` 2026-09-04 ~17:4x ET by Bob (`~/dg-build/bin/dg-land.sh DG-156`).** Gate 654.
+**NOT live** — it goes with the next pull, which is not scheduled; David has not asked for another.
+
+| state | mark | how it is drawn | means |
+|-------|------|-----------------|-------|
+| `ok` | ● filled | `background: var(--dg-up)` + matching border | Current — the check ran |
+| `attention` | ◐ half | `linear-gradient(90deg, var(--dg-caveat) 0 50%, transparent 50% 100%)` | Limited — an answer with a named limit |
+| `unknown` | ○ hollow | `transparent` + `var(--dg-border-strong)` border | No reading — it could not answer |
+
+**THE DEFAULT IS INVERTED AND THAT IS THE FIX.** The base was `background: var(--dg-chrome)` — a FILLED neutral dot
+— and `unknown` had no rule at all, so a check that could not answer rendered exactly like one that answered fine.
+Hollow is now the base, so any state nobody styles fails toward *"we did not get an answer"*. Half-filled rather than
+a second hue keeps the middle state distinguishable from both neighbours with no colour perception at all.
+
+**Greg overruled his own rule 2 on the point raised above:** the dot keeps `aria-hidden="true"` and the sentence
+beside it stays the single accessible channel. Naming a decorative mark that restates the adjacent sentence would
+make a screen reader announce the same fact twice. The rule that survives is the one always intended — never encode
+information in colour alone — and shape satisfies it without duplication.
+
+**Both build-time requirements are ASSERTIONS, not intentions:** a test proves the three states differ structurally
+rather than only in hue, and another proves no media query hides the masthead or the freshness line, so the mark
+survives the 390px width where the rail's box is `display:none` (DG-114). Tests red first: 3 of 5.
