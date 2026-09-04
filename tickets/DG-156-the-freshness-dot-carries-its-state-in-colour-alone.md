@@ -1,6 +1,6 @@
 # DG-156 — The morning freshness dot carries its state in colour alone
 
-**Layer:** 6 · **State:** todo · **Lane:** — · **DG 3.0** · **frontend / accessibility · small**
+**Layer:** 6 · **State:** todo · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **frontend / accessibility · small**
 **Source:** Greg (`davidleess-eb [a78c76]`), 2026-09-04 ~17:2x ET, as the smallest true instance of David's glyph
 ruling; filed by Bob after verifying the surface at source. **David, 2026-09-04 09:24 ET, verbatim:** *"we need
 glyphs and symbols, not full sentences. This is UI/UX."*
