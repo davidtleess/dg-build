@@ -1,6 +1,6 @@
 # DG-144 — Remove the range: one number per player
 
-**Layer:** 6 · **State:** doing · **Lane:** Davids-MacBook-Pro-54105 · **DG 3.0** · **product truth / presentation · small**
+**Layer:** 6 · **State:** done · **Lane:** Davids-MacBook-Pro-54105 · **DG 3.0** · **product truth / presentation · small**
 **Source:** David's ruling 2026-09-03 06:22 ET (Tower session `6f07a6c0`, message stamped 10:22:36Z), verbatim:
 *"So then, plus or minus 20, remove it, one number per player."* Twenty-three minutes earlier (05:59 ET):
 *"I don't see the point of a range if it's going to be 40 points. So either predict a number … Generally
@@ -88,3 +88,10 @@ account spend limit (resets 22:00 ET); its decisive items were verified inline b
 5. **What David sees today is unchanged until pull → `npm run build` → restart:** the served bundle
    `index-C6XzDCYI.js` (built 09-02 21:33) still prints the range on 24 of 27 roster rows. His word 09-03 evening:
    *"tomorrow is fine."*
+
+**LANDED 2026-09-03 21:1x ET — merge `505027b5` on `origin/main`** (`dg-land.sh DG-144`: rebase clean; pytest 6830
+passed / 32 skipped; frontend gate 629/629 + build; merge + push; worktree and branch removed). **NOT LIVE:** trunk
+`~/dynasty-genius-product` stays at `6f517027`, now 5 behind origin/main (DG-142 ×2 + DG-144 ×3). Going live is
+pull → `cd frontend && npm run build` → API restart, on David's word: *"tomorrow is fine"* (09-03 ~19:45 ET) and
+*"land it when the review is clean"* (~19:50 ET).
+
