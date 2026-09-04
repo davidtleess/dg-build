@@ -1,6 +1,6 @@
 # DG-146 — A small rookie marker on the roster row
 
-**Layer:** 6 · **State:** doing · **Lane:** Davids-MacBook-Pro-54105 · **DG 3.0** · **product truth / presentation · small**
+**Layer:** 6 · **State:** done · **Lane:** Davids-MacBook-Pro-54105 · **DG 3.0** · **product truth / presentation · small**
 **Source:** David, 2026-09-03 23:35 ET (03:35:57Z), answering Greg's plain-words question about DG-144's consequence #1 ("in the
 roster table, the wide range was the only thing that made a rookie-model number look different from a measured one.
 Now they look identical there. The player card still says which model scored him. Fine as is, or do you want a small
@@ -37,3 +37,23 @@ unchanged.
 ---
 
 **Notes**
+
+**Build + review record (Greg).** Cut 2026-09-03 23:5x ET from origin/main `22d904b0`; TDD — `RosterAuditRookie.test.jsx`
+RED first (1 failed | 1 passed; the blend guard is green by construction). `5f19ebdf`: `ROOKIE_MARKER` minted in
+`copy.ts`, the word after the name in `RosterAuditRow.tsx` on `is_prospect`, `.dg-roster__rookie` in `RosterAudit.css`
+(tokens only; census unchanged). First gate attempt failed on import order and the smoke on a missing `timeout`
+binary (macOS); the re-run: gate GREEN (631), `npm run visual:smoke` **25/25**, marker visible on Kaelon Black / Omar
+Cooper Jr. / Fernando Mendoza in `artifacts/visual/roster-audit-desktop.png`. Panel 09-04 00:1x–00:2x ET, 3 lenses ×
+2 refuters, 37 agents — **21 verifiers died on the spend limit ("resets 4:10am")**; the honesty lens was fully
+verified, the correctness and protocol lenses' items re-verified inline by Greg (gate, smoke, census, commit paths,
+base). Survivors → `54532718`: the "player fact" wording corrected everywhere (the flag is derived, see above); the
+Players filter says "Rookies"; the test's rookie fixture carries the live row shape (`PROSPECT_C`, model status not
+applicable, no percentile); the CSS comment says the border is decorative. Re-run on the final tree: gate GREEN
+(631), smoke **25/25**. Refuted/unactioned notes: "Rookie" beside a blank value would be honest and is unreachable
+today; at 1440 the word wraps "Details" to a second line on two rows (taller row, never a wider table — DG-117/128).
+
+**LANDED 2026-09-04 07:30 ET — merge `12023dff` on `origin/main`** (rebased onto DG-145's `024de1ac`; pytest 6843
+passed / 32 skipped; frontend gate 637/637 + build; worktree removed). **NOT LIVE**: trunk `6f517027`, now 14 behind
+(DG-142 ×2, DG-144 ×3, DG-143 ×3, DG-145 ×3, DG-146 ×3). Live = pull before 09:00 or after 14:00 (Fred's window) →
+`cd frontend && npm run build` → API restart — on David's word; not given as of 07:31.
+
