@@ -1,6 +1,6 @@
 # DG-145 — Free agents show "FA" on the card
 
-**Layer:** 6 (+2 if the one-place decision lands in the served-team rule) · **State:** todo · **Lane:** — · **DG 3.0** · **product truth / presentation · small**
+**Layer:** 6 (+2 if the one-place decision lands in the served-team rule) · **State:** todo · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **product truth / presentation · small**
 **Source:** David, 2026-09-03 05:59 ET (Tower session `6f07a6c0`, message 09:59:20Z), verbatim: *"I think free agents
 should show 'FA' on the card."* Filed 2026-09-03 21:0x ET by Greg (`davidleess-eb [a78c76]`) under David's 19:5x ET
 "then plan a few hours of work and get the team going"; assigned to Bob.
