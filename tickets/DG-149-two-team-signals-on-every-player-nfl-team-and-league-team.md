@@ -1,6 +1,6 @@
 # DG-149 — Two team signals on every player, in different spots: NFL team (FA when none) and league team (FA when unowned)
 
-**Layer:** 6 (+2 for the league team name) · **State:** todo · **Lane:** — · **DG 3.0** · **product truth / presentation · small-medium**
+**Layer:** 6 (+2 for the league team name) · **State:** todo · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **product truth / presentation · small-medium**
 **Source:** David, 2026-09-04 07:3x ET, verbatim: *"there should be a signal on every player NFL Team (including the FA tag
 if they don't have a team) and Team = team they are on in my league i.e. woodbury riders or if they are a FA they get the
 FA tag there too. they should be in different spots - no you can leave it by dleess"* — his answer to Greg's two
