@@ -35,3 +35,26 @@ word then rests on a player fact with no frontend change.
 ---
 
 **Notes**
+
+**Acceptance — LANDED `c7ac3484` 2026-09-04 08:0x ET by Bob (`~/dg-build/bin/dg-land.sh DG-147`).** Built `f1da0029`
++ review fix `e8ee6c11`. **NOT live** (trunk `6f517027`; needs the pull + build + restart on David's word).
+
+Three seams as specified: the index admits an ENGINE_A row for any ROSTERED rookie (measured on the served artifact:
+255 → 263, and the newly admitted rows are exactly the eight named above, nothing else); `is_prospect` is Sleeper's
+`years_exp == 0`, with the engine standing in only when Sleeper never said; `draft_class` rides the roster row.
+Verified through the ROUTE, not only `run_audit_pvo`: `draft_class` is in `_SCALARS` and `map_player` copies it, so
+the served row carries 2026 where it carried null. All 44 rostered ENGINE_A rows are `years_exp` 0; no rostered
+non-ENGINE_A row is; David's four rookies were already drafted in-league, so his screen is unchanged. Backend 6,850;
+frontend gate 639.
+
+**Adversarial review: 3 lenses ran, EVERY verifier died on the account spend limit** (21 of 29 agents lost). The two
+should-fix findings were judged inline against the code and the data, and both were real:
+- **Fixed.** Routing a fallback rookie through the ROOKIE contract made the backend emit *"Engine A (prospect) not yet
+  validated"*, while `copy.ts` matched the token prefix and returned ONE fixed sentence blaming the ACTIVE-PLAYER
+  model — the screen named a model the backend never consulted. The dictionary now answers the Engine A variant with
+  the honest fact (*"the rookie model has not scored him"*) and keeps the active-player wording for Engine B. This is
+  the sentence on the first waiver rookie David adds: 364 of the 400 free-agent 2026 skill rookies have no
+  rookie-model row.
+- **Fixed.** The universe path read the ARTIFACT's `years_exp` while team and age two lines above read the LIVE
+  Sleeper row (DG-137 / DG-139). The live row now wins, artifact as fallback; pinned both ways.
+- Note, unbuilt: DG-146's comments still describe the flag's source as the draft class. Cosmetic, in DG-146's file.
