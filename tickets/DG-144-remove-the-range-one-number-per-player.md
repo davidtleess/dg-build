@@ -13,11 +13,11 @@ DG-128 ruling ("the band ships with the number").** Filed 2026-09-03 19:2x ET by
 of whichever engine produced the number: the 388 measured rows carry 2 × `DVS_SIGMA_B` (QB 44.8 / RB 45.6 / WR 40.0 /
 TE 47.2) and the 80 rookie-model rows 2 × `DVS_SIGMA_A` (QB 80.0 / RB 40.8 / WR 64.8 / TE 59.4) — because the only
 per-player form (the blend) fires on 0 of 12,227 rows. It describes that engine's average model error at that
-position, never the player, and David has ruled it off the screen. *(Corrected 09-03 21:0x by the review panel: the
+position, never the player, and David has ruled it off the screen. *(Corrected 09-03 23:2x ET on the review panel's finding: the
 first filing said "four distinct widths"; there are eight, four per engine. Conclusion unchanged.)*
 
 **How we know:** `grep -rn 'likelyRange' frontend/src` → exactly two render sites (2026-09-03 19:20 ET, trunk
-`6f517027`). Widths re-measured 2026-09-03 20:5x on the served artifact (`universe_pvo_runtime.json`, captured
+`6f517027`). Widths re-measured 2026-09-03 23:2x ET on the served artifact (`universe_pvo_runtime.json`, captured
 18:00:02Z): 468 bands = 388 `dvs_engine=B` at four widths + 80 `dvs_engine=A` at four wider ones; 188 touch 0 or 100;
 0 blend rows.
 
@@ -54,9 +54,9 @@ Then `7aced050`: range span off `RosterAuditRow.tsx`, range fact off `ValuationT
 `dg-land.sh DG-144 --dry-run` 19:4x: pytest **6830 passed / 32 skipped**, frontend gate green, merge builds, push
 accepted in rehearsal.
 
-**Review, 19:5x–20:4x ET — 5 lenses × 3 refuters, 92 agents (honesty · correctness · completeness · protocol ·
+**Review, ~19:50–20:15 ET — 5 lenses × 3 refuters, 92 agents (honesty · correctness · completeness · protocol ·
 built bundle).** 29 findings, 21 survived, 8 refuted. ⚠ The three refuters on the built-bundle lens died on the
-account spend limit (resets 22:00 ET); its decisive items were verified inline by Greg instead: the fresh
+account spend limit (tripped during the panel; reset at 22:00 ET); its decisive items were verified inline by Greg instead: the fresh
 `dist/assets/index-*.js` contains 0 × "Likely range", 0 × "dg-roster__band", 1 × "Dynasty value". Fixed in
 `b3cb7c34`:
 - **The blend caveat still promised a range.** `engine_ab_blend_low_sample:games=N` ended "— the range around it
@@ -89,9 +89,9 @@ account spend limit (resets 22:00 ET); its decisive items were verified inline b
    `index-C6XzDCYI.js` (built 09-02 21:33) still prints the range on 24 of 27 roster rows. His word 09-03 evening:
    *"tomorrow is fine."*
 
-**LANDED 2026-09-03 21:1x ET — merge `505027b5` on `origin/main`** (`dg-land.sh DG-144`: rebase clean; pytest 6830
+**LANDED 2026-09-03 23:26 ET — merge `505027b5` on `origin/main`** (`dg-land.sh DG-144`: rebase clean; pytest 6830
 passed / 32 skipped; frontend gate 629/629 + build; merge + push; worktree and branch removed). **NOT LIVE:** trunk
 `~/dynasty-genius-product` stays at `6f517027`, now 5 behind origin/main (DG-142 ×2 + DG-144 ×3). Going live is
-pull → `cd frontend && npm run build` → API restart, on David's word: *"tomorrow is fine"* (09-03 ~19:45 ET) and
-*"land it when the review is clean"* (~19:50 ET).
+pull → `cd frontend && npm run build` → API restart, on David's word: *"tomorrow is fine"* (09-03 19:26 ET) and
+*"land it when the review is clean"* (19:42 ET).
 

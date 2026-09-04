@@ -1,10 +1,10 @@
 # DG-146 — A small rookie marker on the roster row
 
 **Layer:** 6 · **State:** todo · **Lane:** — · **DG 3.0** · **product truth / presentation · small**
-**Source:** David, 2026-09-03 ~21:35 ET, answering Greg's plain-words question about DG-144's consequence #1 ("in the
+**Source:** David, 2026-09-03 23:35 ET (03:35:57Z), answering Greg's plain-words question about DG-144's consequence #1 ("in the
 roster table, the wide range was the only thing that made a rookie-model number look different from a measured one.
 Now they look identical there. The player card still says which model scored him. Fine as is, or do you want a small
-marker back in the table?"). Verbatim: **"2) small marker indicating theyre a rookie."** Filed 09-03 21:4x ET by Greg
+marker back in the table?"). Verbatim: **"2) small marker indicating theyre a rookie."** Filed 09-03 23:38 ET by Greg
 (`davidleess-eb [a78c76]`), who builds it.
 
 **Problem:** since DG-144 a rookie's number (rookie model: draft capital + age) and a veteran's measured number look

@@ -2,7 +2,7 @@
 
 **Layer:** 6 (+2 if the one-place decision lands in the served-team rule) · **State:** todo · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **product truth / presentation · small**
 **Source:** David, 2026-09-03 05:59 ET (Tower session `6f07a6c0`, message 09:59:20Z), verbatim: *"I think free agents
-should show 'FA' on the card."* Filed 2026-09-03 21:0x ET by Greg (`davidleess-eb [a78c76]`) under David's 19:5x ET
+should show 'FA' on the card."* Filed 2026-09-03 23:26 ET by Greg (`davidleess-eb [a78c76]`) under David's 19:42 ET
 "then plan a few hours of work and get the team going"; assigned to Bob.
 
 **Problem:** since DG-137 the served team is Sleeper's current team. A player Sleeper lists with no NFL team arrives
@@ -11,9 +11,9 @@ with a null team, and the product prints a dash where a manager expects the leag
 partners and movers are to be measured).
 
 **How we know:** David's sentence above; `grep -n nfl_team frontend/src/roster/RosterAuditRow.tsx` → `:73` (2026-09-03
-20:5x ET). First measurement, before any build: how many served rows carry a null team, and how many of David's 27.
+23:1x ET). First measurement, before any build: how many served rows carry a null team, and how many of David's 27.
 
-**Reading of "free agent" — RULED by David 2026-09-03 ~21:35 ET.** Greg asked: *"FA: do you mean players with no NFL
+**Reading of "free agent" — RULED by David 2026-09-03 23:35 ET (03:35:57Z).** Greg asked: *"FA: do you mean players with no NFL
 team, the way Sleeper shows FA? Or players nobody in your league owns?"* David, verbatim: **"1) nobody in the league
 owns."** So "FA" = a player on no roster in his 12-team Sleeper league — a LEAGUE free agent, read from the latest
 league roster capture, never a training-time fact. *(Greg's first filing assumed NFL free agent; that reading is

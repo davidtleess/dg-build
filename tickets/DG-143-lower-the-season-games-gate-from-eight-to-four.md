@@ -88,11 +88,11 @@ untouched, since each player's position is fixed by his own xvar.** Tower propos
 freezing would silently redefine the statistic as "rank among players with 8+ games". **Do not land DG-143
 without putting this to David with both variants measured on his own 27 rows.**
 
-**LANDED 2026-09-03 21:5x ET — merge `22d904b0` on `origin/main`, on David's word.** Greg asked him in plain terms
-(~21:25 ET): "lowering the games threshold gives 114 more players a number, including Wilson and Allen on your roster.
+**LANDED 2026-09-03 23:40 ET — merge `22d904b0` on `origin/main`, on David's word.** Greg asked him in plain terms
+(~23:28 ET): "lowering the games threshold gives 114 more players a number, including Wilson and Allen on your roster.
 Side effect: because more players enter the comparison, everyone's position percentile rises about 7 points on
-average, and nobody swaps places with anybody. Do you want that landed with tomorrow's pull, or held?" David, ~21:35
-ET, verbatim: **"3) yes land it"**. Landed by Greg (`davidleess-eb [a78c76]`) via `dg-land.sh DG-143`: rebased onto
+average, and nobody swaps places with anybody. Do you want that landed with tomorrow's pull, or held?" David, 23:35
+ET (03:35:57Z), verbatim: **"3) yes land it"**. Landed by Greg (`davidleess-eb [a78c76]`) via `dg-land.sh DG-143`: rebased onto
 origin/main (on top of DG-144); pytest **6834 passed / 33 skipped**; frontend gate 629/629 + build; merge + push;
 worktree removed. One extra commit `5426ffbd` before landing: the gate comment now cites this ticket's audited market
 figures (0.634-0.711 across seven snapshots vs 0.788-0.805) instead of the date-lucky 0.711-vs-0.795; no behaviour
