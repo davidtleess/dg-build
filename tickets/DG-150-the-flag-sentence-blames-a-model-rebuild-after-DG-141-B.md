@@ -1,6 +1,6 @@
 # DG-150 — After DG-141 (B), the morning flag's sentence still blames a model rebuild for a change that is a player's details moving
 
-**Layer:** 6 · **State:** todo · **Lane:** — · **DG 3.0** · **frontend copy · small**
+**Layer:** 6 · **State:** todo · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **frontend copy · small**
 **Source:** Fred (`davidleess-eb [d4e70e]`), 2026-09-04 ~08:2x ET, while landing DG-141 under David's ruling "B";
 verified by Greg at `frontend/src/lib/copy.ts:491` before filing. Filed 09-04 08:2x ET by Greg. Assigned to Bob (idle;
 frontend lane).
