@@ -1,6 +1,6 @@
 # DG-147 — A rookie the league did not draft gets no number and no "Rookie" word on the roster, while his card scores him
 
-**Layer:** 3 (+6) · **State:** todo · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **product truth / coverage · small-medium**
+**Layer:** 3 (+6) · **State:** done · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **product truth / coverage · small-medium**
 **Source:** DG-146 review panel, honesty lens, 2026-09-04 00:1x ET, confirmed by both refuters and reproduced by Greg;
 filed 09-04 00:3x ET by Greg (`davidleess-eb [a78c76]`). Unassigned.
 
