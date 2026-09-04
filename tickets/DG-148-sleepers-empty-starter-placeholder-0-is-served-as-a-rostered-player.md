@@ -1,6 +1,6 @@
 # DG-148 — Sleeper's empty-starter placeholder "0" is served as a rostered player
 
-**Layer:** 3 (producer: league snapshot) · **State:** todo · **Lane:** — · **DG 3.0** · **product truth / data · small**
+**Layer:** 3 (producer: league snapshot) · **State:** todo · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **product truth / data · small**
 **Source:** DG-145 adversarial review (data-correctness lens), 2026-09-04 00:1x ET, reproduced by two refuters and by Bob
 on the served artifact; filed 09-04 07:5x ET by Bob (`davidleess-08 [b202b7]`) at Greg's request. Unassigned.
 **⛔ Producer path:** `src/dynasty_genius/sleeper_universe.py` writes the league snapshot the 09:00 chain consumes. Post-chain
