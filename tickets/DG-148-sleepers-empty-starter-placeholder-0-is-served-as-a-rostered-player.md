@@ -1,6 +1,6 @@
 # DG-148 — Sleeper's empty-starter placeholder "0" is served as a rostered player
 
-**Layer:** 3 (producer: league snapshot) · **State:** todo · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **product truth / data · small**
+**Layer:** 3 (producer: league snapshot) · **State:** done · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **product truth / data · small**
 **Source:** DG-145 adversarial review (data-correctness lens), 2026-09-04 00:1x ET, reproduced by two refuters and by Bob
 on the served artifact; filed 09-04 07:5x ET by Bob (`davidleess-08 [b202b7]`) at Greg's request. Unassigned.
 **⛔ Producer path:** `src/dynasty_genius/sleeper_universe.py` writes the league snapshot the 09:00 chain consumes. Post-chain
@@ -37,3 +37,32 @@ artifact has no row `"0"` and rostered == 273 (or whatever the league truly hold
 ---
 
 **Notes**
+
+**AUTHORIZED** — David, 2026-09-04 19:34:46Z (15:34 ET), verbatim in his own bare message (verified at source, not
+from a relay): *"Yes, you have permission to touch a data capture."*
+
+**Acceptance — LANDED `144f1dfc` 2026-09-04 ~15:5x ET by Bob (`~/dg-build/bin/dg-land.sh DG-148`).** Backend 6,950.
+**Takes effect on the next SCHEDULED capture — no manual refresh** (a same-day re-capture costs the morning
+comparison; see the DG-137 lesson). Idempotent by construction: the capture writes a new run directory each time and
+`_build_roster_context` is a pure function of the roster payload.
+
+**⚠ THE COUNT MOVES AND IT IS NOT DATA LOSS.** Measured on the 2026-09-04 13:00 capture:
+**rostered ids 274 → 273**, and the single id that goes is `"0"` — nothing else. The placeholder appears **8 times,
+all in starter slots, in no roster's `players` list**, and it is the ONLY id anywhere in starters/taxi/reserve
+missing from `players` across all 12 rosters. Anyone reading a 274→273 drop in a future report should read it here.
+
+**One deliberate departure from this ticket's "Done".** It said membership should be defined from
+`players | taxi | reserve` with starters as a flag. Membership KEEPS THE UNION and only the placeholder is excluded.
+The tidier rule gives the identical answer on every roster today, but a real player who ever appeared only in a
+starter slot would then vanish silently from David's roster — a far worse failure than the one visible junk row this
+removes. The reason is in the code beside the choice.
+
+**Tests red first: 3 of 6.** The placeholder in a starter slot creating no row; never taking a manager's name (it was
+attributed to whichever roster was processed last, so the phantom CHANGED OWNER as roster order changed); ignored in
+every list it can appear in. Also pinned green: a real starter keeps his flag and his roster, a player listed only as
+a starter is still rostered (the union, guarded), and falsy ids are still ignored.
+
+**Knock-on, measured on the 18:00 artifact 09-04:** the phantom was one of the **3** cards that print "FA" in the NFL
+slot directly above "Rostered by <manager>". After the next capture that is **2** — Tyreek Hill and Austin Ekeler,
+both Dseidman's. Those two are a real contradiction on any reading and are held pending David's ruling on which
+instance of "FA" is the wrong one (see DG-150 / the third-FA question).
