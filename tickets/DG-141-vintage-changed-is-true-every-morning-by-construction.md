@@ -1,6 +1,6 @@
 # DG-141 — `vintage_changed` is true every morning by construction: a microsecond timestamp is hashed into `provenance_hash`, poisoning the PAIR while the semantic half still works
 
-**Layer:** 2 · **State:** open · **Lane:** unclaimed · **DG 3.0** · **capture provenance / signal integrity · small**
+**Layer:** 2 · **State:** open · **Lane:** Davids-MacBook-Pro-69536 · **DG 3.0** · **capture provenance / signal integrity · small**
 **Source:** measured by Fred (davidleess-45) 2026-09-02 ~22:30; the narrower framing below (the pair is
 poisoned, the semantic half works) came out of Tower's counter-example and Fred's own correction of his first
 wording — each session corrected the other, and neither claim here is one session's unchecked assertion. Filed while closing DG-134, after Tower asserted in two
