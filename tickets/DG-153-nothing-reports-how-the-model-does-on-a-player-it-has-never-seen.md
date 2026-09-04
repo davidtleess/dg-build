@@ -1,6 +1,6 @@
 # DG-153 — Nothing reports how the model does on a player it has never seen
 
-**Layer:** 3 · **State:** todo · **Lane:** — · **DG 3.0** · **model honesty · medium**
+**Layer:** 3 · **State:** todo · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **model honesty · medium**
 **Source:** Bob (`davidleess-08 [b202b7]`), 2026-09-04 ~13:5x ET, found while measuring DG-027/DG-026 and filed at
 Greg's direction as its own ticket — it is a bigger finding than the split bug it fell out of and must not be buried
 in that closeout. **Neither DG-027 nor DG-026 names it.**
