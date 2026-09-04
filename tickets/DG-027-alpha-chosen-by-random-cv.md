@@ -1,6 +1,6 @@
 # DG-027 — The penalty is chosen by random CV on repeated-player panel data
 
-**Layer:** 3  ·  **State:** todo  ·  **Lane:** —  ·  **DG 3.0**
+**Layer:** 3  ·  **State:** todo  ·  **Lane:** Davids-MacBook-Pro-48631  ·  **DG 3.0**
 **Source:** Tower, 2026-08-18, adversarial review of the Codex program
 
 **Problem:** Alpha is selected with random 5-fold cross-validation over pooled multi-season rows. The
