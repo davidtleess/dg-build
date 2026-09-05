@@ -177,6 +177,31 @@ This must be reported as the model's honest disagreement, not omitted. A disagre
 terms independently is the "find where the market is wrong" edge David asked for (08-31 ruling 2). Omitting him
 would make the apparent agreement an artifact of which players we happened to measure.
 
+## 5d. THE REG-ONLY CHOICE, MEASURED — and a conflation corrected before it reached David
+
+Fred flagged that a REG-only outcome would systematically underrate *"a player whose value is concentrated in
+playoff weeks"*, with the errors compounding across both terms. **That conflates two different things, and the
+literal version is not true.**
+
+- **Fantasy playoff weeks are NFL weeks 15–17. They are INSIDE the regular season and are already fully counted.**
+- What my definition excludes is the **NFL postseason, weeks 19–22** — which no fantasy league scores at all.
+
+Measured across 1999–2025, both questions:
+
+| definition | startable player-seasons | change vs REG-only |
+|---|---:|---|
+| **REG only** (mine) | 3,348 | — |
+| REG + POST | 3,349 | **255 differ (7.6%) — 128 added, 127 dropped** |
+| ranked on **weeks 15–17 only** | 3,353 | 1,731 differ (51.7%) — 868 in, 863 out |
+
+**On (a): the choice is real but small and NOT directional.** 128 in against 127 dropped is as close to a wash as
+the data can give. There is no systematic under-rating to compound, so the "errors compound rather than cancel"
+concern does not hold for this choice — though the ruling is still David's, and 7.6% is not zero.
+
+**On (b): the 51.7% churn is a three-week sample being noisy, not a signal we are missing.** Ranking dynasty assets
+on a 3-game window would be mostly luck. It is not an argument for changing the outcome; if anything it is an
+argument against it.
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
