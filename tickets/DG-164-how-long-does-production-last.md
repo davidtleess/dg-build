@@ -806,6 +806,37 @@ zero.** Same age, same tier, opposite asset classes — measured, not asserted. 
 retracted retention vector and are void as to magnitude; he is re-running the null on R and the limit test in its
 corrected form (V → A(0)·R(1) as the discount → 0, still tying to the board Codex reproduced).
 
+## 5x. ⛔ A TIE SKIPPED THE BAR RANK AND SILENTLY DELETED 284 ROWS — my defect, found by printing
+
+**`retention_R_FIXED.json` supersedes `retention_R_FINAL.json`.** Three changes: a complete contiguous partition, a
+corrected zero-floor warning, and a real defect in my own delivered data.
+
+**THE DEFECT.** The bar was located with `rank == N` under `method="min"`. **When two players tie at rank N−1,
+rank N is skipped entirely**, the lookup returns nothing, the bar is `NaN`, every margin that season becomes `NaN`,
+and `pd.qcut` **drops those rows with no error**. It hit **WR 2024: 284 cohort-year observations across 71 distinct
+players — 3.3% of the WR sample — excluded from every published WR cell.** Fixed by taking the **N-th largest
+value**, which always exists. Verified: **0 NaN margins**, and `assert f.md.notna().all()` now guards the
+decile assignment so a future recurrence fails loudly instead of shrinking the sample.
+
+⭐ **This was found by PRINTING the edges, not by a test.** The WR row came back `-inf | +inf | +inf …` — all
+unbounded — which is obviously wrong on sight and invisible in any aggregate. Every cell count, every R value and
+every interval still looked entirely reasonable with 3.3% of receivers missing. **The whole-file statistics cannot
+see a silently dropped subgroup; only looking at the object can.**
+
+**THE PARTITION.** `edge_lo`/`edge_hi` are now the **decile cut points**, not observed min/max, so bin *k*'s
+`edge_hi` **is** bin *k+1*'s `edge_lo` exactly and the outermost are unbounded. **Suppressed entries carry edges
+too.** Every possible margin therefore lands in exactly one named bin — published or suppressed — and Fred's seven
+"rounding crack" blanks (Jefferson, Higgins, Purdy, Barkley, Harrison, LaPorta, Montgomery) disappear at source.
+**No gap-width threshold is needed**, which was the point: he had been forced to separate real holes from rounding
+artefacts with a tuned 0.05, and a tuned threshold is what we have spent the day refusing.
+
+**THE ZERO-FLOOR — Fred's assembly correction needs a correction.** He floored players with `margin < 1.0` at zero,
+reasoning they are below replacement. **Margin is a RATE ratio; qualifying is on season TOTALS**, and a player can
+be below the bar per game and above it for the season by playing more. Measured on the panel: **226 qualifying
+player-seasons have margin < 1.0 and 100% of them have POSITIVE VOR** — median 18.6 points, and at QB a median of
+44 with a maximum of 227. **The correct worth-zero test is projected season points ≤ the bar player's projected
+season points, not margin < 1.0.** The warning is in the file's own definition block.
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
