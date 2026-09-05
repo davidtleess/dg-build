@@ -104,14 +104,45 @@ injury report genuinely does not predict whether a player posts a qualifying sea
 - **Not tested: severity or body part.** Only counts were built. A concussion and a hamstring are the same row here.
   Given the univariate result, a severity split is a long shot, but it is genuinely untested.
 
-## 6. THE SENTENCE FOR DAVID
+## 6. FOR DAVID — in his terms
 
-Half of every number on your screen is a guess about whether the player will still be playing in a year or two, and
-that guess never looks at the injury report — which seemed obviously wrong, so we tested it. It turns out the injury
-report barely predicts it. Weeks listed as Out is a coin flip. Games played already tells us nearly everything, and
-the one thing the injury report *does* predict is that a player who shows up on it a lot is *more* likely to still
-be around — because you have to be on an NFL roster to be listed at all. Adding it would have looked like an
-improvement and would not have been one. Nothing changed.
+**What we checked.** Every score on your card is really two guesses multiplied together: how many points this
+player scores when he plays, and whether he is still playing at all a year or two from now. The second guess is
+half the number, and it is made from six things — his age, how many games he played, his points per game this
+season and the two before, and his snap share. Nothing about injuries. Meanwhile the product downloads the NFL's
+official injury report every morning and has 45,337 rows of it going back to 2018, read by nothing. That looked
+like the most obviously wrong thing in the product, so we tested it before building anything.
+
+**What we found.** The injury report barely predicts it. Counting the weeks a player was declared **Out** and
+using that alone to guess whether he is still playing in two years is almost exactly a coin flip. Adding one, two
+or three injury measurements to the forecast changes its accuracy by an amount too small to distinguish from
+chance. Adding a lot of them makes it measurably worse — not because injuries are misleading, but because each
+position's model only has a few hundred players to learn from, and a model that small gets worse every time you
+give it another thing to weigh.
+
+**The part that would have fooled us.** One injury measurement did show real signal — how often a player appears
+on the injury report at all — and it pointed the **wrong way.** Players who appear on it more often are *more*
+likely to still be playing in two years, not less. The reason is simple once you see it: you have to be on an NFL
+roster to be listed on a team's injury report. A player who is out of the league entirely never appears. So
+"frequently on the injury report" is mostly a measure of *having a job*, not of being hurt.
+
+That matters more than the headline. If we had built this feature the obvious way, it would have shown genuine
+predictive power, behaved sensibly on the screen, and quietly been measuring whether a man is employed. Nothing
+would have looked broken. It would have gone in and stayed in.
+
+**What already does the work.** Games played. On its own it predicts whether a player is still around better than
+anything in the injury report by a wide margin. It turns out that "he played fifteen games" already tells us most
+of what "he was on the injury report twice" would.
+
+**What this does not mean.** It does not mean injury data is useless — it means injury *history* does not improve
+*this particular* forecast, which is a deliberately coarse one: did he manage at least four games in either of the
+next two seasons. Three-quarters of players do. Injury data might predict **next week's** availability, or **how
+many games** he plays next season, far better; neither was tested. We also only counted injuries — a concussion
+and a hamstring were the same row. So if this comes up again, the right question is *"which forecast?"*, not
+*"didn't we try that?"*
+
+**What changed: nothing.** No feature was added, no model retrained, no number on your screen moved. This was a
+measurement, and the answer was no.
 
 ---
 
