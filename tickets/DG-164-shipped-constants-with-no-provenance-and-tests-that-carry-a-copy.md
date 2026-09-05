@@ -1,6 +1,6 @@
 # DG-164 — Four shipped constants had NO SOURCE, and their guard test carried a copy of the same wrong numbers
 
-**Layer:** 3 · **State:** open — the instance is FIXED in DG-159; **the CLASS is not swept** · **Lane:** — · **DG 3.0** · **model honesty · provenance**
+**Layer:** 3 · **State:** open — instance FIXED in DG-159, class **SWEPT CLEAN 09-05 and found to be a single instance**; what remains is (a) the standing CI detector and (b) the wider constant-provenance inventory · **Lane:** — · **DG 3.0** · **model honesty · provenance**
 **Source:** Found by Fred 2026-09-04 evening while reconciling a rank error Greg queried, during the DG-159 build.
 Filed by Greg 2026-09-05 because the finding was absorbed into DG-159's commit and has no record of its own.
 
@@ -43,6 +43,33 @@ here"*. That is a check announcing that it cannot fail. It is not the same as a 
 
 If the answer is "from the same place the code got it", the test is decoration.
 
+## ⭐ THE RULE, SHARPENED — and the first version of it was wrong (Fred, 2026-09-05, swept at `96dad300`)
+
+The obvious detector looks for **a test table that DUPLICATES a production constant**. That is the WRONG shape.
+A duplicated constant is merely redundant — if the two copies disagree, something goes red.
+
+**The dangerous shape is the opposite:** a test table whose values appear **NOWHERE in the code it guards**.
+`12.91 / 7.29 / 8.79 / 8.99` were not duplicated from anywhere — they were **the only copy in the repository.**
+That is what made the test unfalsifiable: there was nothing for it to disagree WITH.
+
+> **A test supplying the expected value of a production constant, where that value exists nowhere in
+> production, is not a check. The test has become the source of truth for the thing it is auditing.**
+
+An expected value must come from the code, from an artifact, or from a computation. Never from the test file.
+
+**SWEEP RESULT — the class is NOT widespread.** 419 test files against 219 production files at `origin/main`
+`96dad300`: **clean.** No per-position table in any test carries values absent from `src` or `app`. The grep
+tell ("no such constant exists, so it is restated here") returns **exactly one hit — `test_phase15_xvar.py`
+itself**, so the confession does not recur; but the confession is optional and the shape is not, which is why
+the detector matters more than the phrase. ✅ **The detector was validated to FIRE before it was trusted:**
+run against `f80e0309` it correctly flags `_REPLACEMENT_PPG`. A clean sweep from an unvalidated detector would
+have been [[feedback_the_failure_path_returns_the_success_signal]] all over again.
+
+⛔ **READ THE REF, NOT THE WORKING TREE.** The first clean-looking run scanned the trunk working tree, **17
+commits behind**, so it was auditing pre-DG-159 code and reading a stale hit as live. Read every file through
+`git show origin/main:<path>`. **"The working tree" is a claim about a commit, and it needs checking like any
+other claim.** See [[feedback_check_when_not_just_what]].
+
 ## WHAT IT COST, measured
 
 Decomposed on Ashton Jeanty, David's roster:
@@ -74,8 +101,10 @@ that do not contain them, or are guarded by tests holding a restated copy.
    derived-from-a-named-artifact-that-verifiably-contains-it, or **asserted with no source**.
 2. Any constant in the third bucket is either re-derived or **explicitly labelled unsourced in the file**, so the
    next reader is not misled by a comment that sounds like a citation.
-3. No guard test may take its expected value from a literal restated in the test. Expected values come from the
-   artifact or from a recomputation. **Where that is impossible, the test says so in its own docstring.**
+3. **A standing detector, in CI**, for the sharpened shape: any test table supplying expected values for a
+   production constant where those values appear nowhere in `src`/`app`. Fred's one-off exists and is
+   validated; it is not wired in, so nothing stops the shape returning. **Whatever is wired must be shown to
+   FIRE on `f80e0309` before it is believed on `main`.**
 4. ⚠ Scope check before starting: **DG-061** ("Version the scoring constants and declare their
    calibration-evidence state") is adjacent and open. Decide whether this is DG-061's first increment or a
    separate sweep — do not build both.
