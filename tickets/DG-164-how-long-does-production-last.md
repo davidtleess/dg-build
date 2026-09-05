@@ -434,6 +434,53 @@ it. S(5) rests on 6,094 observations across 1,611 players, which is more than S(
 through h=5. If the horizon is cut to three it should be for a product reason — what David wants to reason about —
 not because the fourth and fifth years are unsupported. They are the best-supported thing in the ticket.
 
+## 5m. THE TWO BARS WERE DIFFERENT QUANTITIES — Fred's cause is right, his fix is knife-edge
+
+Fred found our margins disagree by ~4.6× on the same players (his Gibbs 2.66×, mine 12.35×) and traced it to two
+independent differences. **Both are real; his diagnosis of the cause is correct and his proposed repair is not
+robust.**
+
+**(a) CONFIRMED — rank-82 on season TOTALS is a near-zero bar.** Measured, median across seasons:
+
+| pos | rank | bar points | bar **games** | bar ppg |
+|---|---:|---:|---:|---:|
+| QB | 45 | 33.4 | **4.0** | 7.50 |
+| RB | 82 | 31.1 | **8.5** | 4.01 |
+| WR | 108 | 50.2 | 12.0 | 4.10 |
+| TE | 42 | 53.3 | 12.0 | 4.01 |
+
+The RB82 player is an **8.5-game** player scoring 31 points. Fred is right: season totals at that depth are
+dominated by games played, so the bar is close to nothing and everything startable sits 10–18× above it.
+
+**(b) ACCEPTED ON ITS MERITS — the margin should be a RATE, the outcome should stay on TOTALS.** His reasoning is
+better than his prediction: totals **conflate good with healthy**, so as a conditioning variable standing in for
+*"how good is he"* a rate is the cleaner quantity, while the survival *outcome* keeps totals because staying
+available genuinely is part of lasting. Adopted.
+
+**(c) REFUTED — a rate margin does NOT restore quartile sufficiency.** His prediction was that switching to a rate
+would largely dissolve the resolution problem. It does not:
+
+- The **top-quartile span is wider on rate, not narrower** — RB 4.6× against 3.9× on totals; WR 2.8× against 2.6×.
+  The stretch at the top is a property of talent being heavy-tailed, not of the bar being near-zero.
+- The concrete case that motivated deciles, tested both ways:
+
+| bar | 2025 bar | Gibbs | Bijan | Hall | McCaffrey | Henry |
+|---|---|---|---|---|---|---|
+| RB82, rate | 3.35 ppg | Q4 | Q4 | **Q3** | Q4 | Q4 |
+| RB60, rate *(Fred's literal reading)* | 5.84 ppg | Q4 | Q4 | **Q4** | Q4 | Q4 |
+
+At RB82 the rate margin does separate Hall — **by 0.14× of margin**, with the Q4 edge at 4.01 and Hall at 3.87. At
+RB60 **all five collapse into one bucket.** So quartile sufficiency is a knife-edge that depends on where the cut
+happens to fall relative to the players in question.
+
+**Deciles stay** — not because quartiles never work, but because whether they work is a property of the boundary's
+accidental position, and that is not something to rely on. No single decile boundary is load-bearing.
+
+⛔ **THE BAR DEPTH IS UNRESOLVED AND IS NOT MINE TO CHOOSE.** RB82 (structural) against RB~60 (the literal "best
+genuinely unowned player") change the answers materially. I built at RB82 because it reached me through a relay;
+Fred now recommends the literal reading and has sent that to Greg. **I am not regenerating a third time on an
+unsettled spec.** The cells stand at RB82 and are labelled as such; when the depth is ruled, one regeneration.
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
