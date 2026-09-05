@@ -16,6 +16,14 @@ The four replacement points-per-game figures that every cross-positional number 
 - **No season of the training data reproduces them** at the shipped ranks. **Neither does any population of the
   served artifact** — four were checked.
 
+**THE FOUR CHECKS THAT DISPROVE THE CITED PROVENANCE — cheap to re-run, written up in the DG-159 acceptance:**
+1. Open the cited calibration artifact: it holds `13.47 / 8.59 / 8.65 / 9.76`, not the shipped four.
+2. No feature season of `engine_b_features_v2.csv` reproduces the shipped values at the shipped ranks.
+3. None of four populations of the served artifact reproduces them either.
+4. Grep the guard test for the literals — `test_phase15_xvar.py` restates them, **with a comment saying in so
+   many words that no such constant exists so it is restated here.** That sentence is the tell, and it was
+   sitting in the file the whole time announcing exactly what was wrong.
+
 ## ⛔ THE PART THAT MAKES THIS ITS OWN DEFECT CLASS
 
 **The coupled-identity test carried its own restated copy of the same four numbers.** So the test and the code
@@ -29,6 +37,9 @@ failure path. The failure is that **the oracle and the subject share an ancestor
 
 **The diagnostic question, and it is not the same question as "what would this print if it were broken":**
 > **"If this constant were WRONG, which test would go red — and where did THAT test get its number?"**
+
+**The tell to grep for:** any test comment along the lines of *"there is no such constant, so it is restated
+here"*. That is a check announcing that it cannot fail. It is not the same as a check that fails invisibly.
 
 If the answer is "from the same place the code got it", the test is decoration.
 
