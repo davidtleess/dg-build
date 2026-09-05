@@ -131,6 +131,52 @@ Using each player's **actual 2025 finish tier**, not the band average:
   Anyone reading my table as a ranking is misreading it: **E[seasons] is a duration, not a value, and durations are
   not comparable across positions.**
 
+## 5b. S(h) PUBLISHED, AND THE ELITE FINDING STRESS-TESTED
+
+**Fred needs the vector, not the mean.** The discount rate is the contend/rebuild toggle: contend weights S(1) far
+above S(4), and that weighting cannot be applied to an expectation after the fact. **59 cells at n ≥ 12 are
+published to `survival_curves.json`**, keyed (position, ageband, tier), carrying S1…S5 and E. Cells below n=12 are
+**suppressed, not smoothed** — for RB 30–31 elite and most of TE there is no honest cell, and a consumer must treat
+those as missing rather than fall back to the band average.
+
+**THE STRESS TEST.** The obvious objection to §4 is that it is mechanical: an elite player starts further above the
+bar, so of course he takes longer to fall below it. Tested by replacing tier with a continuous **margin** — his
+points that season over the points of the last startable player at his position. P(startable) averaged over k=1..5:
+
+| margin over the bar | ≤23 | 24–25 | 26–27 | 28–29 | 30–31 | 32+ |
+|---|---:|---:|---:|---:|---:|---:|
+| 1.0–1.3× | 45% | 33% | 20% | 19% | 21% | 13% |
+| 1.3–1.7× | 57% | 44% | 33% | 33% | 35% | 26% |
+| 1.7–2.3× | 71% | 58% | 51% | 47% | 42% | 38% |
+| 2.3×+ | 77% | 72% | 69% | 64% | 56% | 47% |
+
+**Both effects are large and neither collapses.** Distance from the bar is worth 30+ points of survival at every
+age; age still hurts at every margin. The strong form survives: **2.3×+ at 28–29 (64%) nearly doubles marginal at
+24–25 (33%)**. The sharpest defensible sentence: **being far above the bar at 32+ (47%) is worth about as much
+remaining production as being barely startable at 23 (45%)** — nine years of age, cancelled by being good.
+
+⚠ **State it precisely.** Part of the tier effect IS definitional — the outcome is "stays above a fixed bar", so
+starting further above mechanically helps. That is the mechanism a dynasty price should capture, not a flaw, but
+the supportable claim is *"how far above the bar you are today predicts longevity as strongly as age does"* and
+**NOT** *"elite players age better."* The second is a claim about ageing **rate** and this design cannot separate
+it from a floor effect.
+
+## 5c. ⚠ PUKA NACUA — the product does NOT return David's top three
+
+| | |
+|---|---|
+| Puka Nacua, WR, age 25, 2025 finish **WR1**, **3.21× the bar**, elite | |
+| S(h) | 90%, 87%, 79%, 67%, 62% |
+| **E[startable seasons]** | **3.84, 90% CI [3.47, 4.20]**, n=41 |
+
+**The highest duration of any player measured** — above Gibbs and Bijan (3.33) and Allen (3.12). Fred reports Nacua
+first on the per-season term as well, so he is **first on the product**, and the claim that the combined board
+returns David's stated top three is **not true once he is included**: it returns Nacua, then Allen/Gibbs/Bijan.
+
+This must be reported as the model's honest disagreement, not omitted. A disagreement the model can defend on both
+terms independently is the "find where the market is wrong" edge David asked for (08-31 ruling 2). Omitting him
+would make the apparent agreement an artifact of which players we happened to measure.
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
