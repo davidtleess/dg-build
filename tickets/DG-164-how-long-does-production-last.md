@@ -481,6 +481,62 @@ genuinely unowned player") change the answers materially. I built at RB82 becaus
 Fred now recommends the literal reading and has sent that to Greg. **I am not regenerating a third time on an
 unsettled spec.** The cells stand at RB82 and are labelled as such; when the depth is ruled, one regeneration.
 
+## 5n. COVERAGE OF A TOP-30 BOARD — 7 blanks, in TWO categories that need different sentences
+
+Checked the 30 highest-DVS players against the deep-bar decile cells. **7 come back blank, and lumping them
+together would be a mistake — they fail for unrelated reasons.**
+
+**Category A — no NFL season at all (3): Jeremiyah Love (RB 21), Harold Fannin (TE 22), Jadarian Price (RB 22).**
+Not a sample-size problem and no threshold fixes it. They have no 2025 panel row, therefore no production, therefore
+no margin, therefore no cell. ⭐ **This is a product-level gap, not a cell gap: the survival term cannot price a
+rookie at all, and rookies are a core dynasty asset class.** Engine A exists precisely for players with no NFL
+production; the horizon term has no equivalent and would need a college-to-NFL survival panel to get one. Worth its
+own ticket rather than a footnote.
+
+**Category B — cell suppressed (4), and three of the four are tight ends:**
+
+| player | pos | age | cell | n |
+|---|---|---:|---|---:|
+| Brock Bowers | TE | 23 | ≤23 / d7 | 7 |
+| Colston Loveland | TE | 22 | ≤23 / d6 | 7 |
+| George Kittle | TE | 32 | 32+ / d6 | 8 |
+| **Drake Maye** | QB | 24 | 24–25 / d7 | **11** |
+
+TE thinness has been flagged since §6 and this is where it lands on names David reads. **Maye is one player short
+of the threshold** — worth stating as "eleven comparable players, one below our publishing bar" rather than as a
+blank, because that is what it is.
+
+**The sentence beside a Category B blank should follow the McCaffrey model** — say how rare the player's situation
+is, which is the actual content of the suppression. For Bowers and Loveland: *only seven tight ends since 1999 have
+produced at this level by 23.* That is a statement about them, not about us.
+
+## 5o. INVARIANTS THAT MUST HOLD IF THE ASSEMBLY IS CORRECT — checkable without rebuilding Fred's half
+
+Greg asked whether a property exists that would catch an assembly defect in a top-20 board. **Yes — five, and two
+of them are strong.** All need only a three-column list from Fred: *(player, cell, duration factor)*.
+
+1. ⭐ **CELL DETERMINISM.** The duration factor must be a pure function of (position, age band, margin decile).
+   **Any two players sharing a cell must have identical duration factors**, and any player's factor must equal my
+   published `E` for his cell at d=1. **This is the check that would have caught the totals-vs-rate mismatch
+   instantly** — Fred's Gibbs at 2.66× and mine at 12.35× land in different deciles, so the cell assignment itself
+   disagrees before any arithmetic runs.
+2. ⭐ **THE LIMIT TEST, and it ties the new number to a VERIFIED artifact.** Codex reproduced the one-season board
+   to the decimal. As the discount → 0, `V → d·S(1)·A(0)`, so **the asset ordering must converge to the ordering of
+   S(1) × (the verified one-season value)**. S(1) is one published column of mine and A(0) is the artifact Codex
+   checked, so this is computable entirely from verified inputs. If a small-d board does not match it, the
+   assembly is wrong and neither half has to be rebuilt to find out.
+3. **BOUND.** With three horizons and d ≤ 1, every duration factor lies in **[0, 3]**. Anything above 3 is a
+   summation or lookup bug.
+4. **MONOTONICITY.** At a fixed position and age band, a higher margin decile must give a duration factor no
+   smaller. My published cells satisfy this; a violation on the board that is not in my cells is assembly.
+5. **THE CROSSING TEST.** Within a position, the only pairs whose order may change between two discount settings
+   are pairs whose survival curves cross — and I can enumerate exactly which cell-pairs those are (§5e/§5k).
+   **Any reordering on the board that does not correspond to an enumerated crossing pair is a defect.**
+
+⚠ **What these do NOT cover:** they check that the assembly used my cells correctly. They cannot check that Fred's
+value term is right, and they cannot check the bar-depth question. **Independent reproduction is still worth doing
+for the value half** — my invariants only retire the assembly risk, which is one of the three.
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
