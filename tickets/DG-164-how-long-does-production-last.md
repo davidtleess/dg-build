@@ -767,6 +767,45 @@ VOR by year four**; a **30+ QB** is worth **26.5**.
 median does not protect you** — the median guards against outliers in the numerator, not against a denominator
 that is small by design. **Check the scale of the denominator before publishing any ratio.**
 
+## 5w. `retention_R_FINAL.json` — the ONE quantity, and S(h) drops out of the formula
+
+**`R(h) = mean(VOR at h, unconditional) / mean(VOR at 0)`, per cell. 129 cells, 39 suppressed (23%), keyed
+identically to the survival cells** so the join is one lookup. **Zero cells flagged fragile** — the smallest cell
+denominator is well clear of the instability threshold, so the artifact that killed the per-player ratio does not
+recur at cell level.
+
+    V = A(0) × Σ dʰ · R(h)
+
+⛔ **SURVIVAL IS INSIDE R AND THE 129 SURVIVAL CELLS ARE NO LONGER A FORMULA INPUT.** A non-qualifier contributes
+zero, so `mean(VOR_h) = P(qualify) × E[VOR_h | qualify]`. Multiplying by S(h) double-counts the exit. The file
+carries that warning in its own definition block.
+
+**(iii) — pure levels — was rejected for a reason worth recording: it reintroduces the defect David opened the
+program with.** Under levels every player in a bin gets an identical trajectory, so the top RB bin returns the same
+asset value for McCaffrey, Gibbs, Bijan, Taylor and Achane — five backs spanning 9.73 to 11.96 of edge, all tied.
+**That is five backs at 58.05 again by a different route.** (Fred's catch.)
+
+⭐ **AND THE TOP-BIN NUMBERS ARE THE CLEANEST ANSWER TO DAVID'S SUPERFLEX QUESTION THE PROGRAM HAS PRODUCED:**
+
+| top margin bin | n | R1 | R2 | R3 | R4 | R5 |
+|---|---:|---:|---:|---:|---:|---:|
+| **QB 30–31** | 13 | 59% | 90% | 76% | 59% | **61%** |
+| WR 30–31 | 26 | 57% | 59% | 45% | 31% | 15% |
+| **RB 30–31** | 12 | 43% | 28% | 7% | 3% | **0%** |
+| QB 24–25 | 14 | 77% | 55% | 61% | 62% | 41% |
+| RB 24–25 | 27 | 70% | 62% | 57% | 48% | 21% |
+| WR 24–25 | 30 | 81% | 75% | 69% | 50% | 53% |
+
+**An elite 30-year-old quarterback keeps 61% of his edge at year five. An elite 30-year-old running back keeps
+zero.** Same age, same tier, opposite asset classes — measured, not asserted. That is the sentence for David.
+
+⚠ Note QB 30–31 shows R2 (90%) above R1 (59%) — **that is the recovery phenomenon from §5t, and we now know not to
+"fix" it.** Had the monotonicity gate survived, this cell would have been rejected or smoothed.
+
+**Void as a consequence, flagged by Fred:** his permutation null and probe orderings were computed against the
+retracted retention vector and are void as to magnitude; he is re-running the null on R and the limit test in its
+corrected form (V → A(0)·R(1) as the discount → 0, still tying to the board Codex reproduced).
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
