@@ -1,6 +1,6 @@
 # DG-159 — One scale for every position AND both engines: the rookie engine stops flattering rookies
 
-**Layer:** 3 · **State:** open · **Lane:** — · **DG 3.0** · **model correctness / product truth · medium**
+**Layer:** 3 · **State:** open · **Lane:** Davids-MacBook-Pro-69536 · **DG 3.0** · **model correctness / product truth · medium**
 **Source:** David's rulings, in sequence and all verified at source:
 * 2026-09-04 19:34:46Z (15:34 ET): *"we need to put the tight ends on the same kind of scale as the rest of the
   players … It can't have its own scale; it can have a calibration to the position, but it has to be on the same

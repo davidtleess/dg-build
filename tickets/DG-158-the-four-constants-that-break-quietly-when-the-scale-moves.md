@@ -1,6 +1,6 @@
 # DG-158 — The four score-unit constants that break when the scale moves
 
-**Layer:** 3 (+6) · **State:** todo · **Lane:** — · **DG 3.0** · **coupled with Fred's rescale · medium**
+**Layer:** 3 (+6) · **State:** done · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **coupled with Fred's rescale · medium**
 **Source:** Fred found three while scoping the tight-end rescale; Bob verified all three and found a fourth. Filed
 09-04 ~18:4x ET by Bob. **David ruled the rescale ships before kickoff** (2026-09-04 22:30:11Z = 18:30 ET, verbatim):
 *"take decision one now. then build before week 1"*.
@@ -54,3 +54,27 @@ his core lands LAST as the switch. Neither alone.** These four change nothing ob
 ---
 
 **Notes**
+
+**Acceptance — LANDED `af6ff61b` 2026-09-04 ~19:5x ET by Bob.** Backend 6,996; frontend gate 661. **NOT live**, and
+dormant by design: none of it changes anything observable until the scores actually move. **Fred's core lands LAST as
+the switch; neither half alone.**
+
+All five shipped: the counter-argument threshold as a share of the position ceiling (80.0 today at every position, so
+nobody gains or loses an argument on the day it lands); the prospect gate told about a DECLARED scale, with the
+declaration derived from the denominators so it cannot be forgotten; the model movers capped at 25 with the honest
+total beside them; the band guards; and the units-change refusal with its wording.
+
+**⚠ THE TENTH INSTANCE OF THE DAY'S DEFECT SHAPE, BUILT BY THE LANE THAT CATALOGUED THE OTHER NINE.** Wiring the
+refusal made an existing empty branch REACHABLE, and it renders *"Projections held steady — no player movement on
+this tape"* on the one morning every score in the product changes. Caught by READING the branch I had just made
+reachable, not by any test. The comment on that branch says so, and it is the strongest argument on record for why
+the wording rules exist.
+
+**Two wording corrections that came from review, both mine to have avoided.** (a) Three of my five draft strings
+claimed "nobody moved" — false in the one direction that costs a decision, because this SUPPRESSES the comparison
+rather than observing an absence; a player who genuinely fell that morning is not covered by any claim. (b) The
+section clause said "every score in a position" while the detector only verifies a position with ≥8 compared
+players and the status fires globally — confirmed by running it (TE verified over 12, QB carrying 5 → returns TE
+alone, status still fires). Narrowed to **"in the positions we could check"**, the same scope construction this
+dictionary already uses. Both are now pinned by tests asserting what the strings must NOT contain, so neither claim
+can be reintroduced without a red suite.
