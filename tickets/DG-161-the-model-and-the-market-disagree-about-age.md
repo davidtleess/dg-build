@@ -1,4 +1,4 @@
-# DG-160 — The model and the market disagree about age, and which of them is wrong is unknown
+# DG-161 — The model and the market disagree about age, and which of them is wrong is unknown
 
 **Layer:** 3 · **State:** WATCH (date-bound, see below) · **Lane:** — · **DG 3.0** · **model honesty · measurement**
 **Source:** David's ruling of 2026-08-31, selected from an options list: ***"Chase it now — it outranks the rest"***,
