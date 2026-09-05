@@ -537,6 +537,41 @@ of them are strong.** All need only a three-column list from Fred: *(player, cel
 value term is right, and they cannot check the bar-depth question. **Independent reproduction is still worth doing
 for the value half** — my invariants only retire the assembly risk, which is one of the three.
 
+## 5p. THE BAR-PROXY QUESTION — measured, and it is much cheaper than it looks (except at TE)
+
+Fred surfaced that David's ruling is a fact about **today's** league while the panel is **1999–2025**, so the
+historical bar must be a *proxy* the ruling does not choose between:
+**(a)** today's measured availability ranks frozen and applied historically (QB37 / RB60 / WR71), or
+**(b)** structural depth, rostered-count-plus-one (QB45 / RB82 / WR108) — what the cells currently use.
+He proposed escalating it to David. **Measured first, and it mostly should not be escalated.**
+
+Built both, three horizons, deciles, everything else held:
+
+| | QB / RB / WR only |
+|---|---|
+| cells in common | 146 · median \|ΔE\| **0.179**, 90th 0.433, max 0.726 *(scale 0–3)* |
+| top-25 names priceable under both | 20 |
+| **Spearman between the two proxies** | **0.872** |
+| moves > 2 places | 9 of 20 · max move 6 — and the biggest movers (Taylor, Cook, Kyren Williams) sit at **identical E values**, so their "6 places" is tie-breaking, not reordering |
+
+**On the three positions Fred actually measured, the two proxies substantially agree.** The choice is a labelling
+decision, not a finding. Escalating it would spend David's attention on a distinction his board barely sees.
+
+⛔ **BUT WE CANNOT ANSWER IT FOR TIGHT END, AND I NEARLY REPORTED THAT WE COULD.** Fred measured QB37 / RB60 / WR71
+and **no TE rank**. My first run filled the gap with **TE=34, which I invented**, and it produced **Spearman 0.274**
+with the four largest movers all tight ends — Tyler Warren 16th→2nd, Trey McBride 10th→1st. I was one step from
+reporting "the proxies disagree materially, escalate to David" on the strength of a number nobody measured. I
+caught it only because every large mover was the same position.
+
+**TE is where the proxy genuinely could matter**, and for a structural reason: it is the shallowest position, so
+eight ranks is a quarter of the pool rather than a tenth. **The actionable item is not a ruling — it is measuring
+the TE availability rank in David's league.** If TE then lands near 0.87 like the others, the whole question is
+academic and either proxy ships with a label.
+
+**The lesson is the one this ticket keeps relearning, this time against myself:** a gap filled with a plausible
+invention does not announce itself — it comes back as a headline. See
+[[feedback_a_null_needs_a_sample_that_spans_the_effect]] and §5m.
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
