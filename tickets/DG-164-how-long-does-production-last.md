@@ -249,6 +249,35 @@ about him that no fitted number would convey.
 **Also visible here:** `WR 28-29 at 2.3×+` (E=4.16) beats `WR 24-25 at 1.7–2.3×` (E=3.68). The §5b result again,
 on a cell structure that never saw the tier definition.
 
+## 5g. THE MARGIN CELLS, PUBLISHED — independent confirmation, with one comparison downgraded
+
+`survival_curves_margin.json` — **58 cells at n ≥ 12, 20 suppressed with their n listed** so a consumer can see
+what is missing rather than infer it. Carries S1..S5, E, and a bootstrapped 90% interval on E. The header states
+the definitions; suppressed cells **must not be backfilled from a neighbour**.
+
+This structure never saw the tier cut, so it is a genuine second look at §4:
+
+| cell | n | E | 90% CI |
+|---|---:|---:|---|
+| WR 28–29 · 2.3×+ | 16 | **4.16** | [3.75, 4.50] |
+| WR 24–25 · 1.7–2.3× | 61 | 3.68 | [3.36, 3.98] |
+| WR 24–25 · 1.0–1.3× | 103 | **1.81** | [1.53, 2.08] |
+| WR 30+ · 2.3×+ | 16 | **2.88** | [2.30, 3.37] |
+| WR ≤23 · 1.0–1.3× | 49 | **2.85** | [2.44, 3.23] |
+| RB 28–29 · 2.3×+ | 15 | 2.70 | [2.01, 3.25] |
+| RB 24–25 · 1.0–1.3× | 79 | 1.52 | [1.19, 1.86] |
+
+**Two forms of the claim, and they are not equally strong — I stated them as one and should not have.**
+
+- ✅ **STRONG, intervals fully separated:** an elite 28–29 WR (4.16 [3.75, 4.50]) against a *marginal* 24–25 WR
+  (1.81 [1.53, 2.08]). Same at RB: 2.70 [2.01, 3.25] against 1.52 [1.19, 1.86].
+- ✅ **STRONG, and the sentence for David:** **WR 30+ at 2.3× the bar (2.88 [2.30, 3.37]) ≈ WR ≤23 at 1.0–1.3×
+  (2.85 [2.44, 3.23])** — statistically indistinguishable. Being excellent at 30+ buys the same remaining
+  production as being barely startable at 23.
+- ⚠ **WEAKER than §4 implied:** elite 28–29 (4.16 [3.75, 4.50]) against *solid* 24–25 (3.68 [3.36, 3.98]) — the
+  intervals **overlap**. Directionally right, not separated. §4's "an elite 28–29 WR outlasts a fringe 24–25 WR by
+  more than a season and a half" is the fringe comparison and stands; **do not extend it to the solid comparison.**
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
