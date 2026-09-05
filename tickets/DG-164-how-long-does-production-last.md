@@ -202,6 +202,53 @@ concern does not hold for this choice — though the ruling is still David's, an
 on a 3-game window would be mostly luck. It is not an argument for changing the outcome; if anything it is an
 argument against it.
 
+## 5e. THE TOGGLE IS NOT INERT — Fred's mechanism is right, his conclusion is a property of his probe
+
+Fred measured the contend/rebuild discount across his six probe players, found **one swap across the whole range**,
+and concluded the toggle is nearly a no-op. **His mechanism is exactly right — a discount only reorders two players
+when their survival curves CROSS — and the conclusion does not follow.** Tested across all 59 published cells,
+1,711 pairs, rebuild d=1.00 against hard contend d=0.55:
+
+- **66 pairs reorder (3.9%).**
+- **Maximum relative repricing the toggle can produce between two players: 1.74×** (most back-loaded cell
+  RB ≤23 elite, V(1)/V(.55) = 4.22; most front-loaded RB 32+ fringe, 2.43).
+
+Representative flips: `WR 32+ mid` over `WR 24-25 fringe` (0.747 → 1.031) · `RB 28-29 elite` over `WR ≤23 fringe`
+(0.849 → 1.075) · `WR 32+ elite` over `QB 24-25 fringe` (0.953 → 1.247).
+
+**Why his probe showed nothing: it contains no front-loaded player.** Nacua, Maye, Gibbs, Robinson, Hall are young
+or prime, and Allen is a QB — the one position whose curve does not collapse. The archetype that crosses is the old
+producer with high S(1) and collapsing S(4)–S(5), and **`RB 28-29 elite` is exactly that shape and IS published**
+(n=23, S = 90/63/57/38/12, E=2.61). The archetype is not missing; it was missing from the six players he chose.
+
+## 5f. HENRY IS NOW PRICEABLE. McCAFFREY IS NOT — and that is the finding, not a gap
+
+Fred named three acceptable repairs and ruled out borrowing a neighbouring cell. Taking the two that are honest —
+**a continuous margin instead of the tier**, and **a pooled 30+ tail band**:
+
+| pos | age | margin | n | S(1..5) | E |
+|---|---|---|---:|---|---:|
+| RB | 28–29 | 2.3×+ | 15 | 86/71/65/37/11 | 2.70 |
+| **RB** | **30+** | **1.7–2.3×** | **24** | **52/45/24/14/5** | **1.40** |
+| RB | 30+ | 2.3×+ | **8** | 80/33/11/0/11 | *(suppressed)* |
+| WR | 28–29 | 2.3×+ | 16 | 100/90/80/83/62 | 4.16 |
+| WR | 30+ | 2.3×+ | 16 | 88/81/56/42/21 | 2.88 |
+
+**Derrick Henry is solved.** 2025 margin **1.99× the bar** → `RB 30+, 1.7–2.3×`, **n=24**, **E = 1.40**. Above the
+publishing bar, no borrowing required.
+
+**Christian McCaffrey is not, and I am not going to invent him.** 2025 margin **2.97×** → `RB 30+, 2.3×+`, **n=8**.
+The cell's own numbers give it away — S(4)=0% followed by S(5)=11% is noise, not football.
+
+⭐ **But the n=8 IS the answer, and it is a better one than a number would be.** Since 1999 there have been **eight
+running-back seasons** at age 30+ producing at 2.3× replacement. Eight, in twenty-seven years. **We cannot price
+McCaffrey's horizon because there is almost no precedent for what he currently is** — and telling David that is
+more honest and more useful than a curve fitted to eight players. It is also, separately, a reason to be cautious
+about him that no fitted number would convey.
+
+**Also visible here:** `WR 28-29 at 2.3×+` (E=4.16) beats `WR 24-25 at 1.7–2.3×` (E=3.68). The §5b result again,
+on a cell structure that never saw the tier definition.
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
