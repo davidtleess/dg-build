@@ -729,6 +729,44 @@ corrected at the top. Bottom-half cells run 102–328 players and should support
 top half by position — QB 88/89/81/84/85 · RB 77/70/60/57/51 · WR 79/76/72/68/65 · TE 71/75/70/61/59;
 bottom half by age — ≤25 135/142/135/146/138 · 26–29 113/103/107/110/95 · 30+ 102/92/92/91/80.
 
+## 5v. ⛔ THE RETENTION VECTOR WAS WRONG IN BOTH HALVES — a near-zero denominator manufactured it
+
+Fred challenged the bottom-half figures as a small-denominator artifact: retention is a ratio of value-over-
+replacement, and near the bar the denominator is tiny by construction. **He was right, and it was worse than he
+estimated — the top half was wrong too.**
+
+| | y1 | y2 | y3 | y4 | y5 |
+|---|---:|---:|---:|---:|---:|
+| **top half** (i) median of *individual* ratios *(what I published)* | 85% | 79% | 75% | 72% | **69%** |
+| **top half** (ii) ratio of *cell means* | 72% | 61% | 50% | 40% | **31%** |
+| **bottom half** (i) *(what I published)* | 126% | 129% | 124% | 133% | **126%** |
+| **bottom half** (ii) ratio of cell means | 90% | 71% | 58% | 49% | **38%** |
+
+Median individual VOR₀ is **105** in the top half and **32.5** in the bottom. Nobody in the bottom half was gaining
+value; a near-zero denominator manufactured the appearance. **And my top-half number — the one I told Fred to key
+the top of the board on — overstated elite players by more than a factor of two at year five (69% against 31%),
+which is a larger error than the double-counting I was correcting for when I flagged it.**
+
+⭐ **THE CONSEQUENCE THAT MATTERS MOST: (ii) AND (iii) ARE UNCONDITIONAL — SURVIVAL IS ALREADY INSIDE THEM.**
+(i) conditioned on still qualifying, which is why it read high and why it needed multiplying by S(h). A
+non-qualifying player contributes **zero** to (ii) and (iii). **Multiplying either by S(h) counts the exit twice.**
+So the formula collapses rather than gets patched:
+
+    V = A(0) × Σ dʰ · (ii)(h)     ratio of cell means — scales to the player, S(h) is INSIDE   ← recommended
+    V = Σ dʰ · (iii)(h)           pure levels — no denominator, but does NOT scale to the player
+
+**(iii) is unconditionally right and loses the individual**: every player in a cell gets the same trajectory
+regardless of where he sits within it. Seven margin bins make that tolerable, not free. **(ii) keeps A(0) doing the
+per-player work.**
+
+**Bottom-half 3×4 on levels — all twelve cells clear n=12**, so the cross Fred asked for is supportable. The
+extremes state the position asset-class difference rawly: a **30+ RB** in the bottom half is worth **1.1 points of
+VOR by year four**; a **30+ QB** is worth **26.5**.
+
+**The lesson, and it is a general one: a ratio whose denominator can approach zero will manufacture effects, and a
+median does not protect you** — the median guards against outliers in the numerator, not against a denominator
+that is small by design. **Check the scale of the denominator before publishing any ratio.**
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
