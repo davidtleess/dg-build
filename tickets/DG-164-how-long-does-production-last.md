@@ -303,6 +303,90 @@ This structure never saw the tier cut, so it is a genuine second look at §4:
   intervals **overlap**. Directionally right, not separated. §4's "an elite 28–29 WR outlasts a fringe 24–25 WR by
   more than a season and a half" is the fringe comparison and stands; **do not extend it to the solid comparison.**
 
+## 5h. ⛔ THE FLAT-DECLINE FINDING IS TRUE OF PPG AND FALSE OF THE QUANTITY FRED MULTIPLIES
+
+**This corrects §3, which is my own headline finding, and it changes Fred's arithmetic.**
+
+§3 measured the decline in **points per game** and found it flat (pooled drift 3 points). Fred's term is
+**value above replacement**, and VOR is a *difference* — so it is levered. A player at 15 ppg against a 10 ppg bar
+has VOR 5; drop him 4% to 14.4 and his VOR falls 12%. Re-measured on the quantity that actually enters the product,
+median VOR retention among players who are **still qualifying**:
+
+| age at t | y1 | y2 | y3 | y4 | y5 | drift |
+|---|---:|---:|---:|---:|---:|---:|
+| ≤25 | 109% | 101% | 106% | 102% | 103% | −6p |
+| 26–29 | 94% | 86% | 75% | 73% | **72%** | **−22p** |
+| 30+ | 87% | 75% | 83% | 70% | **72%** | −15p |
+| **pooled** | 95% | 88% | 86% | 84% | **84%** | **−11p** |
+
+**So A is NOT constant across the surviving seasons, and `V = A × E[seasons]` overstates.** It overstates *most*
+for players aged 26+, whose VOR retention falls to ~72% by year five while the under-25s hold at ~103%.
+
+- ✅ **The direction is safe.** Correcting it pushes older players *further* down, which strengthens the McCaffrey
+  and Henry conclusions rather than threatening them.
+- ⛔ **The magnitude is not.** The collapse needs a measured retention vector, not a constant: `V = Σ_h dᵸ · S(h) ·
+  A(0) · rel(h)`. Still computable and still explainable — *how long he lasts, and how much of his edge he keeps* —
+  but it is no longer a two-factor product.
+- **This is bar-independent** (pooled drift −11 under the lineup bar, −12 under the deep bar), so choosing a bar
+  does not fix it.
+
+## 5i. THE BAR QUESTION — recommendation, with the cost stated
+
+David ruled replacement = *"the next who is actually available"* (Fred measures QB45 / RB82 / WR108 / TE42). Does
+it govern the survival outcome too?
+
+**Recommendation: yes, adopt the deep bar for S(h) — because mixing them double-counts the exit.** A back who is
+RB40 in year three is counted *gone* by the lineup bar while Fred's term would still credit him positive value over
+RB82. Multiplying a value measured against one line by a duration measured against another understates, and the
+understatement lands on exactly the mid-tier players.
+
+Measured effect of switching: pooled survival rises 63/51/42/34/27% → **70/57/47/37/29%**, and the VOR-retention
+property is unchanged (§5h). **The published S(h) cells therefore all change** and must be regenerated at the deep
+bar before Fred consumes them.
+
+⛔ **THE COST, and Greg was right to ask.** The **McCaffrey rarity finding does not survive the switch.** At the
+deep bar his margin is **14.03×** rather than 2.97×, and "RB aged 30+ at ≥2.3× the bar" goes from **7 seasons to
+151**. The sentence is a property of the *starter* bar specifically.
+
+**It is saved by labelling, not by choosing the bar for its sake:** keep it as a descriptive statement, explicitly
+against the starter bar, outside the value formula. **Corrected count — I said eight and it is seven:**
+
+> Since 1999, **seven** times has a running back aged 30 or older produced at 2.3× what the last startable back
+> produced: Emmitt Smith 1999, Ricky Watters 1999 and 2000, Charlie Garner 2002, Curtis Martin 2004, Tiki Barber
+> 2005, **Derrick Henry 2024**. McCaffrey is attempting the eighth. Between Barber and Henry there was a
+> **nineteen-year gap.**
+
+⚠ Also correcting: **whether McCaffrey is priceable depends on the cell structure.** Margin cells suppress him
+(n=8 at 30+ / 2.3×+). Tier cells with a pooled 30+ band do price him: **E = 1.13, 13th percentile of RBs.** I
+reported "not priceable" from the margin structure without saying that the tier structure prices him. Both are
+honest; they must not be quoted interchangeably.
+
+## 5j. NACUA WITHOUT A CROSS-POSITION DURATION CLAIM — use percentiles
+
+Greg is right that E[seasons] cannot be compared across positions (WR53 and QB25 are different bars).
+**Percentile of E within a player's own position is unitless and therefore cross-position safe.** Of the 2025
+startable players whose cells clear n=12:
+
+| player | pos | age | E | percentile within position |
+|---|---|---:|---:|---|
+| **Puka Nacua** | WR | 25 | 3.84 | **97th** of 50 WRs |
+| Jahmyr Gibbs | RB | 24 | 3.33 | **97th** of 31 RBs |
+| Bijan Robinson | RB | 24 | 3.33 | **97th** of 31 RBs |
+| Josh Allen | QB | 30 | 2.91 | **58th** of 25 QBs |
+| Derrick Henry | RB | 32 | 1.26 | 35th of 31 RBs |
+| Christian McCaffrey | RB | 30 | 1.13 | **13th** of 31 RBs |
+
+**The statement for David, with no cross-position duration in it:** *Nacua, Gibbs and Bijan all sit at the 97th
+percentile of remaining career for their own position. Allen is at the 58th — a slightly-above-average horizon for
+a quarterback. McCaffrey is at the 13th percentile for a running back.*
+
+**And this reframes Allen honestly.** His horizon is unremarkable *for a QB*; what makes him valuable is that
+quarterbacks last longer in general and a superflex QB1 season is worth more. **Both of those belong in Fred's
+term, not mine** — which is the cleanest statement yet of where the two halves divide.
+
+⚠ Nacua's 3.84 comes from the **tier** cell (n=41). The **margin** cell for his band is n=9 and suppressed. His
+number is honest but rests on the looser of the two cuts, and that must travel with it.
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
