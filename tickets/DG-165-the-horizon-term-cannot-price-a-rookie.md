@@ -48,3 +48,43 @@ the rookie equivalent would need the same gate run before anyone commits to opti
   input for a player with no season. Stated in DG-164 §5n.
 - **Not blocked on the bar question.** Rookies are unpriceable under every candidate bar.
 - **Not solvable by lowering `MIN_N`.** There is no cell to populate.
+
+
+---
+
+## FEASIBILITY GATE — run 2026-09-05 after David's ruling. **PASSES, with one landmine.**
+
+David ruled none of the three options above: **"look at their college football stats and do a mathematical
+analysis of how college football stats translate to NFL career stats."** Gate run on
+`app/data/training/prospects_with_outcomes_v3.csv` (874 prospects, 2015–2025, 173 columns).
+
+**THE COHORT: 478 prospects in classes 2015–2020 have five years of follow-up.**
+WR 194 · RB 129 · TE 87 · QB 68.
+
+Against the veteran side (20,885 cohort-years, 1,232 players) this is thin, and it is thin exactly where it is
+needed. **Pooled across positions 478 supports a five-year model; per position, 68–194 does not support much** —
+that is the same range DG-162 showed cannot absorb many features. **A rookie model must be simple and probably
+pooled with position as a term.** Classes 2021+ have 1–4 years and can inform short horizons only.
+
+✅ **SURVIVORSHIP PASSES AT THE SOURCE: the washouts are in the file.** 280 prospects overall and **85 of the 478
+(18%) played zero NFL games.** They are the most informative rows in the table for a career-length model.
+
+⛔ **BUT `censored_incomplete_arc` WOULD DELETE THEM, AND IT LOOKS LIKE A CORRECTNESS FILTER.** In classes
+2015–2020, where follow-up is complete and censoring cannot possibly be about time:
+
+| `censored_incomplete_arc` | n | played zero games | median games | median points |
+|---|---:|---:|---:|---:|
+| 0 | 313 | **0** | 33 | 215.2 |
+| 1 | 165 | **85 (52%)** | 0 | 0.0 |
+
+**The flag conflates two opposite facts** — *"we cannot observe his arc yet"* (true of 2022–2025) and *"he never
+played"* (**an outcome, not missing data**). Filtering `censored_incomplete_arc == 0` on a fully-observed class
+removes every washout and leaves a population whose median is 33 games: **only the players who lasted.**
+
+⭐ **This is the 638-deleted-seasons defect in a new costume, and Greg predicted the shape before it was found.**
+Anyone building the rookie model must ignore this flag for classes ≤2020 and use it only to exclude classes with
+genuinely incomplete follow-up. `low_sample_flag` (533/874) and `head_b_training_eligible` (320/874) are unexamined
+and must be checked the same way before use.
+
+**Verdict: buildable. Five horizons supportable pooled, not per position. The binding risk is not sample size —
+it is an inherited filter that silently selects survivors.**
