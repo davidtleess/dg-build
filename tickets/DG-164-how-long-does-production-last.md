@@ -290,9 +290,15 @@ This structure never saw the tier cut, so it is a genuine second look at §4:
   merely unmeasured"; the earlier phrasing did not.
 
   *(Fred derived the same bounds independently by recovering standard errors from the marginal intervals and
-  combining in quadrature: +0.03 [−0.64, +0.70], +0.48 [−0.01, +0.97], +2.35 [+1.88, +2.81]. Every bound within
-  0.06 of the direct computation, and his independence assumption is exactly right on the load-bearing row, which
-  has **zero** player overlap.)*
+  combining in quadrature: +0.03 [−0.64, +0.70], +0.48 [−0.01, +0.97], +2.35 [+1.88, +2.81], RB +1.18
+  [+0.48, +1.89]. Every bound within 0.06 of the direct computation, and his independence assumption is exactly
+  right on the load-bearing row, which has **zero** player overlap.)*
+
+  ⚠ **The approximation's error has a direction and it is the unsafe one.** Shared players inflate the apparent
+  precision of a difference built from two independent bootstraps, so quadrature **fails toward false
+  confidence** — on the RB pair its lower bound is **+0.48 against the direct +0.38**. Harmless there; it fails
+  hardest on comparisons sitting near zero, which is exactly the middle row we are not claiming. Quadrature is a
+  sanity check and must never decide whether something separates.
 - ⚠ **WEAKER than §4 implied:** elite 28–29 (4.16 [3.75, 4.50]) against *solid* 24–25 (3.68 [3.36, 3.98]) — the
   intervals **overlap**. Directionally right, not separated. §4's "an elite 28–29 WR outlasts a fringe 24–25 WR by
   more than a season and a half" is the fringe comparison and stands; **do not extend it to the solid comparison.**
