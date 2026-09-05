@@ -271,9 +271,28 @@ This structure never saw the tier cut, so it is a genuine second look at §4:
 
 - ✅ **STRONG, intervals fully separated:** an elite 28–29 WR (4.16 [3.75, 4.50]) against a *marginal* 24–25 WR
   (1.81 [1.53, 2.08]). Same at RB: 2.70 [2.01, 3.25] against 1.52 [1.19, 1.86].
-- ✅ **STRONG, and the sentence for David:** **WR 30+ at 2.3× the bar (2.88 [2.30, 3.37]) ≈ WR ≤23 at 1.0–1.3×
-  (2.85 [2.44, 3.23])** — statistically indistinguishable. Being excellent at 30+ buys the same remaining
-  production as being barely startable at 23.
+- ✅ **STRONG, and the sentence for David — now stated as a BOUNDED EQUIVALENCE, not an absence of evidence.**
+  "Statistically indistinguishable" is a *failure to reject*, not a finding of equality: with n=16 a real gap could
+  hide inside the interval, and a reviewer would rightly say we had shown we cannot tell. **Bound the difference
+  instead.** Direct bootstrap — players resampled once from the union of both cells, both cells recomputed inside
+  each replicate, so any player appearing in both is handled:
+
+  | comparison | overlap | difference | 90% CI |
+  |---|---:|---:|---|
+  | **WR 30+ 2.3×+ − WR ≤23 1.0–1.3×** | **0 players** | **+0.03** | **[−0.70, +0.69]** |
+  | WR 28–29 2.3×+ − WR 24–25 1.7–2.3× | 7 | +0.48 | [−0.05, +0.96] |
+  | WR 28–29 2.3×+ − WR 24–25 1.0–1.3× | 6 | +2.35 | [+1.86, +2.82] |
+  | RB 28–29 2.3×+ − RB 24–25 1.0–1.3× | 4 | +1.18 | [+0.38, +1.88] |
+
+  **THE SENTENCE: being excellent at 30-plus buys the same remaining production as being barely startable at 23 —
+  to within seven-tenths of a season either way.** Against an E of ~2.85 that bound is about a quarter, small
+  enough to mean something. This is a positive claim that survives "how do you know they are equal rather than
+  merely unmeasured"; the earlier phrasing did not.
+
+  *(Fred derived the same bounds independently by recovering standard errors from the marginal intervals and
+  combining in quadrature: +0.03 [−0.64, +0.70], +0.48 [−0.01, +0.97], +2.35 [+1.88, +2.81]. Every bound within
+  0.06 of the direct computation, and his independence assumption is exactly right on the load-bearing row, which
+  has **zero** player overlap.)*
 - ⚠ **WEAKER than §4 implied:** elite 28–29 (4.16 [3.75, 4.50]) against *solid* 24–25 (3.68 [3.36, 3.98]) — the
   intervals **overlap**. Directionally right, not separated. §4's "an elite 28–29 WR outlasts a fringe 24–25 WR by
   more than a season and a half" is the fringe comparison and stands; **do not extend it to the solid comparison.**
