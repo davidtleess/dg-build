@@ -572,6 +572,51 @@ academic and either proxy ships with a label.
 invention does not announce itself — it comes back as a headline. See
 [[feedback_a_null_needs_a_sample_that_spans_the_effect]] and §5m.
 
+## 5q. ⛔ REVERSING §5p — with all four ranks measured, the proxies DISAGREE, and one of them is simply wrong
+
+§5p said "do not escalate, Spearman 0.872". **That was computed with RB60 — Fred's own acknowledged guess — and it
+does not survive the measured numbers.** Two lanes independently measured the live artifact and agree:
+**QB37 / RB45 / WR71 / TE21** (Greg on two bases, Fred from the league; RB45 on both, so the RB60 in §5p is retired).
+
+Re-run with all four correct:
+
+| | Spearman (a) vs (b) | median \|ΔE\| |
+|---|---:|---:|
+| **all four positions** | **0.282** | — |
+| WR | 1.000 | 0.103 |
+| QB (n=2) | — | 0.129 |
+| **RB** | **0.000** | **1.505** |
+| **TE** | 0.500 | **1.014** |
+
+Jonathan Taylor moves 3rd → 17th, Gibbs and Bijan 4th → 10th, Tucker Kraft 14th → 4th. **This is not a labelling
+choice. It reorders the board.**
+
+⭐ **BUT THE ESCALATION IS STILL UNNECESSARY, BECAUSE ONE PROXY IS DEFECTIVE RATHER THAN DIFFERENT.** What kind of
+player does each bar actually describe, median 1999–2025?
+
+| pos | (a) availability | | (b) structural | |
+|---|---|---|---|---|
+| RB | **RB45** — 102.2 pts, **14.0 games**, 7.11 ppg | a real starter-adjacent back | RB82 — 31.1 pts, **8.5 games** | **a fragment of a season** |
+| TE | **TE21** — 101.7 pts, **14.0 games**, 6.89 ppg | a real player | TE42 — 53.3 pts, 12 games | a part-season player |
+| WR | **WR71** — 100.5 pts, 13.0 games, 7.63 ppg | a real player | WR108 — 50.2 pts, 12 games | a part-season player |
+| QB | QB37 — 63.9 pts, 8.0 games | weak | QB45 — 33.4 pts, **4.0 games** | **a fragment of a season** |
+
+**Look at the internal consistency of (a): RB45, TE21 and WR71 all land at ~100–102 season points across 13–14
+games.** Three different positions, three different ranks, the same *kind of player*. That is what a replacement
+level should look like. **(b) lands on 31–53 points and, at RB and QB, on players who appeared in half a season or
+less.** Nobody signs an 8.5-game back who scored 31 points as their replacement for McCaffrey.
+
+**So (b) is not a legitimate alternative reading of David's ruling — it does not describe a gettable player at all.
+The bar is (a), and no ruling is required to say so.** Fred's underlying question (whether 2026 manager behaviour
+should be assumed in 2003, or only league size) is real and remains open, but it is second-order beside this.
+
+⚠ **THIS IS MY SECOND REVERSAL ON THE SAME QUESTION IN ONE MORNING.** First I nearly escalated on a TE rank **I**
+invented; then I said don't escalate on an RB rank **Fred** invented; now, with all four measured, the answer is
+different again. **Both recommendations were confidently given on inputs containing a fabricated number, and in
+neither case did the fabrication announce itself** — it arrived as a plausible integer inside an otherwise sound
+analysis. The rule that would have caught both, on the first pass: **before recommending anything, list every input
+and mark which were measured and by whom.** Four ranks, four provenances. It takes one line.
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
