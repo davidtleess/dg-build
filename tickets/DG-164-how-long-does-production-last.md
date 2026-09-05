@@ -617,6 +617,65 @@ neither case did the fabrication announce itself** — it arrived as a plausible
 analysis. The rule that would have caught both, on the first pass: **before recommending anything, list every input
 and mark which were measured and by whom.** Four ranks, four provenances. It takes one line.
 
+## 5r. THE CONFIRMED RUN, AND WHAT IT COST — plus retention keyed, and an age boundary
+
+**`survival_curves_FINAL.json`** — spec restated by Fred and amended to **five horizons** before running.
+Ranks QB37/RB45/WR71/TE21, qualifying on totals with postseason excluded, **margin on rate**, deciles, suppress
+below n=12. 20,885 cohort-year observations, 1,232 players, pooled S(1..5) = 66/54/44/35/28%.
+
+⛔ **THE CORRECT BAR COSTS CELL QUALITY, and the suppression count understates it.** The availability ranks admit
+far fewer players than the structural ones (20,885 against 33,240), so suppression rose 35 → **74 cells** — and
+Fred measured that **the surviving cells are noisier too**, not merely fewer. **Survival rising, which a cohort
+cannot do, appears in 16.7% of steps** (Fred counts *cells containing any rise* and gets 35%; both are right,
+different denominators — his is the one to use, since a cell with one impossible step is indefensible).
+Suppression was also **scattered rather than systematic** — QB 30-31 publishes deciles 2,4,5,6,7,9 and holes 0,1,3,8,
+so priceability depended on which slice a player landed in with priced neighbours either side.
+
+**REPAIRED BY ASYMMETRIC BINS — resolution where the board reads, pooling where it does not:**
+
+| cut | cells | suppressed | median n | survival rises (steps) |
+|---|---:|---:|---:|---:|
+| uniform deciles (delivered) | 166 | 74 (31%) | 19 | 16.7% |
+| A: d0–4 pooled, d5..d9 | 108 | 36 | 23 | 13.7% |
+| **B: d0–2, d3–4, then d5..d9** | **129** | **39 (23%)** | **24** | **13.6%** |
+| C: d0–3, d4–5, then d6..d9 | 110 | 34 | 27 | 14.1% |
+
+**B taken.** ✅ **Hall still separates**: d6 at 2.03× against Gibbs 3.37× and Bijan 3.41× at d9 — three bins apart
+under B. The fix that motivated deciles survives the coarsening.
+
+## 5s. RETENTION KEYING — (position, quality), and the age boundary that scopes it
+
+Fred asked whether retention differs by position and by quality. **Both, and the quality effect is large.**
+
+- **Position:** QB retains ~94% of VOR at year five; RB/WR/TE fall to 76–81%. **An 18-point spread landing on the
+  position David's probe turns on.** A pooled vector would have quarterbacks fading like receivers when they do not
+  fade at all.
+- **Quality:** top half of margin 66% at year five, bottom half 116% — a 50-point gap.
+  ⚠ **Mostly REGRESSION TO THE MEAN. The sentence is "an exceptional season is partly luck, and next year looks
+  more ordinary" — NOT "elite players fade faster,"** which is a football claim this design cannot support.
+- ⭐ **It compounds in the bad direction:** elite players survive *longer* and retain *less*, so a single pooled
+  vector gives them long survival × average retention and **overstates them twice**, at the top of the board where
+  every reader looks.
+
+**Does age still bite once quality is controlled? Only outside the top half.**
+
+| median VOR retained | y1 | y3 | y5 |
+|---|---:|---:|---:|
+| **top** ≤25 / 26–29 / 30+ | 82 / 86 / 72% | 80 / 70 / 70% | **71 / 64 / 62%** |
+| **bottom** ≤25 / 26–29 / 30+ | 135 / 113 / 102% | 135 / 107 / 92% | **138 / 95 / 80%** |
+| spread across age — top | 13 pts | 10 | **9** |
+| spread across age — bottom | 33 pts | 44 | **58** |
+
+**In the top half age nearly vanishes once quality is controlled** — 9 points at year five against a 50-point
+quality gap. Fred's hypothesis, confirmed: an old player still in the top half is a survivor with less left to give
+back. **In the bottom half age is decisive** — a young marginal player has real upside (138%), an old marginal
+player is finished (80%). Opposite futures; pooling them is indefensible.
+
+⭐ **So (position, quality) is sufficient WHERE THE BOARD LIVES and wrong outside it.** A top-20 asset list reads
+only top-half cells. **The vector must be published with that boundary stated — valid in the top half of margin;
+below it, age is required** — rather than as a general-purpose retention curve. A clean vector with an honest edge
+beats a three-way cross that is mostly suppressed.
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
