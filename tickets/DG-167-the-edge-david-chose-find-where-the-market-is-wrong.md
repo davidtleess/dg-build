@@ -1,4 +1,4 @@
-# DG-165 — The edge David actually chose: find where the market is WRONG. Ticketless for 5 days
+# DG-167 — The edge David actually chose: find where the market is WRONG. Ticketless for 5 days
 
 **Layer:** 3 · **State:** open — needs a scoping pass before it is buildable · **Lane:** — · **DG 3.0** · **the edge**
 **Source:** David's 2026-08-31 ruling 2, verified at source in `daab5375`. Asked *"What is the edge you actually

@@ -1,4 +1,4 @@
-# DG-164 — Four shipped constants had NO SOURCE, and their guard test carried a copy of the same wrong numbers
+# DG-166 — Four shipped constants had NO SOURCE, and their guard test carried a copy of the same wrong numbers
 
 **Layer:** 3 · **State:** open — instance FIXED in DG-159, class **SWEPT CLEAN 09-05 and found to be a single instance**; what remains is (a) the standing CI detector and (b) the wider constant-provenance inventory · **Lane:** — · **DG 3.0** · **model honesty · provenance**
 **Source:** Found by Fred 2026-09-04 evening while reconciling a rank error Greg queried, during the DG-159 build.
