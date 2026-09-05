@@ -141,19 +141,47 @@ Of those six, five move a score somewhere; `ngs_avg_time_to_throw` does not (§2
 The one non-model consumer: `scripts/run_realized_outcome_scoring.py` reads `player_snap_count`. **That harness has
 never graded anything** — no week has finalised (verified 09-04) — so it is a real consumer that has not yet fired.
 
-## 5. THE FOUR COLUMNS BUILT THREE DAYS AGO THAT NOTHING READS
+## 5. ⛔ RETRACTED — the four "orphaned" columns are a DELIBERATE CARRY, and David ruled on it
 
-`games_t_minus_1`, `games_t_minus_2` and their two `_available` flags were added on **09-01** in `738b7525`,
-*"feat(features): lag games so the durability gate can see more than one season"*. Measured today:
+**This section originally read "the four columns built three days ago that nothing reads" and called it the one
+unambiguously unfinished item in the inventory. That was wrong, and it was wrong by deduction rather than by
+measurement.** Retracted 2026-09-04 by the same lane that wrote it, before anyone built on it.
 
-- They are written to the runtime store every morning.
-- **They are absent from `engine_b_features_v2.csv` entirely**, so no model could be trained on them.
-- **They are not in `ENGINE_B_ALLOWED_FEATURES`**, so the contract validator would *reject* any model that tried.
-- **The durability gate does not read them.** Nothing does, outside the assembler that writes them.
+The four observable facts were all correct: `games_t_minus_1`, `games_t_minus_2` and their `_available` flags are
+written to the runtime store every morning, are absent from `engine_b_features_v2.csv`, are not in
+`ENGINE_B_ALLOWED_FEATURES`, and are read by nothing. **The inference from those facts was not.** I read the commit
+*subject* — *"lag games so the durability gate can see more than one season"* — saw no consumer, and concluded the
+consumer half had been forgotten. The commit **body** says the opposite, in capitals:
 
-The data half of that change shipped and the consumer half did not. Green pipeline, new columns, no reader — the
-project's standing defect shape in a new key. This is the one item in the whole inventory that is unambiguously
-unfinished rather than deliberate.
+> Adds games_t_minus_1/_minus_2 and their _available flags, **CARRIED NOT CONSUMED**: registered in
+> ENGINE_B_OUTPUT_COLUMNS and built at feature_assembly step 7, but added to no model feature set. **Deliberate, and
+> each reason measured** […] Adding to ENGINE_B_BASE_FEATURES moves feature_completeness for 229 of 505 scored
+> players, changes the displayed value for 227, and renders the raw string "games t minus 1" into user-facing
+> caveat copy.
+
+That last clause is a DG-109/DG-117 render-rule violation — a raw pipeline key on a card. The carry is not an
+oversight; it is the correct handling of a column that cannot be consumed without a display fix and a promotion.
+
+It is also **not an open item.** DG-127 is `done` (`c941d785`, 09-01), the board row already says CARRIED NOT
+CONSUMED, and **David ruled on it personally on 09-01: "wait, do not force."** It was built by this same lane four
+days ago, in a session this one no longer holds.
+
+**And the defect that motivated it can no longer occur.** DG-127's case was Garrett Wilson, refused at `games_t = 7`
+by `ENGINE_B_MIN_GAMES_T = 8` while `games_t_minus_2 = 17` sat in the row being refused. **DG-143 moved that gate
+from 8 to 4 on David's 09-03 ruling**, admitting all **115** players the old gate refused — Wilson among them
+(verified today: `games_t 7`, `games_t_minus_1 17`, `games_t_minus_2 17`, and 0 of 505 rows now fall under 4). The
+gate no longer judges durability on one season because it barely judges durability at all.
+
+**So "finish it or delete it" is the wrong frame and neither half is available to a lane.** Finishing overturns
+David's "wait, do not force" and changes 227 displayed numbers; deleting overturns the same ruling in the other
+direction and discards a closed ticket's deliberate output. **The genuinely open question, and it is for whoever
+owns DG-127:** the carry was justified by a gate that has since been relaxed by ruling, so does it still have a
+purpose, or is it now inventory? That is a question for David, not a build.
+
+**The lesson, and it is mine:** I deduced intent from the absence of a consumer instead of reading the commit body
+and the board row that were both one command away. `git log -1 --format=%B <sha>` would have settled it in five
+seconds. See [[feedback_relay_authority_drift]] — provenance is a lookup, not a deduction — which I have been
+applying to peers' claims about David and failed to apply to a commit.
 
 ## 6. WHAT WE HOLD THAT NOTHING READS — the inverse half
 
@@ -224,9 +252,10 @@ it does give the usage data much more weight — but it does not make the foreca
 plumbing problem we can tighten. We hold 411 columns of NFL data, the model reads six of them, and each position's
 model is trained on only a few hundred players. A model that small cannot absorb much more than it already has.
 
-The one thing that is plainly unfinished: three days ago we started computing four new columns about how many
-games a player played in prior seasons, and nothing reads them. And we forecast whether a player will play again
-without ever looking at the injury reports we download every morning.
+The one thing that looks plainly wrong: we forecast whether a player will play again without ever looking at the
+injury reports we download every morning. (An earlier draft of this ticket also flagged four columns we compute
+and never read — that one is retracted, §5: it is deliberate, it is a closed ticket, and you ruled on it yourself
+on 09-01.)
 
 ---
 
