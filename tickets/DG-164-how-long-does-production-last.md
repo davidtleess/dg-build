@@ -169,9 +169,12 @@ it from a floor effect.
 | S(h) | 90%, 87%, 79%, 67%, 62% |
 | **E[startable seasons]** | **3.84, 90% CI [3.47, 4.20]**, n=41 |
 
-**The highest duration of any player measured** — above Gibbs and Bijan (3.33) and Allen (3.12). Fred reports Nacua
-first on the per-season term as well, so he is **first on the product**, and the claim that the combined board
-returns David's stated top three is **not true once he is included**: it returns Nacua, then Allen/Gibbs/Bijan.
+**The highest duration of any player measured** at the time — above Gibbs and Bijan (3.33) and Allen (3.12).
+⛔ **CORRECTED 2026-09-05 (Fred, self-caught): "Nacua is first on both terms" is NO LONGER TRUE** on the current
+assembly — he is **5th this season and 49th on the career multiplier**, and Smith-Njigba is 9th and 41st. They
+reach 1st and 2nd **by being good on both, not first on either.** That is a weaker claim and a more interesting
+one: it says the product is doing something neither term does alone, which is the whole argument for building it.
+The sentence was carried across three rebuilds unchecked — see §5aa.
 
 This must be reported as the model's honest disagreement, not omitted. A disagreement the model can defend on both
 terms independently is the "find where the market is wrong" edge David asked for (08-31 ruling 2). Omitting him
@@ -909,6 +912,35 @@ that assumption has never been measured.** Live alternative, not settled.
 **2. Two people defending one choice with different arguments is not agreement.** It is a coincidence that will not
 survive a new case. Both of these are logged so the next person knows which parts of the definition block are
 measured and which are chosen.
+
+## 5aa. ⛔ I DELETED MY OWN FRAGILITY RULE IN A REWRITE AND KEPT QUOTING ITS RESULT
+
+Fred found **TE ≤23 m0 with `mean_VOR_at_0 = 7.09` and R1 = 7.22** — a 722% "retention", the small-denominator
+artifact we spent an hour killing at player level, alive in the smallest cell and pricing seven live tight ends.
+My definition block said flag below 10. I had reported **zero fragile cells.**
+
+**Greg framed it as a rule that exists and does not fire. It is worse: `grep -c FRAGILE` returns 2 in the first
+publish script and 0 in the rebuild.** When I rewrote to fix the tie defect, the check and its documentation both
+vanished — **and I carried the sentence "zero cells flagged fragile" across the rewrite into my message to Fred.
+The claim was true of a file that no longer existed.**
+
+⭐ **The identical error to Fred's "Nacua is first on both terms", carried across three rebuilds, in the same hour.**
+General form: **a rebuild invalidates every claim derived from the old build, including the ones you are proud of.**
+A rewrite is not an edit; nothing said about the previous artifact survives it automatically.
+
+**FIXED BY ASSERTION, NOT BY DOCUMENTING IT AGAIN** (`retention_R_v3.json`):
+
+    published 128 cells, 40 suppressed
+    assertions passed: no cell with n<12 or denominator<10.0
+    smallest surviving denominator: 11.04
+    newly suppressed: TE <=23 m0 — n=12, mean_VOR_at_0=7.09
+
+Suppression is now `n < 12 OR mean_VOR_at_0 < 10`; every suppressed entry carries a `suppressed_because` naming
+which rule caught it; **a future rewrite that drops the check now fails loudly instead of publishing.**
+**A documented threshold is exactly as good as a deleted one. An assertion is not.**
+
+⚠ **And Fred leaving it rather than patching it was right** — had he fixed the cell, I would have learned that one
+number changed and never that the check was gone.
 
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
