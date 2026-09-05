@@ -878,6 +878,38 @@ conditional/unconditional retention, and the prevalence/survival curve). The pat
 lanes confirmed the spec in writing each time. **What is missing is that a spec names a quantity without naming its
 UNITS and its CONDITIONING.** That is the field to add.
 
+## 5z. THE LOOKUP QUANTITY IS ALREADY STORED — and two things logged as chosen, not derived
+
+**`projection_2y` IS the conditional rate.** `pvo_assembler.py:457`, in the code's own words: *"projection_2y is
+E[points | plays]; availability is P(plays)"*, and line 491 computes DVS from
+`apply_availability(projection_2y, availability_p)`. **The PRE-availability rate is what gets stored; the POST
+value is what gets normalised into the score.** So the cell lookup is simply **`projection_2y / bar_ppg`** — no
+availability to recover, no `score_rows` refit, no dependence on the training CSV.
+
+Fred's algebraic route (`P = served / projection_2y`, then `served / P`) is correct and returns the field it
+started from. **It also dissolves the clamped-row gap he was about to carry as blanks:** clamping bounds DVS, not
+`projection_2y`. Measured live — **582 players with a DVS, 502 (86.3%) carrying `projection_2y`, including 17 of
+the 18 clamped.** The 80 without one are rookies (DG-165), a different gap.
+
+**The honest size of the availability defect, from his recovery:** a **1.14–1.28** uplift, largest at TE, spread
+across positions only **1.13×**. Real, small, nearly uniform — a bin here and there, never six. **My flag was worth
+less than either of us treated it as, and he corrected his own overstatement to David before I could.**
+
+### Two questions logged as CHOSEN, not derived
+
+**1. Rate versus season totals — settled on Fred's reason, not mine.** I argued the QB bar player's 8 games are an
+artifact of being a backup who would play a full season as a starter. **That is wrong: rostering a backup does not
+make him an NFL starter; he plays 8 games because that is what his club gives him.** I asserted a football fact I
+had not measured. **Fred's reason is correct and is the one on record: the replacement is not one man's season, it
+is the best you can field each week**, so a single player's season total is the wrong object regardless of games.
+⚠ **And the choice is not a derivation.** Where the best available man plays most weeks, rate and total converge;
+at QB, where he plays half, the choice rests on **an assumption about what David does in the other nine weeks, and
+that assumption has never been measured.** Live alternative, not settled.
+
+**2. Two people defending one choice with different arguments is not agreement.** It is a coincidence that will not
+survive a new case. Both of these are logged so the next person knows which parts of the definition block are
+measured and which are chosen.
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
