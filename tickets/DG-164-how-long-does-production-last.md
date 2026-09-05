@@ -837,6 +837,47 @@ player-seasons have margin < 1.0 and 100% of them have POSITIVE VOR** — median
 44 with a maximum of 227. **The correct worth-zero test is projected season points ≤ the bar player's projected
 season points, not margin < 1.0.** The warning is in the file's own definition block.
 
+## 5y. THE FIFTH ONE-WORD-TWO-QUANTITIES — "margin", and the proposed fix was wrong too
+
+Fred found that his margins and mine disagree by up to 2.5× on the same players and traced it to his served PPG
+carrying availability while my bar player's rate does not. **The mismatch is real. His proposed repair is not, and
+he had merged two separate issues.**
+
+**⛔ `served_ppg × 17` IS NOT EXPECTED SEASON POINTS.** `apply_availability` returns `projection × availability`,
+and `availability` is *"the probability he posts a qualifying season at all"* — where the qualifying event
+(DG-163, `availability.py`) is **≥4 games at t+1 OR t+2: a TWO-YEAR event with a 77% base rate.** Multiplying a
+per-game conditional rate by a two-year survival probability and then by 17 produces a quantity with no clean
+interpretation — not an expectation over games, not expected season points.
+
+**✅ The fix runs the other way: divide the availability out.** The cells key on the **conditional rate** (both
+sides total ÷ games for men who played), so the lookup quantity is `served_ppg / availability`.
+
+⚠ **`availability` is NOT stored in the served artifact** — walked every nesting level of a player record; the
+`valuation` block carries `dvs_band_*`, `xvar`, `model_grade` and no probability, and there is no top-level field.
+**It is recoverable via `score_rows`**, at the cost of that function's own stated simplification (it refits at
+scoring time from the training CSV, so the value depends on that file).
+
+**THE TWO ISSUES, separated:**
+
+| | |
+|---|---|
+| **1. His lookup is broken** | availability-adjusted numerator against an unadjusted denominator. Real. Mine to have specified. Fixed by dividing P out. |
+| **2. Rate margin ≠ season-total margin** | differ by the bar player's games. **Not a defect** — the quantity choice made deliberately in §5m on his own argument that *totals conflate good with healthy*. |
+
+His table measures (2) and attributes it to (1). **Quarterbacks moving six bins under a season-total margin is not
+evidence that season totals are right; it is the two quantities differing, which is what choosing one means.**
+
+⭐ **And the rate is right at quarterback for a football reason.** The QB bar player is an 8-game backup at 7.99
+a game. **Those 8 games are an artifact of being a backup, not a forecast of what you would get if you signed him**
+— as a starter he plays a full season. A season-total comparison treats his 8 games as a property of the player and
+inflates Allen's edge from **3.0× to 6.4×**. The rate asks the right question: how much better per game is Allen
+than the man David could actually sign.
+
+**Fifth instance today of one word carrying two quantities** (after the bar depth, the totals/rate margin, the
+conditional/unconditional retention, and the prevalence/survival curve). The pattern is not sloppiness — both
+lanes confirmed the spec in writing each time. **What is missing is that a spec names a quantity without naming its
+UNITS and its CONDITIONING.** That is the field to add.
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
