@@ -676,6 +676,59 @@ only top-half cells. **The vector must be published with that boundary stated �
 below it, age is required** — rather than as a general-purpose retention curve. A clean vector with an honest edge
 beats a three-way cross that is mostly suppressed.
 
+## 5t. ⛔ "SURVIVAL CANNOT RISE" IS FALSE — it is recovery, and we nearly gated on it
+
+Both lanes spent hours treating a rising cell as **impossible for a cohort** and using its frequency as a quality
+gate — Fred at 35%, then 47% on the option-B cells; me at 13.6% of steps. **The premise is wrong.**
+
+**S(h) here is a PREVALENCE curve, not a survival curve.** It asks *is he qualifying in year h*, not *has he not
+yet failed*. Nothing stops a back finishing RB50 and then RB30. Measured on the panel:
+
+| | y1→y2 | y2→y3 | y3→y4 | y4→y5 |
+|---|---:|---:|---:|---:|
+| of those NOT qualifying, share qualifying again next year | **21%** | 16% | 9% | 9% |
+
+**Overall 305 of 2,364 out-of-the-money player-years return the next year — 13% — and 25% of players go out and
+come back at least once inside five years.**
+
+⭐ **So a rising cell can be correctly capturing football.** The gate would have rejected cells that are right, and
+**had either of us "repaired" it with isotonic smoothing we would have deleted a real phenomenon** — one that
+matters more to a dynasty owner than almost anything else in the product, because it is exactly the question
+*"do I sell a good player having a bad year?"*
+
+**The defensible gate is cell size and interval width on E**, which measures what we genuinely cannot stand behind.
+Monotonicity is retained only as a *noise indicator*, never as a validity criterion. Option B still stands, on
+its own merits rather than on the reason originally given.
+
+⚠ **And it qualifies the ticket's own headline.** §3's *"ageing is an exit process, not a fading one"* survives, but
+it needs the second clause: **and 13% of exits reverse within a year.** A dynasty owner selling a 27-year-old after
+one bad season is acting on the wrong half of that sentence.
+
+**The shape of the error is worth naming:** two lanes independently agreed on a plausible constraint, measured
+against it, disagreed only about the metric, reconciled the metric — and never checked whether the constraint was
+real. **Agreement between two measurers is not evidence about the world.**
+
+## 5u. POSITION BITES IN THE BOTTOM HALF, HARDER THAN AT THE TOP
+
+Fred asked whether position could be collapsed below the quality median — nobody had looked. It cannot:
+
+| bottom half, VOR retained | y1 | y3 | y5 |
+|---|---:|---:|---:|
+| QB | 108% | 104% | 112% |
+| RB | 110% | 126% | 131% |
+| WR | 121% | 116% | 112% |
+| **TE** | **152%** | **145%** | **155%** |
+| **position spread, bottom half** | **44 pts** | 40 | **43** |
+| position spread, top half (for scale) | 17 pts | 21 | 35 |
+
+**43 points at year five, larger than the 35 at the top**, and the outlier is **tight end**, not quarterback. So
+the bottom half needs **(age, position)**, not age alone — collapsing position there would repeat the error just
+corrected at the top. Bottom-half cells run 102–328 players and should support the 3×4 cross.
+
+**Published vectors** (`survival_FINAL_B.json`, 129 survival cells / 39 suppressed / option-B bins / five horizons):
+top half by position — QB 88/89/81/84/85 · RB 77/70/60/57/51 · WR 79/76/72/68/65 · TE 71/75/70/61/59;
+bottom half by age — ≤25 135/142/135/146/138 · 26–29 113/103/107/110/95 · 30+ 102/92/92/91/80.
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
