@@ -387,6 +387,53 @@ term, not mine** — which is the cleanest statement yet of where the two halves
 ⚠ Nacua's 3.84 comes from the **tier** cell (n=41). The **margin** cell for his band is n=9 and suppressed. His
 number is honest but rests on the looser of the two cuts, and that must travel with it.
 
+## 5k. REGENERATED AT DAVID'S BAR — and the deep bar broke something I had to repair
+
+Both 2026-09-05 rulings applied: **NFL postseason excluded** (already what §1 did — no change) and **replacement =
+the next who is actually available**, QB45 / RB82 / WR108 / TE42.
+
+**`survival_curves_deepbar_decile.json` — 205 cells at n ≥ 12, 35 suppressed with their n.** Supersedes all three
+earlier files. The deeper bar more than doubles the cohort population: **33,240 cohort-year observations across
+1,854 players**, against 14,880 / 925 at the starter bar. Pooled survival 70/57/47/37/29%.
+
+⛔ **THE DEEP BAR COSTS DISCRIMINATION AT THE TOP, and quartiles hid it.** Against a bar that deep every startable
+player sits far above the line, so a quartile of margin is enormously wide: **the RB Q4 bucket spanned 7.0× to
+12.5×** and put **Breece Hall in the same cell as Gibbs and Bijan** — all three returning an identical E = 3.90,
+when at the starter bar Hall was 1.66 against their 3.33. **The bar that makes the value term correct makes the
+duration term blunt, and it goes blunt on exactly the elite players David cares most about.**
+
+**Repaired with deciles**, which the larger population easily supports — 205 publishable cells against 79:
+
+| RB cell | margin range | n | E |
+|---|---|---:|---:|
+| 24–25 · d7 | 5.2–6.5× | 60 | 3.32 |
+| 24–25 · d8 | 6.5–8.7× | 51 | **3.68** ← Breece Hall (6.99×) |
+| 24–25 · d9 | 8.9–18.7× | 42 | **4.24** ← Gibbs (12.35×), Bijan (12.48×) |
+| 30–31 · d8 | 6.5–8.4× | 25 | 2.41 |
+| 30–31 · d9 | 8.7–15.5× | 18 | 2.53 |
+
+**The toggle also gets stronger at the deep bar with this resolution: 1,108 of 20,910 pairs reorder (5.3%) and the
+maximum repricing rises to 2.52×**, against 3.9% and 1.74× at the starter bar. David's ruling made the
+contend/rebuild control more useful, not less.
+
+## 5l. ARE FIVE HORIZONS HONEST? YES — and the premise behind the doubt does not apply here
+
+Greg asked twice for three-versus-five on the grounds that years four and five rested on an aging curve DG-162
+measured as inert. **That premise is not true of this term.** Observations behind each horizon at the deep bar:
+
+| | S(1) | S(2) | S(3) | S(4) | S(5) |
+|---|---:|---:|---:|---:|---:|
+| observations | 7,202 | 6,925 | 6,648 | 6,371 | **6,094** |
+| distinct players | 1,854 | 1,802 | 1,731 | 1,673 | **1,611** |
+
+**Every S(h) is directly observed from 1999–2020 cohorts. Nothing is projected, extrapolated, or fitted**, and
+**this term reads no aging curve at all** — `aging_curve_value` being inert in the served models has no bearing on
+it. S(5) rests on 6,094 observations across 1,611 players, which is more than S(1) had at the starter bar.
+
+**So five horizons are honest for the survival half.** The retention vector rel(h) in §5h is likewise measured
+through h=5. If the horizon is cut to three it should be for a product reason — what David wants to reason about —
+not because the fourth and fifth years are unsupported. They are the best-supported thing in the ticket.
+
 ## 6. WHAT IS KNOWABLE VS WHAT WE WOULD BE INVENTING
 
 **Measured, and I would defend it:** the exit curves by position × age (every cell n ≥ 33 except TE); the flatness
