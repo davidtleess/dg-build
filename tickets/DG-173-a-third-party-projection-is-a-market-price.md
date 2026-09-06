@@ -1,6 +1,6 @@
 # DG-173 — A third-party PROJECTION or RANKING is a market price. Widen the ban and assert it.
 
-**Layer:** 3 · **State:** open · **Lane:** — · **DG 3.0** · **model honesty · governance**
+**Layer:** 3 · **State:** open · **Lane:** Davids-MacBook-Pro-48631 · **DG 3.0** · **model honesty · governance**
 **Source:** **David's ruling, 2026-09-06, typed:** *"market price is 3rd party points projection or ranking of a
 player — projection and price are very similar its a main variable in price. you have to replace those points
 and or value."* Filed by Greg the same morning.
