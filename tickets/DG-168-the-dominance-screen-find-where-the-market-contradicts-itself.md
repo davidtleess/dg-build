@@ -1,6 +1,6 @@
 # DG-168 — The dominance screen: find where the market contradicts ITSELF, not where it disagrees with us
 
-**Layer:** 3 · **State:** open — the first buildable increment of DG-167 · **Lane:** — · **DG 3.0** · **the edge**
+**Layer:** 3 · **State:** open — the first buildable increment of DG-167 · **Lane:** Davids-MacBook-Pro-69536 · **DG 3.0** · **the edge**
 **Source:** Dynasty Nerds, *"The Ultimate Guide on Valuation"* (Lee Liberman, 2022-08-29), read 2026-09-06 at David's
 direction. Filed by Greg 09-06 as the highest-value output of the asset program.
 
